@@ -31,6 +31,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     Transform playerCamera;
 
+    [SerializeField]
+    GameObject flashlight;
+
     /// <summary>
     /// The standard player camera sensitivity
     /// </summary>
@@ -62,6 +65,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f); // Sets the position of the invisible dot that the player will always face.
+        flashlight.transform.LookAt(playerLookAt);
         Vector3 aimTarget = playerLookAt.position;
         
         RaycastHit hitInfo;
@@ -89,6 +93,18 @@ public class Player : MonoBehaviour
         Vector3 aimDirection = (aimTarget - transform.position).normalized;
 
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
+    }
+
+    void OnFlashlight()
+    {
+        if (flashlight.activeSelf == false)
+        {
+            flashlight.SetActive(true);
+        }
+        else
+        {
+            flashlight.SetActive(false);
+        }
     }
 
 }
