@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Shoot",
+                    "type": "PassThrough",
+                    "id": "17628640-4e7e-497d-86b2-d225f04c298e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Aim",
                     "type": "PassThrough",
                     "id": "40896c7e-4ab4-4dc6-a3a5-eec80c3e2c23",
@@ -54,6 +63,15 @@
                     "name": "Flashlight",
                     "type": "Button",
                     "id": "1279c35e-4f0e-4048-8a16-d45458ba6d53",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Crouch",
+                    "type": "Button",
+                    "id": "3971c5f0-40eb-4251-9145-9f527f616b18",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -239,6 +257,17 @@
                 },
                 {
                     "name": "",
+                    "id": "0fdec306-7d5e-4687-9a6b-d29a4a63015e",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KeyboardMouse",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "906b3758-86a7-4379-a5c1-06e090edd5ac",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
@@ -256,6 +285,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b0c4c652-111c-4b3b-96e2-b6e98025aa20",
+                    "path": "<Keyboard>/ctrl",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Crouch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
