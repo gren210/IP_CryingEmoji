@@ -56,10 +56,16 @@ public class Player : MonoBehaviour
     /// </summary>
     private StarterAssetsInputs starterAssetsInputs;
 
+    /// <summary>
+    /// The animator for the player controller.
+    /// </summary>
+    private Animator animator;
+
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -73,7 +79,7 @@ public class Player : MonoBehaviour
         Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo))
         {
-            Debug.Log(hitInfo);
+            //Debug.Log(hitInfo);
         }
 
 
@@ -89,10 +95,20 @@ public class Player : MonoBehaviour
             thirdPersonController.SetSensitivity(normalSensitivity);
         }
 
+        if (starterAssetsInputs.move != Vector2.zero && animator.GetBool("isSecondary"))
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+        Debug.Log(starterAssetsInputs.move);
+
         aimTarget.y = transform.position.y; // Keeps the player face the x axis only so the whole player model does not face up and down
         Vector3 aimDirection = (aimTarget - transform.position).normalized;
 
-        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
+        //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
     }
 
     void OnFlashlight()
@@ -105,6 +121,12 @@ public class Player : MonoBehaviour
         {
             flashlight.SetActive(false);
         }
+    }
+
+    void OnSecondaryEquip()
+    {
+        animator.SetBool("isSecondary",!animator.GetBool("isSecondary"));
+        Debug.Log(animator.GetBool("isSecondary"));
     }
 
 }
