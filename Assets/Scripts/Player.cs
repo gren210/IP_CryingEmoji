@@ -72,9 +72,11 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        animator.SetFloat("moveX", starterAssetsInputs.move.x);
+        animator.SetFloat("moveY", starterAssetsInputs.move.y);
         if (isAiming)
         {
-            playerLookAt.position = playerCamera.position + (playerCamera.forward * 2.5f);
+            playerLookAt.position = playerCamera.position + (playerCamera.forward * 4f);
         }
         else
         {
@@ -82,7 +84,10 @@ public class Player : MonoBehaviour
         }
         flashlight.transform.LookAt(playerLookAt);
         Vector3 aimTarget = playerLookAt.position;
-        
+        aimTarget.y = transform.position.y; // Keeps the player face the x axis only so the whole player model does not face up and down
+        Vector3 aimDirection = (aimTarget - transform.position).normalized;
+        //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
+
         RaycastHit hitInfo;
         Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
         Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
@@ -94,41 +99,26 @@ public class Player : MonoBehaviour
 
         if (starterAssetsInputs.aim)
         {
-            aimVirtualCamera.gameObject.SetActive(true);
-            thirdPersonController.SetSensitivity(aimSensitivity);
-            animator.SetBool("isSecondary", true);
-            isAiming = true;
+            AimState(true, 1, 1f, aimSensitivity);
+            transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         }
         else
         {
-            aimVirtualCamera.gameObject.SetActive(false);
-            thirdPersonController.SetSensitivity(normalSensitivity);
-            animator.SetBool("isSecondary", false);
-            isAiming = false;
-        }
-
-        if (starterAssetsInputs.move != Vector2.zero && animator.GetBool("isSecondary"))
-        {
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            animator.SetBool("isMoving", false);
-        }
-        if (starterAssetsInputs.move == new Vector2(-1.00f,0.00f) && animator.GetBool("isSecondary"))
-        {
-            animator.SetBool("isMovingLeft", true);
-        }
-        else
-        {
-            animator.SetBool("isMovingLeft", false);
+            AimState(false, 1, 0f, normalSensitivity);
         }
         Debug.Log(starterAssetsInputs.move);
 
-        aimTarget.y = transform.position.y; // Keeps the player face the x axis only so the whole player model does not face up and down
-        Vector3 aimDirection = (aimTarget - transform.position).normalized;
-        transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
+        
+    }
+
+    void AimState(bool aimState, int layer, float layerWeight, float sens)
+    {
+        aimVirtualCamera.gameObject.SetActive(aimState);
+        thirdPersonController.SetSensitivity(sens);
+        animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(layer), layerWeight, Time.deltaTime * 12f));
+        animator.SetBool("isAiming", aimState);
+        isAiming = aimState;
     }
 
     void OnFlashlight()
@@ -141,6 +131,11 @@ public class Player : MonoBehaviour
         {
             flashlight.SetActive(false);
         }
+    }
+
+    void OnPrimaryEquip()
+    {
+
     }
 
     void OnSecondaryEquip()
