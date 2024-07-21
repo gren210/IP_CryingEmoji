@@ -112,14 +112,12 @@ public class Player : MonoBehaviour
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 4;
                 AimState(true, previousWeaponLayer, 1f, aimSensitivity);
-                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
             }
             else if (currentWeaponLayer == 1)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 2;
                 AimState(true, previousWeaponLayer, 1f, aimSensitivity);
-                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
             }
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
@@ -131,14 +129,12 @@ public class Player : MonoBehaviour
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 3;
                 AimState(false, previousWeaponLayer, 0f, aimSensitivity);
-                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
             }
             else if (currentWeaponLayer == 2)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 1;
                 AimState(false, previousWeaponLayer, 0f, aimSensitivity);
-                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
             }
         }
 
@@ -183,26 +179,32 @@ public class Player : MonoBehaviour
 
     void OnPrimaryEquip()
     {
-        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
-        currentTimer = 0;
-        previousWeaponLayer = currentWeaponLayer;
-        currentWeaponLayer = 3;
+        //isAiming = false;
+        animator.SetLayerWeight(2, 0f);
+        WeaponState(3);
     }
 
     void OnSecondaryEquip()
     {
-        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
-        currentTimer = 0;
-        previousWeaponLayer = currentWeaponLayer;
-        currentWeaponLayer = 1;
+        //isAiming = false;
+        animator.SetLayerWeight(4, 0f);
+        WeaponState(1);
     }
 
     void OnHolster()
     {
+        //isAiming = false;
+        animator.SetLayerWeight(2, 0f);
+        animator.SetLayerWeight(4, 0f);
+        WeaponState(0);
+    }
+
+    void WeaponState(int currentLayer)
+    {
         AimState(false, currentWeaponLayer, 0f, normalSensitivity);
         currentTimer = 0;
         previousWeaponLayer = currentWeaponLayer;
-        currentWeaponLayer = 0;
+        currentWeaponLayer = currentLayer;
     }
 
 }
