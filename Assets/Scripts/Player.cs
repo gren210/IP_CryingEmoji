@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Player : MonoBehaviour
 {
@@ -63,6 +64,13 @@ public class Player : MonoBehaviour
 
     private bool isAiming;
 
+    [HideInInspector]
+    public int currentWeaponLayer;
+
+    int previousWeaponLayer;
+
+    float currentTimer = 0;
+
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -99,24 +107,64 @@ public class Player : MonoBehaviour
 
         if (starterAssetsInputs.aim)
         {
-            AimState(true, 1, 1f, aimSensitivity);
+            if(currentWeaponLayer == 3)
+            {
+                previousWeaponLayer = currentWeaponLayer;
+                currentWeaponLayer = 4;
+                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
+            }
+            else if (currentWeaponLayer == 1)
+            {
+                previousWeaponLayer = currentWeaponLayer;
+                currentWeaponLayer = 2;
+                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
+            }
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         }
         else
         {
-            AimState(false, 1, 0f, normalSensitivity);
+            if (currentWeaponLayer == 4)
+            {
+                previousWeaponLayer = currentWeaponLayer;
+                currentWeaponLayer = 3;
+                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
+            }
+            else if (currentWeaponLayer == 2)
+            {
+                previousWeaponLayer = currentWeaponLayer;
+                currentWeaponLayer = 1;
+                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(previousWeaponLayer), 0f, Time.deltaTime * 12f));
+            }
         }
-        Debug.Log(starterAssetsInputs.move);
 
-        
+        if (previousWeaponLayer != currentWeaponLayer)
+        {
+            currentTimer += Time.deltaTime;
+            animator.SetLayerWeight(currentWeaponLayer, Mathf.Lerp(0, 1f, currentTimer/ .2f));
+            animator.SetLayerWeight(previousWeaponLayer, Mathf.Lerp(1, 0f, currentTimer / .2f));
+            Debug.Log(currentTimer);
+            if (currentTimer >= .2f)
+            {
+                Debug.Log("tf");
+                animator.SetLayerWeight(currentWeaponLayer, 1);
+                animator.SetLayerWeight(previousWeaponLayer, 0);
+                previousWeaponLayer = currentWeaponLayer;
+                currentTimer = 0;
+            }
+        }
+
     }
 
     void AimState(bool aimState, int layer, float layerWeight, float sens)
     {
         aimVirtualCamera.gameObject.SetActive(aimState);
         thirdPersonController.SetSensitivity(sens);
-        animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(layer), layerWeight, Time.deltaTime * 12f));
+        //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(layer), layerWeight, Time.deltaTime * 12f));
         animator.SetBool("isAiming", aimState);
         isAiming = aimState;
     }
@@ -135,13 +183,26 @@ public class Player : MonoBehaviour
 
     void OnPrimaryEquip()
     {
-
+        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
+        currentTimer = 0;
+        previousWeaponLayer = currentWeaponLayer;
+        currentWeaponLayer = 3;
     }
 
     void OnSecondaryEquip()
     {
-        //animator.SetBool("isSecondary",!animator.GetBool("isSecondary"));
-        Debug.Log(animator.GetBool("isSecondary"));
+        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
+        currentTimer = 0;
+        previousWeaponLayer = currentWeaponLayer;
+        currentWeaponLayer = 1;
+    }
+
+    void OnHolster()
+    {
+        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
+        currentTimer = 0;
+        previousWeaponLayer = currentWeaponLayer;
+        currentWeaponLayer = 0;
     }
 
 }

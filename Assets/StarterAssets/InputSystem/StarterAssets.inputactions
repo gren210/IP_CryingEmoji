@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Holster",
+                    "type": "Button",
+                    "id": "5d30f21d-03f1-463b-b75c-bf4a46b681ca",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -336,6 +345,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Primary Equip",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b42be102-865b-4121-9a58-f00837c71b18",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Holster",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
