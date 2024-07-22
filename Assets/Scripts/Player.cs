@@ -30,8 +30,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// The transform of the player's main camera
     /// </summary>
-    [SerializeField]
-    Transform playerCamera;
+    public Transform playerCamera;
 
     [SerializeField]
     GameObject flashlight;
@@ -73,6 +72,10 @@ public class Player : MonoBehaviour
     int previousWeaponLayer;
 
     float currentTimer = 0;
+
+    public GameObject currentPrimary;
+
+    public GameObject currentSecondary;
 
     private void Awake()
     {
@@ -183,8 +186,24 @@ public class Player : MonoBehaviour
     void OnPrimaryEquip()
     {
         //isAiming = false;
-        if (GameManager.instance.currentGun.reloading == false)
+        if (GameManager.instance.currentGun != null)
         {
+            if (GameManager.instance.currentGun.reloading == false)
+            {
+                GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
+                currentPrimary.SetActive(true);
+                currentSecondary.SetActive(false);
+                animator.SetBool("isSecondary", false);
+                animator.SetLayerWeight(2, 0f);
+                WeaponState(3);
+            }
+        }
+        else
+        {
+            GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
+            currentPrimary.SetActive(true);
+            currentSecondary.SetActive(false);
+            animator.SetBool("isSecondary", false);
             animator.SetLayerWeight(2, 0f);
             WeaponState(3);
         }
@@ -193,10 +212,35 @@ public class Player : MonoBehaviour
     void OnSecondaryEquip()
     {
         //isAiming = false;
-        if (GameManager.instance.currentGun.reloading == false)
+        if(GameManager.instance.currentGun != null)
         {
+            if (GameManager.instance.currentGun.reloading == false)
+            {
+                GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
+                currentPrimary.SetActive(false);
+                currentSecondary.SetActive(true);
+                animator.SetBool("isSecondary", true);
+                animator.SetLayerWeight(4, 0f);
+                WeaponState(1);
+            }
+        }
+        else
+        {
+            GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
+            currentPrimary.SetActive(false);
+            currentSecondary.SetActive(true);
+            animator.SetBool("isSecondary", true);
             animator.SetLayerWeight(4, 0f);
             WeaponState(1);
+        }
+       
+    }
+
+    void OnShoot()
+    {
+        if (GameManager.instance.currentGun != null)
+        {
+            GameManager.instance.currentGun.Shoot(this);
         }
     }
 
@@ -205,6 +249,8 @@ public class Player : MonoBehaviour
         //isAiming = false;
         if (GameManager.instance.currentGun.reloading == false)
         {
+            currentPrimary.SetActive(false);
+            currentSecondary.SetActive(false);
             animator.SetLayerWeight(2, 0f);
             animator.SetLayerWeight(4, 0f);
             WeaponState(0);
@@ -237,6 +283,7 @@ public class Player : MonoBehaviour
     {
         StartCoroutine(GameManager.instance.currentGun.Reload());
     }
+
 
 
 }

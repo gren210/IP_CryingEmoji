@@ -40,4 +40,11 @@ public class ScriptManager : MonoBehaviour
         cinemachineComponent.m_AmplitudeGain = shakeIntensity;
         cinemachineComponent.m_FrequencyGain = shakeFrequency;
     }
+
+    protected IEnumerator ShakeCameraOverTime(float shakeIntensity, float shakeFrequency, float shakeTime)
+    {
+        ShakeCamera(shakeIntensity, shakeFrequency);
+        yield return new WaitForSeconds(shakeTime);
+        ShakeCamera(0,0);
+    }
 }
