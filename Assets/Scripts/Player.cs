@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Animations.Rigging;
 
 public class Player : MonoBehaviour
 {
@@ -62,6 +63,8 @@ public class Player : MonoBehaviour
     /// </summary>
     private Animator animator;
 
+    public Rig rig;
+
     private bool isAiming;
 
     [HideInInspector]
@@ -84,11 +87,13 @@ public class Player : MonoBehaviour
         animator.SetFloat("moveY", starterAssetsInputs.move.y);
         if (isAiming)
         {
-            playerLookAt.position = playerCamera.position + (playerCamera.forward * 4f);
+            playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f);
+            rig.weight = 1;
         }
         else
         {
             playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f); // Sets the position of the invisible dot that the player will always face.
+            rig.weight = 0;
         }
         flashlight.transform.LookAt(playerLookAt);
         Vector3 aimTarget = playerLookAt.position;
@@ -97,8 +102,8 @@ public class Player : MonoBehaviour
         //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         RaycastHit hitInfo;
-        Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
-        Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
+        //Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
+        //Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo))
         {
             //Debug.Log(hitInfo);
@@ -178,34 +183,43 @@ public class Player : MonoBehaviour
     void OnPrimaryEquip()
     {
         //isAiming = false;
-        animator.SetLayerWeight(2, 0f);
-        WeaponState(3);
+        if (GameManager.instance.currentGun.reloading == false)
+        {
+            animator.SetLayerWeight(2, 0f);
+            WeaponState(3);
+        }
     }
 
     void OnSecondaryEquip()
     {
         //isAiming = false;
-        animator.SetLayerWeight(4, 0f);
-        WeaponState(1);
+        if (GameManager.instance.currentGun.reloading == false)
+        {
+            animator.SetLayerWeight(4, 0f);
+            WeaponState(1);
+        }
     }
 
     void OnHolster()
     {
         //isAiming = false;
-        animator.SetLayerWeight(2, 0f);
-        animator.SetLayerWeight(4, 0f);
-        WeaponState(0);
+        if (GameManager.instance.currentGun.reloading == false)
+        {
+            animator.SetLayerWeight(2, 0f);
+            animator.SetLayerWeight(4, 0f);
+            WeaponState(0);
+        }
     }
 
     void OnCrouch()
     {
         if (animator.GetLayerWeight(5) == 0)
         {
-            animator.SetLayerWeight(5, 1f);
+            //animator.SetLayerWeight(5, 1f);
         }
         else if (animator.GetLayerWeight(5) == 1)
         {
-            animator.SetLayerWeight(5, 0f);
+            //animator.SetLayerWeight(5, 0f);
         }
 
 
@@ -217,6 +231,11 @@ public class Player : MonoBehaviour
         currentTimer = 0;
         previousWeaponLayer = currentWeaponLayer;
         currentWeaponLayer = currentLayer;
+    }
+
+    void OnReload()
+    {
+        StartCoroutine(GameManager.instance.currentGun.Reload());
     }
 
 

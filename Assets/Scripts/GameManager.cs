@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     public CinemachineVirtualCamera currentVirtualCamera;
 
 
+    public Animator animator;
+
+    public Gun currentGun;
+
+
 
     private void Awake()
     {
