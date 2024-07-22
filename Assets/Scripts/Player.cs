@@ -143,10 +143,8 @@ public class Player : MonoBehaviour
             currentTimer += Time.deltaTime;
             animator.SetLayerWeight(currentWeaponLayer, Mathf.Lerp(0, 1f, currentTimer/ .2f));
             animator.SetLayerWeight(previousWeaponLayer, Mathf.Lerp(1, 0f, currentTimer / .2f));
-            Debug.Log(currentTimer);
             if (currentTimer >= .2f)
             {
-                Debug.Log("tf");
                 animator.SetLayerWeight(currentWeaponLayer, 1);
                 animator.SetLayerWeight(previousWeaponLayer, 0);
                 previousWeaponLayer = currentWeaponLayer;
@@ -199,6 +197,20 @@ public class Player : MonoBehaviour
         WeaponState(0);
     }
 
+    void OnCrouch()
+    {
+        if (animator.GetLayerWeight(5) == 0)
+        {
+            animator.SetLayerWeight(5, 1f);
+        }
+        else if (animator.GetLayerWeight(5) == 1)
+        {
+            animator.SetLayerWeight(5, 0f);
+        }
+
+
+    }
+
     void WeaponState(int currentLayer)
     {
         AimState(false, currentWeaponLayer, 0f, normalSensitivity);
@@ -206,5 +218,6 @@ public class Player : MonoBehaviour
         previousWeaponLayer = currentWeaponLayer;
         currentWeaponLayer = currentLayer;
     }
+
 
 }
