@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public static GameManager instance;
 
+    public GameObject playerCamera;
+    
     /// <summary>
     /// The current virtual camera that is being used by the player.
     /// </summary>
@@ -25,6 +27,8 @@ public class GameManager : MonoBehaviour
     public Animator animator;
 
     public Gun currentGun;
+
+    public Grenade currentGrenade;
 
     public bool isShooting;
 

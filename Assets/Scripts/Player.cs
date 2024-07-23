@@ -84,7 +84,8 @@ public class Player : ScriptManager
     /// <summary>
     /// The animator for the player controller.
     /// </summary>
-    private Animator animator;
+    [HideInInspector]
+    public Animator animator;
 
     public Rig rig;
 
@@ -101,6 +102,8 @@ public class Player : ScriptManager
 
     public GameObject currentSecondary;
 
+    public GameObject currentGrenade;
+
     float currentCrouchTimer;
 
     private bool isCrouch = false;
@@ -108,6 +111,8 @@ public class Player : ScriptManager
     private bool isCrouching = false;
 
     private int crouchCount = 0;
+
+
 
     private void Awake()
     {
@@ -290,9 +295,11 @@ public class Player : ScriptManager
                 GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
                 currentPrimary.SetActive(true);
                 currentSecondary.SetActive(false);
+                currentGrenade.SetActive(false);
                 animator.SetBool("isSecondary", false);
                 animator.SetLayerWeight(2, 0f);
                 WeaponState(3);
+                GameManager.instance.currentGrenade = null;
             }
         }
         else
@@ -300,9 +307,11 @@ public class Player : ScriptManager
             GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
             currentPrimary.SetActive(true);
             currentSecondary.SetActive(false);
+            currentGrenade.SetActive(false);
             animator.SetBool("isSecondary", false);
             animator.SetLayerWeight(2, 0f);
             WeaponState(3);
+            GameManager.instance.currentGrenade = null;
         }
     }
 
@@ -316,9 +325,11 @@ public class Player : ScriptManager
                 GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
                 currentPrimary.SetActive(false);
                 currentSecondary.SetActive(true);
+                currentGrenade.SetActive(false);
                 animator.SetBool("isSecondary", true);
                 animator.SetLayerWeight(4, 0f);
                 WeaponState(1);
+                GameManager.instance.currentGrenade = null;
             }
         }
         else
@@ -326,19 +337,44 @@ public class Player : ScriptManager
             GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
             currentPrimary.SetActive(false);
             currentSecondary.SetActive(true);
+            currentGrenade.SetActive(false);
             animator.SetBool("isSecondary", true);
             animator.SetLayerWeight(4, 0f);
             WeaponState(1);
+            GameManager.instance.currentGrenade = null;
         }
        
     }
 
+    void OnGrenade()
+    {
+        GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
+        currentGrenade.SetActive(true);
+        currentPrimary.SetActive(false);
+        currentSecondary.SetActive(false);
+        animator.SetLayerWeight(2, 0f);
+        animator.SetLayerWeight(4, 0f);
+        WeaponState(0);
+        GameManager.instance.currentGun = null;
+
+    }
+
     void OnShoot()
     {
+
         if (GameManager.instance.currentGun != null)
         {
 
             GameManager.instance.currentGun.Shoot(this);
+        }
+    }
+
+    void OnSingleShot()
+    {
+        if (GameManager.instance.currentGrenade != null)
+        {
+            Debug.Log("okk");
+            StartCoroutine(GameManager.instance.currentGrenade.GrenadeThrow(this));
         }
     }
 
@@ -349,9 +385,12 @@ public class Player : ScriptManager
         {
             currentPrimary.SetActive(false);
             currentSecondary.SetActive(false);
+            currentGrenade.SetActive(false);
             animator.SetLayerWeight(2, 0f);
             animator.SetLayerWeight(4, 0f);
             WeaponState(0);
+            GameManager.instance.currentGun = null;
+            GameManager.instance.currentGrenade = null;
         }
     }
 

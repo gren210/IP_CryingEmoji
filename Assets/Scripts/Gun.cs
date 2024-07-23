@@ -74,8 +74,5 @@ public class Gun : ScriptManager
             shakeSource.GenerateImpulseWithForce(.04f);
             GameManager.instance.isShooting = true;
         }
-
-
-
     }
 }
