@@ -130,7 +130,7 @@ public class Grenade : MonoBehaviour
 
     public IEnumerator GrenadeThrow(Player thePlayer)
     {
-        Debug.Log("ok");
+        thrown = true;
         GameManager.instance.animator.SetLayerWeight(6, 1);
         thePlayer.animator.SetTrigger("Throw");
         yield return new WaitForSeconds(.35f / .6f);
@@ -142,8 +142,10 @@ public class Grenade : MonoBehaviour
     {
         gameObject.GetComponent<Rigidbody>().AddForce(grenadeDistance * GameManager.instance.playerCamera.transform.forward);
         yield return new WaitForSeconds(delay);
+        GameManager.instance.animator.SetLayerWeight(6, 0);
         GrenadeExplode();
     }
+
 
     
 

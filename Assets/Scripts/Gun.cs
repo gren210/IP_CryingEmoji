@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Gun : ScriptManager
@@ -10,6 +11,8 @@ public class Gun : ScriptManager
 
     [SerializeField]
     float reloadTime;
+
+    public bool fullAuto;
 
     [SerializeField]
     int ammoCount;
@@ -32,11 +35,18 @@ public class Gun : ScriptManager
 
     CinemachineImpulseSource shakeSource;
 
+    [HideInInspector]
+    public bool isShooting = false;
+
     // Start is called before the first frame update
     void Start()
     {
         //GameManager.instance.currentGun = this;
         shakeSource = gameObject.GetComponent<CinemachineImpulseSource>();
+        if (fullAuto)
+        {
+            StartCoroutine(FullAutoShoot(GameManager.instance.thePlayer));
+        }
     }
 
     // Update is called once per frame
@@ -73,6 +83,20 @@ public class Gun : ScriptManager
             //StartCoroutine(ShakeCameraOverTime(.7f, .7f, .1f));
             shakeSource.GenerateImpulseWithForce(.04f);
             GameManager.instance.isShooting = true;
+        }
+    }
+
+    public IEnumerator FullAutoShoot(Player thePlayer)
+    {
+        while (true)
+        {
+            while (isShooting)
+            {
+                Shoot(thePlayer);
+                Debug.Log("okk");
+                yield return new WaitForSeconds(60/RPM);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 }

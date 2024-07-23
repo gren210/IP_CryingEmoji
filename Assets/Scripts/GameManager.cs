@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     public CinemachineVirtualCamera currentVirtualCamera;
 
+    public Player thePlayer;
 
     public Animator animator;
 

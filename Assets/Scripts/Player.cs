@@ -166,6 +166,8 @@ public class Player : ScriptManager
             //Debug.Log(hitInfo);
         }
 
+        //Debug.Log(starterAssetsInputs.shoot);
+
 
         if (starterAssetsInputs.aim)
         {
@@ -190,6 +192,7 @@ public class Player : ScriptManager
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         }
+
         else
         {
             ShakeCamera(0f, 0f);
@@ -211,6 +214,15 @@ public class Player : ScriptManager
                 thirdPersonController.SetSensitivity(normalSensitivity);
             }
             GameManager.instance.currentVirtualCamera = currentVirtualCamera;
+        }
+        if (starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        {
+            GameManager.instance.currentGun.isShooting = true;
+            //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+        }
+        else if (!starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        {
+            GameManager.instance.currentGun.isShooting = false;
         }
 
         if (previousWeaponLayer != currentWeaponLayer)
@@ -300,6 +312,10 @@ public class Player : ScriptManager
                 animator.SetLayerWeight(2, 0f);
                 WeaponState(3);
                 GameManager.instance.currentGrenade = null;
+                if (GameManager.instance.currentGun.fullAuto)
+                {
+                    //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+                }
             }
         }
         else
@@ -361,11 +377,19 @@ public class Player : ScriptManager
 
     void OnShoot()
     {
-
         if (GameManager.instance.currentGun != null)
         {
-
-            GameManager.instance.currentGun.Shoot(this);
+            //GameManager.instance.currentGun.isShooting = true;
+            //GameManager.instance.currentGun.Shoot(this);
+            if (starterAssetsInputs.shoot && GameManager.instance.currentGun.fullAuto)
+            {
+                //GameManager.instance.currentGun.isShooting = true;
+                //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+            }
+            else if (!starterAssetsInputs.shoot)
+            {
+                //GameManager.instance.currentGun.isShooting = false;
+            }
         }
     }
 

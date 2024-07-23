@@ -590,9 +590,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloading: 0
   reloadTime: 2.7
+  fullAuto: 1
   ammoCount: 0
-  RPM: 0
+  RPM: 200
   readySwap: 0
+  sphereLookAt: {fileID: 0}
+  isShooting: 0
 --- !u!1 &5734065753958973532
 GameObject:
   m_ObjectHideFlags: 0
