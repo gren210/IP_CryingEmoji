@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
 
     public Gun currentGun;
 
+    public bool isShooting;
+
 
 
     private void Awake()

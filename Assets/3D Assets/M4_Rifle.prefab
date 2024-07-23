@@ -589,9 +589,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   reloading: 0
-  reloadTime: 3.3
+  reloadTime: 2.7
   ammoCount: 0
   RPM: 0
+  readySwap: 0
 --- !u!1 &5734065753958973532
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,7 +7,7 @@ using StarterAssets;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.Animations.Rigging;
 
-public class Player : MonoBehaviour
+public class Player : ScriptManager
 {
     /// <summary>
     /// The virtual camera for aiming.
@@ -20,6 +20,30 @@ public class Player : MonoBehaviour
     /// </summary>
     [SerializeField]
     CinemachineVirtualCamera virtualCamera;
+
+    /// <summary>
+    /// The crouching virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera crouchVirtualCamera;
+
+    /// <summary>
+    /// The crouch aiming virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera crouchAimVirtualCamera;
+
+    /// <summary>
+    /// The current aiming virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera currentAimVirtualCamera;
+
+    /// <summary>
+    /// The current virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera currentVirtualCamera;
 
     /// <summary>
     /// The transform of the invisible dot the player will always face.
@@ -77,6 +101,14 @@ public class Player : MonoBehaviour
 
     public GameObject currentSecondary;
 
+    float currentCrouchTimer;
+
+    private bool isCrouch = false;
+
+    private bool isCrouching = false;
+
+    private int crouchCount = 0;
+
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -84,10 +116,27 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        currentVirtualCamera = virtualCamera;
+        currentAimVirtualCamera = aimVirtualCamera;
+    }
+
     private void Update()
     {
         animator.SetFloat("moveX", starterAssetsInputs.move.x);
         animator.SetFloat("moveY", starterAssetsInputs.move.y);
+
+        if (GameManager.instance.isShooting)
+        {
+            //Vector2 rng = Random.insideUnitCircle;
+            //Vector3 cameraRNG = new Vector3(rng.x, rng.y, 1f);
+            //Debug.Log(cameraRNG);
+            //playerLookAt.position = new Vector3(playerLookAt.position.x + rng.x * 10, playerLookAt.position.y + rng.y * 10, playerLookAt.position.z);
+            //playerCamera.LookAt(playerLookAt.position);
+            //Debug.Log(playerLookAt.position);
+            //GameManager.instance.isShooting = false;
+        }
         if (isAiming)
         {
             playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f);
@@ -115,35 +164,48 @@ public class Player : MonoBehaviour
 
         if (starterAssetsInputs.aim)
         {
-            if(currentWeaponLayer == 3)
+            if (currentWeaponLayer == 3)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 4;
-                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                AimState(currentAimVirtualCamera,true, previousWeaponLayer, 1f, aimSensitivity);
             }
             else if (currentWeaponLayer == 1)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 2;
-                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                AimState(currentAimVirtualCamera, true, previousWeaponLayer, 1f, aimSensitivity);
             }
+            else
+            {
+                currentAimVirtualCamera.gameObject.SetActive(true);
+                thirdPersonController.SetSensitivity(aimSensitivity);
+            }
+            GameManager.instance.currentVirtualCamera = currentAimVirtualCamera;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         }
         else
         {
+            ShakeCamera(0f, 0f);
             if (currentWeaponLayer == 4)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 3;
-                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                AimState(currentAimVirtualCamera, false, previousWeaponLayer, 0f, aimSensitivity);
             }
             else if (currentWeaponLayer == 2)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 1;
-                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                AimState(currentAimVirtualCamera, false, previousWeaponLayer, 0f, aimSensitivity);
             }
+            else
+            {
+                currentAimVirtualCamera.gameObject.SetActive(false);
+                thirdPersonController.SetSensitivity(normalSensitivity);
+            }
+            GameManager.instance.currentVirtualCamera = currentVirtualCamera;
         }
 
         if (previousWeaponLayer != currentWeaponLayer)
@@ -160,13 +222,48 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (isCrouch)
+        {
+            currentCrouchTimer += Time.deltaTime;
+            animator.SetLayerWeight(5, Mathf.Lerp(animator.GetLayerWeight(5), crouchCount%2, currentCrouchTimer / .15f));
+            if (currentCrouchTimer >= .15f)
+            {
+                Debug.Log("done");
+                animator.SetLayerWeight(5, crouchCount%2);
+                currentCrouchTimer = 0;
+                isCrouch = false;
+            }
+        }
+
     }
 
-    void AimState(bool aimState, int layer, float layerWeight, float sens)
+    void CameraSwap(bool isSwap, CinemachineVirtualCamera normal, CinemachineVirtualCamera aim)
     {
-        aimVirtualCamera.gameObject.SetActive(aimState);
+        currentVirtualCamera.gameObject.SetActive(isSwap);
+        currentAimVirtualCamera.gameObject.SetActive(isSwap);
+        currentVirtualCamera = normal;
+        currentAimVirtualCamera = aim;
+        currentVirtualCamera.gameObject.SetActive(!isSwap);
+        currentAimVirtualCamera.gameObject.SetActive(!isSwap);
+        if (starterAssetsInputs.aim)
+        {
+            GameManager.instance.currentVirtualCamera = currentAimVirtualCamera;
+        }
+        else
+        {
+            GameManager.instance.currentVirtualCamera = currentVirtualCamera;
+        }
+    }
+
+    void CameraState(CinemachineVirtualCamera virtualCamera,bool aimState, float sens)
+    {
+        virtualCamera.gameObject.SetActive(aimState);
         thirdPersonController.SetSensitivity(sens);
-        //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(layer), layerWeight, Time.deltaTime * 12f));
+    }
+
+    void AimState(CinemachineVirtualCamera virtualCamera, bool aimState, int layer, float layerWeight, float sens)
+    {
+        CameraState(virtualCamera, aimState, sens);
         animator.SetBool("isAiming", aimState);
         isAiming = aimState;
     }
@@ -188,7 +285,7 @@ public class Player : MonoBehaviour
         //isAiming = false;
         if (GameManager.instance.currentGun != null)
         {
-            if (GameManager.instance.currentGun.reloading == false)
+            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
             {
                 GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
                 currentPrimary.SetActive(true);
@@ -214,7 +311,7 @@ public class Player : MonoBehaviour
         //isAiming = false;
         if(GameManager.instance.currentGun != null)
         {
-            if (GameManager.instance.currentGun.reloading == false)
+            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
             {
                 GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
                 currentPrimary.SetActive(false);
@@ -240,6 +337,7 @@ public class Player : MonoBehaviour
     {
         if (GameManager.instance.currentGun != null)
         {
+
             GameManager.instance.currentGun.Shoot(this);
         }
     }
@@ -259,21 +357,26 @@ public class Player : MonoBehaviour
 
     void OnCrouch()
     {
-        if (animator.GetLayerWeight(5) == 0)
+        if (currentCrouchTimer == 0)
         {
-            //animator.SetLayerWeight(5, 1f);
+            isCrouch = !isCrouch;
+            isCrouching = !isCrouching;
+            Debug.Log(isCrouch);
+            crouchCount++;
         }
-        else if (animator.GetLayerWeight(5) == 1)
+        if (!isCrouching)
         {
-            //animator.SetLayerWeight(5, 0f);
+            CameraSwap(false, virtualCamera, aimVirtualCamera);
         }
-
-
+        else
+        {
+            CameraSwap(false, crouchVirtualCamera, crouchAimVirtualCamera);
+        }
     }
 
     void WeaponState(int currentLayer)
     {
-        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
+        AimState(aimVirtualCamera, false, currentWeaponLayer, 0f, normalSensitivity);
         currentTimer = 0;
         previousWeaponLayer = currentWeaponLayer;
         currentWeaponLayer = currentLayer;
