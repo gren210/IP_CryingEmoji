@@ -365,10 +365,13 @@ public class Player : ScriptManager
 
     void OnGrenade()
     {
-        GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
-        EquipState(false, false, true, 2, 0);
-        animator.SetLayerWeight(4, 0f);
-        GameManager.instance.currentGun = null;
+        if (GameManager.instance.readySwap)
+        {
+            GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
+            EquipState(false, false, true, 2, 0);
+            animator.SetLayerWeight(4, 0f);
+            GameManager.instance.currentGun = null;
+        }
 
     }
 
@@ -397,7 +400,7 @@ public class Player : ScriptManager
     void OnHolster()
     {
         //isAiming = false;
-        if (GameManager.instance.currentGun.reloading == false)
+        if (GameManager.instance.readySwap)
         {
             EquipState(false, false, false, 1, 0);
             animator.SetLayerWeight(4, 0f);

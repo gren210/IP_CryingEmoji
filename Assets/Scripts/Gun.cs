@@ -30,6 +30,8 @@ public class Gun : ScriptManager
 
     CinemachineImpulseSource shakeSource;
 
+    public int gunIndex;
+
     [HideInInspector]
     public bool isShooting = false;
 
