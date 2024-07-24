@@ -5,8 +5,9 @@ using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
 using static UnityEditor.Experimental.GraphView.GraphView;
+using UnityEngine.Animations.Rigging;
 
-public class Player : MonoBehaviour
+public class Player : ScriptManager
 {
     /// <summary>
     /// The virtual camera for aiming.
@@ -21,6 +22,30 @@ public class Player : MonoBehaviour
     CinemachineVirtualCamera virtualCamera;
 
     /// <summary>
+    /// The crouching virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera crouchVirtualCamera;
+
+    /// <summary>
+    /// The crouch aiming virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera crouchAimVirtualCamera;
+
+    /// <summary>
+    /// The current aiming virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera currentAimVirtualCamera;
+
+    /// <summary>
+    /// The current virtual camera.
+    /// </summary>
+    [SerializeField]
+    CinemachineVirtualCamera currentVirtualCamera;
+
+    /// <summary>
     /// The transform of the invisible dot the player will always face.
     /// </summary>
     [SerializeField]
@@ -29,8 +54,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// The transform of the player's main camera
     /// </summary>
-    [SerializeField]
-    Transform playerCamera;
+    public Transform playerCamera;
 
     [SerializeField]
     GameObject flashlight;
@@ -50,17 +74,22 @@ public class Player : MonoBehaviour
     /// <summary>
     /// The third person controller player script
     /// </summary>
-    private ThirdPersonController thirdPersonController;
+    [HideInInspector]
+    public ThirdPersonController thirdPersonController;
 
     /// <summary>
     /// The starter assets input player script
     /// </summary>
-    private StarterAssetsInputs starterAssetsInputs;
+    [HideInInspector]
+    public StarterAssetsInputs starterAssetsInputs;
 
     /// <summary>
     /// The animator for the player controller.
     /// </summary>
-    private Animator animator;
+    [HideInInspector]
+    public Animator animator;
+
+    public Rig rig;
 
     private bool isAiming;
 
@@ -71,6 +100,24 @@ public class Player : MonoBehaviour
 
     float currentTimer = 0;
 
+    public GameObject currentPrimary;
+
+    public GameObject currentSecondary;
+
+    public GameObject currentGrenade;
+
+    float currentCrouchTimer;
+
+    private bool isCrouch = false;
+
+    private bool isCrouching = false;
+
+    private int crouchCount = 0;
+
+    private Coroutine currentCoroutine = null;
+
+
+
     private void Awake()
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
@@ -78,17 +125,36 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void Start()
+    {
+        currentVirtualCamera = virtualCamera;
+        currentAimVirtualCamera = aimVirtualCamera;
+    }
+
     private void Update()
     {
         animator.SetFloat("moveX", starterAssetsInputs.move.x);
         animator.SetFloat("moveY", starterAssetsInputs.move.y);
+
+        if (GameManager.instance.isShooting)
+        {
+            //Vector2 rng = Random.insideUnitCircle;
+            //Vector3 cameraRNG = new Vector3(rng.x, rng.y, 1f);
+            //Debug.Log(cameraRNG);
+            //playerLookAt.position = new Vector3(playerLookAt.position.x + rng.x * 10, playerLookAt.position.y + rng.y * 10, playerLookAt.position.z);
+            //playerCamera.LookAt(playerLookAt.position);
+            //Debug.Log(playerLookAt.position);
+            //GameManager.instance.isShooting = false;
+        }
         if (isAiming)
         {
-            playerLookAt.position = playerCamera.position + (playerCamera.forward * 4f);
+            playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f);
+            rig.weight = 1;
         }
         else
         {
             playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f); // Sets the position of the invisible dot that the player will always face.
+            rig.weight = 0;
         }
         flashlight.transform.LookAt(playerLookAt);
         Vector3 aimTarget = playerLookAt.position;
@@ -97,46 +163,70 @@ public class Player : MonoBehaviour
         //transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         RaycastHit hitInfo;
-        Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
-        Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
+        //Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
+        //Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo))
         {
             //Debug.Log(hitInfo);
         }
 
+        //Debug.Log(starterAssetsInputs.shoot);
+
 
         if (starterAssetsInputs.aim)
         {
-            if(currentWeaponLayer == 3)
+            if (currentWeaponLayer == 3)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 4;
-                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                AimState(currentAimVirtualCamera,true, previousWeaponLayer, 1f, aimSensitivity);
             }
             else if (currentWeaponLayer == 1)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 2;
-                AimState(true, previousWeaponLayer, 1f, aimSensitivity);
+                AimState(currentAimVirtualCamera, true, previousWeaponLayer, 1f, aimSensitivity);
             }
+            else
+            {
+                currentAimVirtualCamera.gameObject.SetActive(true);
+                thirdPersonController.SetSensitivity(aimSensitivity);
+            }
+            GameManager.instance.currentVirtualCamera = currentAimVirtualCamera;
             transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f); // Make rotations smooth
 
         }
+
         else
         {
+            ShakeCamera(0f, 0f);
             if (currentWeaponLayer == 4)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 3;
-                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                AimState(currentAimVirtualCamera, false, previousWeaponLayer, 0f, aimSensitivity);
             }
             else if (currentWeaponLayer == 2)
             {
                 previousWeaponLayer = currentWeaponLayer;
                 currentWeaponLayer = 1;
-                AimState(false, previousWeaponLayer, 0f, aimSensitivity);
+                AimState(currentAimVirtualCamera, false, previousWeaponLayer, 0f, aimSensitivity);
             }
+            else
+            {
+                currentAimVirtualCamera.gameObject.SetActive(false);
+                thirdPersonController.SetSensitivity(normalSensitivity);
+            }
+            GameManager.instance.currentVirtualCamera = currentVirtualCamera;
         }
+        //if (starterAssetsInputs.aim && starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        //{
+        //GameManager.instance.currentGun.isShooting = true;
+        //}
+        //else if (!starterAssetsInputs.aim && !starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        //{
+        //GameManager.instance.currentGun.isShooting = false;
+        //}
 
         if (previousWeaponLayer != currentWeaponLayer)
         {
@@ -152,13 +242,47 @@ public class Player : MonoBehaviour
             }
         }
 
+        if (isCrouch)
+        {
+            currentCrouchTimer += Time.deltaTime;
+            animator.SetLayerWeight(5, Mathf.Lerp(animator.GetLayerWeight(5), crouchCount%2, currentCrouchTimer / .15f));
+            if (currentCrouchTimer >= .15f)
+            {
+                animator.SetLayerWeight(5, crouchCount%2);
+                currentCrouchTimer = 0;
+                isCrouch = false;
+            }
+        }
+
     }
 
-    void AimState(bool aimState, int layer, float layerWeight, float sens)
+    void CameraSwap(bool isSwap, CinemachineVirtualCamera normal, CinemachineVirtualCamera aim)
     {
-        aimVirtualCamera.gameObject.SetActive(aimState);
+        currentVirtualCamera.gameObject.SetActive(isSwap);
+        currentAimVirtualCamera.gameObject.SetActive(isSwap);
+        currentVirtualCamera = normal;
+        currentAimVirtualCamera = aim;
+        currentVirtualCamera.gameObject.SetActive(!isSwap);
+        currentAimVirtualCamera.gameObject.SetActive(!isSwap);
+        if (starterAssetsInputs.aim)
+        {
+            GameManager.instance.currentVirtualCamera = currentAimVirtualCamera;
+        }
+        else
+        {
+            GameManager.instance.currentVirtualCamera = currentVirtualCamera;
+        }
+    }
+
+    void CameraState(CinemachineVirtualCamera virtualCamera,bool aimState, float sens)
+    {
+        virtualCamera.gameObject.SetActive(aimState);
         thirdPersonController.SetSensitivity(sens);
-        //animator.SetLayerWeight(1, Mathf.Lerp(animator.GetLayerWeight(layer), layerWeight, Time.deltaTime * 12f));
+    }
+
+    void AimState(CinemachineVirtualCamera virtualCamera, bool aimState, int layer, float layerWeight, float sens)
+    {
+        CameraState(virtualCamera, aimState, sens);
         animator.SetBool("isAiming", aimState);
         isAiming = aimState;
     }
@@ -175,49 +299,169 @@ public class Player : MonoBehaviour
         }
     }
 
+    void EquipState(bool primary, bool secondary, bool grenade, int setLayer, int weaponState)
+    {
+        currentPrimary.SetActive(primary);
+        currentSecondary.SetActive(secondary);
+        currentGrenade.SetActive(grenade);
+        animator.SetBool("isSecondary", secondary);
+        animator.SetLayerWeight(setLayer, 0f);
+        WeaponState(weaponState);
+    }
+
     void OnPrimaryEquip()
     {
         //isAiming = false;
-        animator.SetLayerWeight(2, 0f);
-        WeaponState(3);
+        if (GameManager.instance.currentGun != null)
+        {
+            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
+            {
+                GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
+                EquipState(true, false, false, 2, 3);
+                //currentPrimary.SetActive(true);
+                //currentSecondary.SetActive(false);
+                //currentGrenade.SetActive(false);
+                //animator.SetBool("isSecondary", false);
+                //animator.SetLayerWeight(2, 0f);
+                //WeaponState(3);
+                GameManager.instance.currentGrenade = null;
+                if (GameManager.instance.currentGun.fullAuto)
+                {
+                    currentCoroutine = StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+                }
+            }
+        }
+        else
+        {
+            GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
+            EquipState(true, false, false, 2, 3);
+            GameManager.instance.currentGrenade = null;
+            if (GameManager.instance.currentGun.fullAuto)
+            {
+                currentCoroutine = StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+            }
+        }
     }
 
     void OnSecondaryEquip()
     {
         //isAiming = false;
+        if(GameManager.instance.currentGun != null)
+        {
+            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
+            {
+                if(currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
+                GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
+                EquipState(false, true, false, 4, 1);
+                //currentPrimary.SetActive(false);
+                //currentSecondary.SetActive(true);
+                //currentGrenade.SetActive(false);
+                //animator.SetBool("isSecondary", true);
+                //animator.SetLayerWeight(4, 0f);
+                //WeaponState(1);
+                GameManager.instance.currentGrenade = null;
+            }
+        }
+        else
+        {
+            if (currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+            }
+            GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
+            EquipState(false, true, false, 4, 1);
+            GameManager.instance.currentGrenade = null;
+        }
+       
+    }
+
+    void OnGrenade()
+    {
+        GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
+        EquipState(false, false, true, 2, 0);
+        //currentGrenade.SetActive(true);
+        //currentPrimary.SetActive(false);
+        //currentSecondary.SetActive(false);
+        //animator.SetLayerWeight(2, 0f);
         animator.SetLayerWeight(4, 0f);
-        WeaponState(1);
+        //WeaponState(0);
+        GameManager.instance.currentGun = null;
+
+    }
+
+    void OnShoot()
+    {
+       
+    }
+
+    void OnSingleShot()
+    {
+        if (GameManager.instance.currentGrenade != null)
+        {
+            Debug.Log("okk");
+            StartCoroutine(GameManager.instance.currentGrenade.GrenadeThrow(this));
+        }
+        else if (GameManager.instance.currentGun != null)
+        {
+            //GameManager.instance.currentGun.isShooting = true;
+            if (starterAssetsInputs.shoot && !GameManager.instance.currentGun.fullAuto)
+            {
+                GameManager.instance.currentGun.Shoot(this);
+            }
+        }
     }
 
     void OnHolster()
     {
         //isAiming = false;
-        animator.SetLayerWeight(2, 0f);
-        animator.SetLayerWeight(4, 0f);
-        WeaponState(0);
+        if (GameManager.instance.currentGun.reloading == false)
+        {
+            currentPrimary.SetActive(false);
+            currentSecondary.SetActive(false);
+            currentGrenade.SetActive(false);
+            animator.SetLayerWeight(2, 0f);
+            animator.SetLayerWeight(4, 0f);
+            WeaponState(0);
+            GameManager.instance.currentGun = null;
+            GameManager.instance.currentGrenade = null;
+        }
     }
 
     void OnCrouch()
     {
-        if (animator.GetLayerWeight(5) == 0)
+        if (currentCrouchTimer == 0)
         {
-            animator.SetLayerWeight(5, 1f);
+            isCrouch = !isCrouch;
+            isCrouching = !isCrouching;
+            Debug.Log(isCrouch);
+            crouchCount++;
         }
-        else if (animator.GetLayerWeight(5) == 1)
+        if (!isCrouching)
         {
-            animator.SetLayerWeight(5, 0f);
+            CameraSwap(false, virtualCamera, aimVirtualCamera);
         }
-
-
+        else
+        {
+            CameraSwap(false, crouchVirtualCamera, crouchAimVirtualCamera);
+        }
     }
 
     void WeaponState(int currentLayer)
     {
-        AimState(false, currentWeaponLayer, 0f, normalSensitivity);
+        AimState(aimVirtualCamera, false, currentWeaponLayer, 0f, normalSensitivity);
         currentTimer = 0;
         previousWeaponLayer = currentWeaponLayer;
         currentWeaponLayer = currentLayer;
     }
+
+    void OnReload()
+    {
+        StartCoroutine(GameManager.instance.currentGun.Reload());
+    }
+
 
 
 }
