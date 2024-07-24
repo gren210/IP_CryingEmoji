@@ -74,12 +74,14 @@ public class Player : ScriptManager
     /// <summary>
     /// The third person controller player script
     /// </summary>
-    private ThirdPersonController thirdPersonController;
+    [HideInInspector]
+    public ThirdPersonController thirdPersonController;
 
     /// <summary>
     /// The starter assets input player script
     /// </summary>
-    private StarterAssetsInputs starterAssetsInputs;
+    [HideInInspector]
+    public StarterAssetsInputs starterAssetsInputs;
 
     /// <summary>
     /// The animator for the player controller.
@@ -111,6 +113,8 @@ public class Player : ScriptManager
     private bool isCrouching = false;
 
     private int crouchCount = 0;
+
+    private Coroutine currentCoroutine = null;
 
 
 
@@ -215,15 +219,14 @@ public class Player : ScriptManager
             }
             GameManager.instance.currentVirtualCamera = currentVirtualCamera;
         }
-        if (starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
-        {
-            GameManager.instance.currentGun.isShooting = true;
-            //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
-        }
-        else if (!starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
-        {
-            GameManager.instance.currentGun.isShooting = false;
-        }
+        //if (starterAssetsInputs.aim && starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        //{
+        //GameManager.instance.currentGun.isShooting = true;
+        //}
+        //else if (!starterAssetsInputs.aim && !starterAssetsInputs.shoot && GameManager.instance.currentGun != null)
+        //{
+        //GameManager.instance.currentGun.isShooting = false;
+        //}
 
         if (previousWeaponLayer != currentWeaponLayer)
         {
@@ -245,7 +248,6 @@ public class Player : ScriptManager
             animator.SetLayerWeight(5, Mathf.Lerp(animator.GetLayerWeight(5), crouchCount%2, currentCrouchTimer / .15f));
             if (currentCrouchTimer >= .15f)
             {
-                Debug.Log("done");
                 animator.SetLayerWeight(5, crouchCount%2);
                 currentCrouchTimer = 0;
                 isCrouch = false;
@@ -297,6 +299,16 @@ public class Player : ScriptManager
         }
     }
 
+    void EquipState(bool primary, bool secondary, bool grenade, int setLayer, int weaponState)
+    {
+        currentPrimary.SetActive(primary);
+        currentSecondary.SetActive(secondary);
+        currentGrenade.SetActive(grenade);
+        animator.SetBool("isSecondary", secondary);
+        animator.SetLayerWeight(setLayer, 0f);
+        WeaponState(weaponState);
+    }
+
     void OnPrimaryEquip()
     {
         //isAiming = false;
@@ -305,29 +317,29 @@ public class Player : ScriptManager
             if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
             {
                 GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
-                currentPrimary.SetActive(true);
-                currentSecondary.SetActive(false);
-                currentGrenade.SetActive(false);
-                animator.SetBool("isSecondary", false);
-                animator.SetLayerWeight(2, 0f);
-                WeaponState(3);
+                EquipState(true, false, false, 2, 3);
+                //currentPrimary.SetActive(true);
+                //currentSecondary.SetActive(false);
+                //currentGrenade.SetActive(false);
+                //animator.SetBool("isSecondary", false);
+                //animator.SetLayerWeight(2, 0f);
+                //WeaponState(3);
                 GameManager.instance.currentGrenade = null;
                 if (GameManager.instance.currentGun.fullAuto)
                 {
-                    //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+                    currentCoroutine = StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
                 }
             }
         }
         else
         {
             GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
-            currentPrimary.SetActive(true);
-            currentSecondary.SetActive(false);
-            currentGrenade.SetActive(false);
-            animator.SetBool("isSecondary", false);
-            animator.SetLayerWeight(2, 0f);
-            WeaponState(3);
+            EquipState(true, false, false, 2, 3);
             GameManager.instance.currentGrenade = null;
+            if (GameManager.instance.currentGun.fullAuto)
+            {
+                currentCoroutine = StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
+            }
         }
     }
 
@@ -338,25 +350,29 @@ public class Player : ScriptManager
         {
             if (GameManager.instance.currentGun.reloading == false && GameManager.instance.currentGun.readySwap == true)
             {
+                if(currentCoroutine != null)
+                {
+                    StopCoroutine(currentCoroutine);
+                }
                 GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
-                currentPrimary.SetActive(false);
-                currentSecondary.SetActive(true);
-                currentGrenade.SetActive(false);
-                animator.SetBool("isSecondary", true);
-                animator.SetLayerWeight(4, 0f);
-                WeaponState(1);
+                EquipState(false, true, false, 4, 1);
+                //currentPrimary.SetActive(false);
+                //currentSecondary.SetActive(true);
+                //currentGrenade.SetActive(false);
+                //animator.SetBool("isSecondary", true);
+                //animator.SetLayerWeight(4, 0f);
+                //WeaponState(1);
                 GameManager.instance.currentGrenade = null;
             }
         }
         else
         {
+            if (currentCoroutine != null)
+            {
+                StopCoroutine(currentCoroutine);
+            }
             GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
-            currentPrimary.SetActive(false);
-            currentSecondary.SetActive(true);
-            currentGrenade.SetActive(false);
-            animator.SetBool("isSecondary", true);
-            animator.SetLayerWeight(4, 0f);
-            WeaponState(1);
+            EquipState(false, true, false, 4, 1);
             GameManager.instance.currentGrenade = null;
         }
        
@@ -365,32 +381,20 @@ public class Player : ScriptManager
     void OnGrenade()
     {
         GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
-        currentGrenade.SetActive(true);
-        currentPrimary.SetActive(false);
-        currentSecondary.SetActive(false);
-        animator.SetLayerWeight(2, 0f);
+        EquipState(false, false, true, 2, 0);
+        //currentGrenade.SetActive(true);
+        //currentPrimary.SetActive(false);
+        //currentSecondary.SetActive(false);
+        //animator.SetLayerWeight(2, 0f);
         animator.SetLayerWeight(4, 0f);
-        WeaponState(0);
+        //WeaponState(0);
         GameManager.instance.currentGun = null;
 
     }
 
     void OnShoot()
     {
-        if (GameManager.instance.currentGun != null)
-        {
-            //GameManager.instance.currentGun.isShooting = true;
-            //GameManager.instance.currentGun.Shoot(this);
-            if (starterAssetsInputs.shoot && GameManager.instance.currentGun.fullAuto)
-            {
-                //GameManager.instance.currentGun.isShooting = true;
-                //StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
-            }
-            else if (!starterAssetsInputs.shoot)
-            {
-                //GameManager.instance.currentGun.isShooting = false;
-            }
-        }
+       
     }
 
     void OnSingleShot()
@@ -399,6 +403,14 @@ public class Player : ScriptManager
         {
             Debug.Log("okk");
             StartCoroutine(GameManager.instance.currentGrenade.GrenadeThrow(this));
+        }
+        else if (GameManager.instance.currentGun != null)
+        {
+            //GameManager.instance.currentGun.isShooting = true;
+            if (starterAssetsInputs.shoot && !GameManager.instance.currentGun.fullAuto)
+            {
+                GameManager.instance.currentGun.Shoot(this);
+            }
         }
     }
 

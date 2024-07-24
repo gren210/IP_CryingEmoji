@@ -1084,6 +1084,8 @@ MonoBehaviour:
   flashlight: {fileID: 571868018}
   normalSensitivity: 1
   aimSensitivity: 0.7
+  thirdPersonController: {fileID: 0}
+  starterAssetsInputs: {fileID: 0}
   animator: {fileID: 0}
   rig: {fileID: 647152352}
   currentWeaponLayer: 0
@@ -2958,7 +2960,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 1.5
+    m_ImpulseDuration: 0.2
     m_ImpulseType: 1
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 0}
@@ -2989,7 +2991,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0.1, y: 1, z: 1}
+  m_DefaultVelocity: {x: 0.1, y: 1, z: -0.2}
 --- !u!1001 &1305045791558914386
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3201,7 +3203,7 @@ MonoBehaviour:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    m_ImpulseDuration: 0.2
+    m_ImpulseDuration: 0.05
     m_ImpulseType: 0
     m_DissipationRate: 0.25
     m_RawSignal: {fileID: 0}
@@ -3232,7 +3234,7 @@ MonoBehaviour:
     m_DissipationMode: 2
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
-  m_DefaultVelocity: {x: 0, y: 0.2, z: 0}
+  m_DefaultVelocity: {x: 0, y: 0.3, z: 0}
 --- !u!1001 &5575934132026544263
 PrefabInstance:
   m_ObjectHideFlags: 0
