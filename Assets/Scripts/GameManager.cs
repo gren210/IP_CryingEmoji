@@ -33,7 +33,9 @@ public class GameManager : MonoBehaviour
 
     public bool isShooting;
 
+    public bool readySwap = true;
 
+    public bool readyShoot = true;
 
     private void Awake()
     {
@@ -51,7 +53,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        readyShoot = true;
+        readySwap = true;
     }
 
     // Update is called once per frame

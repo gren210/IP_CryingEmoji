@@ -86,6 +86,14 @@ public class Grenade : MonoBehaviour
     [SerializeField]
     GameObject realGrenadeObject;
 
+    GameObject grenadeObject = null;
+
+    Player currentPlayer;
+
+    float currentTimer = 0;
+
+    bool throwing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -99,7 +107,24 @@ public class Grenade : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(throwing)
+        {
+            GameManager.instance.thePlayer.FaceForward();
+        }
+        if (thrown)
+        {
+            GameManager.instance.thePlayer.FaceForward();
+            currentTimer += Time.deltaTime;
+            GameManager.instance.animator.SetLayerWeight(6, Mathf.Lerp(1, 1-currentTimer, 1f));
+            if(currentTimer > 1f)
+            {
+                GameManager.instance.animator.SetLayerWeight(6, 0);
+                currentTimer = 0;
+                thrown = false;
+                GameManager.instance.readySwap = true;
+                GameManager.instance.readyShoot = true;
+            }
+        }
     }
 
     private void GrenadeExplode()
@@ -130,22 +155,24 @@ public class Grenade : MonoBehaviour
 
     public IEnumerator GrenadeThrow(Player thePlayer)
     {
-        thrown = true;
-        GameManager.instance.animator.SetLayerWeight(6, 1);
+        throwing = true;
+        GameManager.instance.readySwap = false;
+        thePlayer.animator.SetLayerWeight(6, 1);
         thePlayer.animator.SetTrigger("Throw");
         yield return new WaitForSeconds(.35f / .6f);
-        Instantiate(realGrenadeObject, gameObject.transform.position, gameObject.transform.rotation);
+        throwing = false;
+        grenadeObject = Instantiate(realGrenadeObject, gameObject.transform.position, gameObject.transform.rotation);
+        grenadeObject.GetComponent<Grenade>().thrown = true;
         gameObject.SetActive(false);
+
     }
 
     IEnumerator GrenadeTick()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(grenadeDistance * GameManager.instance.playerCamera.transform.forward);
         yield return new WaitForSeconds(delay);
-        GameManager.instance.animator.SetLayerWeight(6, 0);
         GrenadeExplode();
     }
-
 
     
 

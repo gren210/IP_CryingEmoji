@@ -24,9 +24,6 @@ public class Gun : ScriptManager
 
     float bulletRange;
 
-    [HideInInspector]
-    public bool readySwap;
-
     Transform virtualCamera;
 
     public Transform sphereLookAt;
@@ -57,11 +54,11 @@ public class Gun : ScriptManager
         virtualCamera = GameManager.instance.currentVirtualCamera.transform;
         if (!reloading)
         {
-            readySwap = true;
+            GameManager.instance.readySwap = true;
         }
         else
         {
-            readySwap = false;
+            GameManager.instance.readySwap = false;
         }
     }
 
