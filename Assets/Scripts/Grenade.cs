@@ -115,10 +115,10 @@ public class Grenade : MonoBehaviour
         {
             GameManager.instance.thePlayer.FaceForward();
             currentTimer += Time.deltaTime;
-            GameManager.instance.animator.SetLayerWeight(6, Mathf.Lerp(1, 1-currentTimer, 1f));
+            GameManager.instance.animator.SetLayerWeight(7, Mathf.Lerp(1, 1-currentTimer, 1f));
             if(currentTimer > 1f)
             {
-                GameManager.instance.animator.SetLayerWeight(6, 0);
+                GameManager.instance.animator.SetLayerWeight(7, 0);
                 currentTimer = 0;
                 thrown = false;
                 GameManager.instance.readySwap = true;
@@ -157,7 +157,7 @@ public class Grenade : MonoBehaviour
     {
         throwing = true;
         GameManager.instance.readySwap = false;
-        thePlayer.animator.SetLayerWeight(6, 1);
+        thePlayer.animator.SetLayerWeight(7, 1);
         thePlayer.animator.SetTrigger("Throw");
         yield return new WaitForSeconds(.35f / .6f);
         throwing = false;

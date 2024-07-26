@@ -31,11 +31,19 @@ public class GameManager : MonoBehaviour
 
     public Grenade currentGrenade;
 
+    public Melee currentMelee;
+
     public bool isShooting;
 
     public bool readySwap = true;
 
     public bool readyShoot = true;
+
+    public bool readyMove = true;
+
+    public bool isCrouch = false;
+
+    public bool isAiming = false;
 
     private void Awake()
     {
@@ -55,6 +63,7 @@ public class GameManager : MonoBehaviour
     {
         readyShoot = true;
         readySwap = true;
+        readyMove = true;
     }
 
     // Update is called once per frame

@@ -66,12 +66,12 @@ public class Gun : ScriptManager
 
     public IEnumerator Reload()
     {
-        GameManager.instance.animator.SetLayerWeight(6, 1);
+        GameManager.instance.animator.SetLayerWeight(7, 1);
         reloading = true;
         GameManager.instance.animator.SetTrigger("isReloading");
         yield return new WaitForSeconds(reloadTime);
         reloading = false;
-        GameManager.instance.animator.SetLayerWeight(6, 0);
+        GameManager.instance.animator.SetLayerWeight(7, 0);
     }
 
     public void Shoot(Player thePlayer)

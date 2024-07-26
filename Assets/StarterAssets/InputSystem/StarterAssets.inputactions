@@ -69,6 +69,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "1192a220-b9d2-4ccb-a56b-7d6ba4c98ec1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Flashlight",
                     "type": "Button",
                     "id": "1279c35e-4f0e-4048-8a16-d45458ba6d53",
@@ -105,18 +114,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Holster",
+                    "name": "Melee",
                     "type": "Button",
-                    "id": "5d30f21d-03f1-463b-b75c-bf4a46b681ca",
+                    "id": "6570a1dc-a5e9-44b2-a888-6e5999a43c4c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Reload",
+                    "name": "Holster",
                     "type": "Button",
-                    "id": "1192a220-b9d2-4ccb-a56b-7d6ba4c98ec1",
+                    "id": "5d30f21d-03f1-463b-b75c-bf4a46b681ca",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -388,17 +397,6 @@
                 },
                 {
                     "name": "",
-                    "id": "2e00d1da-ea1b-42ec-8954-db9adcdedc3a",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "497d7844-5a5e-45c6-838e-1011b52ce19b",
                     "path": "<Keyboard>/g",
                     "interactions": "",
@@ -416,6 +414,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SingleShot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "621486e1-a153-4e47-8f4c-bcc15b780929",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e00d1da-ea1b-42ec-8954-db9adcdedc3a",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
