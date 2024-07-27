@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Grenade : MonoBehaviour
+public class Grenade : Interactable
 {
     /// <summary>
     /// The distance the grenade is thrown.
@@ -174,7 +174,13 @@ public class Grenade : MonoBehaviour
         GrenadeExplode();
     }
 
-    
+    public override void Interact(Player thePlayer)
+    {
+        base.Interact(thePlayer);
+
+    }
+
+
 
 
 }

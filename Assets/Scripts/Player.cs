@@ -90,6 +90,8 @@ public class Player : ScriptManager
     [HideInInspector]
     public Animator animator;
 
+    public float interactionDistance = 1000f;
+
     public Rig rig;
 
     private bool isAiming;
@@ -151,7 +153,7 @@ public class Player : ScriptManager
             //Debug.Log(playerLookAt.position);
             //GameManager.instance.isShooting = false;
         }
-        if (isAiming)
+        if (isAiming && thirdPersonController.Grounded)
         {
             playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f);
             rig.weight = 1;
@@ -170,15 +172,12 @@ public class Player : ScriptManager
         RaycastHit hitInfo;
         //Debug.DrawLine(playerCamera.position, playerCamera.position+ (playerCamera.forward * 999f), Color.red); // Draws raycast line in scene
         //Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
-        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo))
+        if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hitInfo, interactionDistance))
         {
             //Debug.Log(hitInfo);
         }
 
-        //Debug.Log(starterAssetsInputs.shoot);
-
-
-        if (starterAssetsInputs.aim)
+        if (starterAssetsInputs.aim && thirdPersonController.Grounded && GameManager.instance.currentMelee == null)
         {
             if (currentWeaponLayer == 3)
             {
@@ -242,7 +241,7 @@ public class Player : ScriptManager
         if (isCrouch)
         {
             currentCrouchTimer += Time.deltaTime;
-            animator.SetLayerWeight(6, Mathf.Lerp(animator.GetLayerWeight(66), crouchCount%2, currentCrouchTimer / .15f));
+            animator.SetLayerWeight(6, Mathf.Lerp(animator.GetLayerWeight(6), crouchCount%2, currentCrouchTimer / .15f));
             if (currentCrouchTimer >= .15f)
             {
                 animator.SetLayerWeight(6, crouchCount%2);
@@ -250,8 +249,19 @@ public class Player : ScriptManager
                 isCrouch = false;
             }
         }
+
+        if(isCrouching || starterAssetsInputs.aim)
+        {
+            thirdPersonController.SprintSpeed = 2;
+        }
+        else
+        {
+            thirdPersonController.SprintSpeed = 5.335f;
+        }
+
         GameManager.instance.isCrouch = isCrouching;
         GameManager.instance.isAiming = starterAssetsInputs.aim;
+        GameManager.instance.thirdPersonController = thirdPersonController;
 
     }
 
@@ -289,6 +299,14 @@ public class Player : ScriptManager
         CameraState(virtualCamera, aimState, sens);
         animator.SetBool("isAiming", aimState);
         isAiming = aimState;
+    }
+
+    void WeaponState(int currentLayer)
+    {
+        AimState(aimVirtualCamera, false, currentWeaponLayer, 0f, normalSensitivity);
+        currentTimer = 0;
+        previousWeaponLayer = currentWeaponLayer;
+        currentWeaponLayer = currentLayer;
     }
 
     void EquipState(bool primary, bool secondary, bool grenade, bool melee, int setLayer, int weaponState)
@@ -420,7 +438,7 @@ public class Player : ScriptManager
         }
         else if (GameManager.instance.currentMelee != null)
         {
-            if (GameManager.instance.currentMelee.readySwing)
+            if (GameManager.instance.currentMelee.readySwing && thirdPersonController.Grounded && !isCrouching)
             {
                 StartCoroutine(GameManager.instance.currentMelee.MeleeAttack());
             }
@@ -451,19 +469,12 @@ public class Player : ScriptManager
         if (!isCrouching)
         {
             CameraSwap(false, virtualCamera, aimVirtualCamera);
+
         }
         else
         {
             CameraSwap(false, crouchVirtualCamera, crouchAimVirtualCamera);
         }
-    }
-
-    void WeaponState(int currentLayer)
-    {
-        AimState(aimVirtualCamera, false, currentWeaponLayer, 0f, normalSensitivity);
-        currentTimer = 0;
-        previousWeaponLayer = currentWeaponLayer;
-        currentWeaponLayer = currentLayer;
     }
 
     void OnReload()

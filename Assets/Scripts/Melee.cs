@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Melee : MonoBehaviour
+public class Melee : Interactable
 {
     private Animator animator;
 
@@ -60,5 +60,11 @@ public class Melee : MonoBehaviour
             animator.SetInteger("hitCount", hitCount);
             readySwing = true;
         }
+    }
+
+    public override void Interact(Player thePlayer)
+    {
+        base.Interact(thePlayer);
+
     }
 }

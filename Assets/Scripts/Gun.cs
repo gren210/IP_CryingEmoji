@@ -2,7 +2,7 @@ using Cinemachine;
 using System.Collections;
 using UnityEngine;
 
-public class Gun : ScriptManager
+public class Gun : Interactable
 {
     [HideInInspector]
     public bool reloading = false;
@@ -31,6 +31,10 @@ public class Gun : ScriptManager
     CinemachineImpulseSource shakeSource;
 
     public int gunIndex;
+
+    bool reloadSmooth;
+
+    float currentTimer;
 
     [HideInInspector]
     public bool isShooting = false;
@@ -62,16 +66,44 @@ public class Gun : ScriptManager
         {
             GameManager.instance.readySwap = false;
         }
-    }
 
+        if (reloadSmooth)
+        {
+            currentTimer += Time.deltaTime;
+            if (reloading == true)
+            {
+                GameManager.instance.animator.SetLayerWeight(7, Mathf.Lerp(0, 1, currentTimer/.2f));
+            }
+            else
+            {
+                GameManager.instance.animator.SetLayerWeight(7, Mathf.Lerp(1, 0, currentTimer/.2f));
+            }
+            if (currentTimer > .2f)
+            {
+                if (reloading == true)
+                {
+                    GameManager.instance.animator.SetLayerWeight(7, 1);
+                }
+                else
+                {
+                    GameManager.instance.animator.SetLayerWeight(7, 0);
+                }
+                currentTimer = 0;
+                reloadSmooth = false;
+            }
+        }
+
+    }
     public IEnumerator Reload()
     {
-        GameManager.instance.animator.SetLayerWeight(7, 1);
+        //GameManager.instance.animator.SetLayerWeight(7, 1);
         reloading = true;
+        reloadSmooth = true;
         GameManager.instance.animator.SetTrigger("isReloading");
         yield return new WaitForSeconds(reloadTime);
         reloading = false;
-        GameManager.instance.animator.SetLayerWeight(7, 0);
+        reloadSmooth = true;
+        //GameManager.instance.animator.SetLayerWeight(7, 0);
     }
 
     public void Shoot(Player thePlayer)
@@ -92,7 +124,7 @@ public class Gun : ScriptManager
         while (true)
         {
             Debug.Log("okk");
-            if (fullAuto && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim)
+            if (fullAuto && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
             {
                 Shoot(thePlayer);
                 yield return new WaitForSeconds(60/RPM);
@@ -100,4 +132,11 @@ public class Gun : ScriptManager
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public override void Interact(Player thePlayer)
+    {
+        base.Interact(thePlayer);
+
+    }
+
 }

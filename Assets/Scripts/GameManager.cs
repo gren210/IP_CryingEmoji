@@ -5,6 +5,7 @@
  */
 
 using Cinemachine;
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,6 +23,8 @@ public class GameManager : MonoBehaviour
     /// The current virtual camera that is being used by the player.
     /// </summary>
     public CinemachineVirtualCamera currentVirtualCamera;
+
+    public ThirdPersonController thirdPersonController;
 
     public Player thePlayer;
 

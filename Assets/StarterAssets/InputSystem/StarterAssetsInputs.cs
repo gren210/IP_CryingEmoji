@@ -38,8 +38,10 @@ namespace StarterAssets
 
 		public void OnJump(InputValue value)
 		{
-            JumpInput(value.isPressed);
-            
+			if(!aim && !GameManager.instance.isCrouch)
+			{
+                JumpInput(value.isPressed);
+            }
 		}
 
 		public void OnSprint(InputValue value)
