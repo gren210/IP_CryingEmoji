@@ -10,6 +10,8 @@ public class Gun : Interactable
     [SerializeField]
     float reloadTime;
 
+    public bool secondary;
+
     public bool fullAuto;
 
     [SerializeField]
@@ -39,13 +41,12 @@ public class Gun : Interactable
     [HideInInspector]
     public bool isShooting = false;
 
+
+   
+
     private void Awake()
     {
         shakeSource = gameObject.GetComponent<CinemachineImpulseSource>();
-        //if (fullAuto)
-        //{
-            //StartCoroutine(FullAutoShoot(GameManager.instance.thePlayer));
-        //}
     }
 
     // Start is called before the first frame update
@@ -58,14 +59,7 @@ public class Gun : Interactable
     void Update()
     {
         virtualCamera = GameManager.instance.currentVirtualCamera.transform;
-        if (!reloading)
-        {
-            GameManager.instance.readySwap = true;
-        }
-        else
-        {
-            GameManager.instance.readySwap = false;
-        }
+        
 
         if (reloadSmooth)
         {
@@ -87,6 +81,7 @@ public class Gun : Interactable
                 else
                 {
                     GameManager.instance.animator.SetLayerWeight(7, 0);
+                    GameManager.instance.readySwap = true;
                 }
                 currentTimer = 0;
                 reloadSmooth = false;
@@ -99,6 +94,7 @@ public class Gun : Interactable
         //GameManager.instance.animator.SetLayerWeight(7, 1);
         reloading = true;
         reloadSmooth = true;
+        GameManager.instance.readySwap = false;
         GameManager.instance.animator.SetTrigger("isReloading");
         yield return new WaitForSeconds(reloadTime);
         reloading = false;

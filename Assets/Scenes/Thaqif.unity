@@ -1870,6 +1870,16 @@ PrefabInstance:
       propertyPath: ShoulderOffset.x
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4215962801187038647, guid: 476e985466112544da7a702ddd12fe74,
+        type: 3}
+      propertyPath: weaponSwapDelay
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4215962801187038647, guid: 476e985466112544da7a702ddd12fe74,
+        type: 3}
+      propertyPath: weaponSwapSpeed
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 4257497510395513029, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -123,6 +123,8 @@ public class Player : ScriptManager
 
     private Vector3 aimDirection;
 
+    public float weaponSwapDelay;
+
 
 
     private void Awake()
@@ -153,7 +155,7 @@ public class Player : ScriptManager
             //Debug.Log(playerLookAt.position);
             //GameManager.instance.isShooting = false;
         }
-        if (isAiming && thirdPersonController.Grounded)
+        if (isAiming && thirdPersonController.Grounded && GameManager.instance.readySwap)
         {
             playerLookAt.position = playerCamera.position + (playerCamera.forward * 10f);
             rig.weight = 1;
@@ -177,7 +179,7 @@ public class Player : ScriptManager
             //Debug.Log(hitInfo);
         }
 
-        if (starterAssetsInputs.aim && thirdPersonController.Grounded && GameManager.instance.currentMelee == null)
+        if (starterAssetsInputs.aim && thirdPersonController.Grounded && GameManager.instance.currentMelee == null && GameManager.instance.readySwap)
         {
             if (currentWeaponLayer == 3)
             {
@@ -262,14 +264,12 @@ public class Player : ScriptManager
         GameManager.instance.isCrouch = isCrouching;
         GameManager.instance.isAiming = starterAssetsInputs.aim;
         GameManager.instance.thirdPersonController = thirdPersonController;
-
     }
 
     public void FaceForward()
     {
         transform.forward = Vector3.Lerp(transform.forward, aimDirection, Time.deltaTime * 35f);
     }
-
     void CameraSwap(bool isSwap, CinemachineVirtualCamera normal, CinemachineVirtualCamera aim)
     {
         currentVirtualCamera.gameObject.SetActive(isSwap);
@@ -309,7 +309,7 @@ public class Player : ScriptManager
         currentWeaponLayer = currentLayer;
     }
 
-    void EquipState(bool primary, bool secondary, bool grenade, bool melee, int setLayer, int weaponState)
+    IEnumerator EquipState(bool primary, bool secondary, bool grenade, bool melee, int setLayer, int weaponState)
     {
         if (currentCoroutine != null)
         {
@@ -322,9 +322,10 @@ public class Player : ScriptManager
         animator.SetBool("isSecondary", secondary);
         animator.SetLayerWeight(setLayer, 0f);
         WeaponState(weaponState);
-
+        GameManager.instance.readySwap = false;
+        yield return new WaitForSeconds(weaponSwapDelay);
+        GameManager.instance.readySwap = true;
     }
-
 
     void OnFlashlight()
     {
@@ -338,16 +339,15 @@ public class Player : ScriptManager
         }
     }
 
-
     void OnPrimaryEquip()
     {
         //isAiming = false;
         if (GameManager.instance.currentGun != null)
         {
-            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.readySwap == true)
+            if (!GameManager.instance.currentGun.reloading && GameManager.instance.readySwap)
             {
                 GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
-                EquipState(true, false, false, false, 2, 3);
+                StartCoroutine(EquipState(true, false, false, false, 2, 3));
                 GameManager.instance.currentGrenade = null;
                 GameManager.instance.currentMelee = null;
                 if (GameManager.instance.currentGun.fullAuto)
@@ -356,10 +356,10 @@ public class Player : ScriptManager
                 }
             }
         }
-        else if (GameManager.instance.readySwap == true)
+        else if (GameManager.instance.readySwap)
         {
             GameManager.instance.currentGun = currentPrimary.GetComponent<Gun>();
-            EquipState(true, false, false, false, 2, 3);
+            StartCoroutine(EquipState(true, false, false, false, 2, 3));
             GameManager.instance.currentGrenade = null;
             GameManager.instance.currentMelee = null;
             if (GameManager.instance.currentGun.fullAuto)
@@ -374,21 +374,20 @@ public class Player : ScriptManager
         //isAiming = false;
         if(GameManager.instance.currentGun != null)
         {
-            if (GameManager.instance.currentGun.reloading == false && GameManager.instance.readySwap == true)
+            if (!GameManager.instance.currentGun.reloading && GameManager.instance.readySwap)
             {
                 GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
-                EquipState(false, true, false, false, 4, 1);
+                StartCoroutine(EquipState(false, true, false, false, 4, 1));
                 GameManager.instance.currentGrenade = null;
             }
         }
-        else if (GameManager.instance.readySwap == true)
+        else if (GameManager.instance.readySwap)
         {
             GameManager.instance.currentGun = currentSecondary.GetComponent<Gun>();
-            EquipState(false, true, false, false, 4, 1);
+            StartCoroutine(EquipState(false, true, false, false, 4, 1));
             GameManager.instance.currentGrenade = null;
             GameManager.instance.currentMelee = null;
         }
-       
     }
 
     void OnMelee()
@@ -396,7 +395,7 @@ public class Player : ScriptManager
         if (GameManager.instance.readySwap)
         {
             GameManager.instance.currentMelee = currentMelee.GetComponent<Melee>();
-            EquipState(false, false, false, true, 2, 5);
+            StartCoroutine(EquipState(false, false, false, true, 2, 5));
             animator.SetLayerWeight(4, 0f);
             GameManager.instance.currentGun = null;
             GameManager.instance.currentGrenade = null;
@@ -408,10 +407,11 @@ public class Player : ScriptManager
         if (GameManager.instance.readySwap)
         {
             GameManager.instance.currentGrenade = currentGrenade.GetComponent<Grenade>();
-            EquipState(false, false, true, false, 2, 0);
+            StartCoroutine(EquipState(false, false, true, false, 2, 0));
             animator.SetLayerWeight(4, 0f);
             GameManager.instance.currentGun = null;
             GameManager.instance.currentMelee = null;
+            AimState(currentAimVirtualCamera, false, 3, 0, normalSensitivity);
         }
 
     }
@@ -450,7 +450,7 @@ public class Player : ScriptManager
         //isAiming = false;
         if (GameManager.instance.readySwap)
         {
-            EquipState(false, false, false, false, 1, 0);
+            StartCoroutine(EquipState(false, false, false, false, 1, 0));
             animator.SetLayerWeight(4, 0f);
             GameManager.instance.currentGun = null;
             GameManager.instance.currentGrenade = null;
@@ -479,9 +479,9 @@ public class Player : ScriptManager
 
     void OnReload()
     {
-        StartCoroutine(GameManager.instance.currentGun.Reload());
+        if(GameManager.instance.currentGun != null)
+        {
+            StartCoroutine(GameManager.instance.currentGun.Reload());
+        }
     }
-
-
-
 }
