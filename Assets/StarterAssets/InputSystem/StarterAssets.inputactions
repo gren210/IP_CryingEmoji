@@ -42,6 +42,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Interact",
+                    "type": "Button",
+                    "id": "8bac89d5-5618-4d8b-ae22-6a9819975cc2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Shoot",
                     "type": "PassThrough",
                     "id": "17628640-4e7e-497d-86b2-d225f04c298e",
@@ -141,7 +150,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "BackPack",
+                    "name": "Backpack",
                     "type": "Button",
                     "id": "d1fea632-c045-4cb9-9b7f-cef24b025bb8",
                     "expectedControlType": "Button",
@@ -455,7 +464,46 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BackPack",
+                    "action": "Backpack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9cdfca3c-83fd-49fc-a616-a30070009a9f",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "UI",
+            "id": "79369b91-d988-4a4f-8139-719d3cc0513b",
+            "actions": [
+                {
+                    "name": "New action",
+                    "type": "Button",
+                    "id": "b104ef62-129f-4ecb-866e-6306c4ed6689",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "b60ad6ef-9d28-4a4a-b5ff-702c4c814ab2",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "New action",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -48,6 +48,14 @@ public class GameManager : MonoBehaviour
 
     public bool isAiming = false;
 
+    public bool[] primaryBackpack = { false, false, false };
+
+    public bool[] secondaryBackpack = { false, false };
+
+    public bool[] meleeBackpack = { false, false, false };
+
+    public int[] grenadeBackpack = { 0, 0, 0 };
+
     private void Awake()
     {
         if (instance == null)

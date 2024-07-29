@@ -132,7 +132,19 @@ public class Gun : Interactable
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-
+        if (!secondary)
+        {
+            GameManager.instance.primaryBackpack[gunIndex] = true;
+            thePlayer.currentPrimary = thePlayer.primaryWeapons[gunIndex];
+            thePlayer.OnPrimaryEquip();
+        }
+        else
+        {
+            GameManager.instance.secondaryBackpack[gunIndex] = true;
+            thePlayer.currentSecondary = thePlayer.secondaryWeapons[gunIndex];
+            thePlayer.OnSecondaryEquip();
+        }
+        Destroy(gameObject);
     }
 
 }
