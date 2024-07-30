@@ -90,6 +90,8 @@ public class Player : ScriptManager
     [HideInInspector]
     public Animator animator;
 
+    CinemachineBrain cinemachineBrain;
+
     public float interactionDistance = 1000f;
 
     public Rig rig;
@@ -139,6 +141,7 @@ public class Player : ScriptManager
     {
         thirdPersonController = GetComponent<ThirdPersonController>();
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
+        cinemachineBrain = playerCamera.gameObject.GetComponent<CinemachineBrain>();
         animator = GetComponent<Animator>();
     }
 
@@ -216,6 +219,7 @@ public class Player : ScriptManager
             GameManager.instance.currentVirtualCamera = currentVirtualCamera;
         }
 
+
         if (previousWeaponLayer != currentWeaponLayer)
         {
             currentTimer += Time.deltaTime;
@@ -255,6 +259,8 @@ public class Player : ScriptManager
         GameManager.instance.isCrouch = isCrouching;
         GameManager.instance.isAiming = starterAssetsInputs.aim;
         GameManager.instance.thirdPersonController = thirdPersonController;
+
+        
     }
 
     public void FaceForward()
@@ -359,7 +365,7 @@ public class Player : ScriptManager
 
     public void OnPrimaryEquip()
     {
-        if (GameManager.instance.readySwap && currentPrimary != null)
+        if (GameManager.instance.readySwap && !cinemachineBrain.IsBlending && currentPrimary != null)
         {
             WeaponSwitch(currentPrimary.GetComponent<Gun>(), null,null);
             StartCoroutine(EquipState(true, false, false, false, 3, 2));
@@ -373,7 +379,7 @@ public class Player : ScriptManager
 
     public void OnSecondaryEquip()
     {
-        if(GameManager.instance.readySwap && currentSecondary != null)
+        if(GameManager.instance.readySwap && !cinemachineBrain.IsBlending && currentSecondary != null)
         {
             WeaponSwitch(currentSecondary.GetComponent<Gun>(), null, null);
             StartCoroutine(EquipState(false, true, false, false, 4, 1));
@@ -382,16 +388,16 @@ public class Player : ScriptManager
 
     public void OnMelee()
     {
-        if (GameManager.instance.readySwap && currentMelee != null)
+        if (GameManager.instance.readySwap && !cinemachineBrain.IsBlending && currentMelee != null)
         {
             WeaponSwitch(null, null, currentMelee.GetComponent<Melee>());
             StartCoroutine(EquipState(false, false, false, true, 3, 5));
         }
     }
 
-    void OnGrenade()
+    public void OnGrenade()
     {
-        if (GameManager.instance.readySwap && currentGrenade != null)
+        if (GameManager.instance.readySwap && !cinemachineBrain.IsBlending && currentGrenade != null)
         {
             WeaponSwitch(null, currentGrenade.GetComponent<Grenade>(), null);
             StartCoroutine(EquipState(false, false, true, false, 3, 0));
@@ -404,7 +410,6 @@ public class Player : ScriptManager
     {
         if (GameManager.instance.currentGrenade != null)
         {
-            Debug.Log(GameManager.instance.readyShoot);
             if (GameManager.instance.readyShoot)
             {
                 StartCoroutine(GameManager.instance.currentGrenade.GrenadeThrow(this));
@@ -429,7 +434,7 @@ public class Player : ScriptManager
 
     void OnHolster()
     {
-        if (GameManager.instance.readySwap && currentPrimary != null && currentSecondary != null && currentGrenade != null && currentMelee != null) // check if currentprimary secondary melee grenade is false
+        if (GameManager.instance.readySwap && (currentPrimary != null || currentSecondary != null || currentGrenade != null || currentMelee != null)) // check if currentprimary secondary melee grenade is false null &&
         {
             WeaponSwitch(null,null,null);   
             StartCoroutine(EquipState(false, false, false, false, 1, 0));

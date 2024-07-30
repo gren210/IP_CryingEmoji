@@ -1,4 +1,5 @@
 using Cinemachine;
+using StarterAssets;
 using System.Collections;
 using UnityEngine;
 
@@ -41,7 +42,8 @@ public class Gun : Interactable
     [HideInInspector]
     public bool isShooting = false;
 
-
+    [SerializeField]
+    GameObject gunAudio;
    
 
     private void Awake()
@@ -106,8 +108,10 @@ public class Gun : Interactable
     {
         
         RaycastHit hitInfo;
-        if (currentCooldown <= 0f)
+        if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
         {
+            GameObject gunshot = Instantiate(gunAudio);
+            Destroy(gunshot, 1f);
             bool hit = Physics.Raycast(thePlayer.playerCamera.position, thePlayer.playerCamera.forward, out hitInfo, bulletRange);
             //StartCoroutine(ShakeCameraOverTime(.7f, .7f, .1f));
             shakeSource.GenerateImpulseWithForce(.04f);
@@ -119,11 +123,12 @@ public class Gun : Interactable
     {
         while (true)
         {
-            Debug.Log("okk");
             if (fullAuto && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
             {
                 Shoot(thePlayer);
-                yield return new WaitForSeconds(60/RPM);
+                float shotDelay = 60f / RPM;
+                Debug.Log(shotDelay);
+                yield return new WaitForSeconds(shotDelay);
             }
             yield return new WaitForEndOfFrame();
         }
@@ -135,12 +140,20 @@ public class Gun : Interactable
         if (!secondary)
         {
             GameManager.instance.primaryBackpack[gunIndex] = true;
+            if (thePlayer.currentPrimary != null)
+            {
+                thePlayer.primaryWeapons[thePlayer.currentPrimary.GetComponent<Gun>().gunIndex].SetActive(false);
+            }
             thePlayer.currentPrimary = thePlayer.primaryWeapons[gunIndex];
             thePlayer.OnPrimaryEquip();
         }
         else
         {
             GameManager.instance.secondaryBackpack[gunIndex] = true;
+            if (thePlayer.currentSecondary != null)
+            {
+                thePlayer.secondaryWeapons[thePlayer.currentSecondary.GetComponent<Gun>().gunIndex].SetActive(false);
+            }
             thePlayer.currentSecondary = thePlayer.secondaryWeapons[gunIndex];
             thePlayer.OnSecondaryEquip();
         }

@@ -94,10 +94,15 @@ public class Grenade : Interactable
 
     bool throwing = false;
 
+    public int grenadeIndex;
+
+    [SerializeField]
+    bool impactGrenade;
+
     // Start is called before the first frame update
     void Start()
     {
-        if (realGrenade)
+        if (realGrenade && !impactGrenade)
         {
             StartCoroutine(GrenadeTick());
         }
@@ -167,17 +172,38 @@ public class Grenade : Interactable
 
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (impactGrenade)
+        {
+            GameManager.instance.readySwap = true;
+            GameManager.instance.readyShoot = true;
+            GameManager.instance.animator.SetLayerWeight(7, 0);
+            GrenadeExplode();
+        }
+    }
+
     IEnumerator GrenadeTick()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(grenadeDistance * GameManager.instance.playerCamera.transform.forward);
         yield return new WaitForSeconds(delay);
-        GrenadeExplode();
+        if (!impactGrenade)
+        {
+            GrenadeExplode();
+        }
     }
 
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-
+        GameManager.instance.grenadeBackpack[grenadeIndex]++;
+        if (thePlayer.currentGrenade != null)
+        {
+            thePlayer.grenadeWeapons[thePlayer.currentGrenade.GetComponent<Grenade>().grenadeIndex].SetActive(false);
+        }
+        thePlayer.currentGrenade = thePlayer.grenadeWeapons[grenadeIndex];
+        thePlayer.OnGrenade();
+        Destroy(gameObject);
     }
 
 

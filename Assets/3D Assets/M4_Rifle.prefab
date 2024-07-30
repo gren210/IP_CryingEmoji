@@ -590,11 +590,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloading: 0
   reloadTime: 2.7
+  secondary: 0
   fullAuto: 1
   ammoCount: 0
-  RPM: 600
+  RPM: 650
   sphereLookAt: {fileID: 0}
+  gunIndex: 0
   isShooting: 0
+  gunAudio: {fileID: 3585659912033475696, guid: 154c5d2b03622354bb26a155dede0c5e,
+    type: 3}
 --- !u!1 &5734065753958973532
 GameObject:
   m_ObjectHideFlags: 0

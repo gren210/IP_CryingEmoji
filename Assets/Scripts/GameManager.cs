@@ -56,6 +56,8 @@ public class GameManager : MonoBehaviour
 
     public int[] grenadeBackpack = { 0, 0, 0 };
 
+    public int health = 100;
+
     private void Awake()
     {
         if (instance == null)

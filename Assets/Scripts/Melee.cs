@@ -17,22 +17,31 @@ public class Melee : Interactable
 
     public bool readySwing;
 
+    public int meleeIndex;
+
+    public bool interactable;
+
     // Start is called before the first frame update
     void Start()
     {
         animator = GameManager.instance.animator;
         readySwing = true;
+        lastClickedTime = 0;
+        
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        lastClickedTime += Time.deltaTime;
-        if (lastClickedTime >= cooldown)
+        if (!interactable)
         {
-            hitCount = 0;
-            animator.SetInteger("hitCount", hitCount);
+            lastClickedTime += Time.deltaTime;
+            if (lastClickedTime >= cooldown)
+            {
+                hitCount = 0;
+                animator.SetInteger("hitCount", hitCount);
+            }
         }
     }
 
@@ -65,6 +74,13 @@ public class Melee : Interactable
     public override void Interact(Player thePlayer)
     {
         base.Interact(thePlayer);
-
+        GameManager.instance.meleeBackpack[meleeIndex] = true;
+        if(thePlayer.currentMelee != null)
+        {
+            thePlayer.meleeWeapons[thePlayer.currentMelee.GetComponent<Melee>().meleeIndex].SetActive(false);
+        }
+        thePlayer.currentMelee = thePlayer.meleeWeapons[meleeIndex];
+        thePlayer.OnMelee();
+        Destroy(gameObject);
     }
 }

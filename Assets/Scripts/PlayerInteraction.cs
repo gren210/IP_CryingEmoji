@@ -40,11 +40,11 @@ public class PlayerInteraction : MonoBehaviour
             }
             else if (hitInfo.transform.TryGetComponent<Grenade>(out currentGrenadePickup))
             {
-
+                Debug.Log(currentGrenadePickup);
             }
             else if(hitInfo.transform.TryGetComponent<Melee>(out currentMeleePickup))
             {
-
+                Debug.Log(currentMeleePickup);
             }
         }
     }
