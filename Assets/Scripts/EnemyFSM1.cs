@@ -43,7 +43,7 @@ public class EnemyFSM1 : MonoBehaviour
         if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
         {
             nextState = "Attack";
-            animator.SetBool("Attack", true);
+            
         }
         else if (detected)
         {
@@ -93,17 +93,19 @@ public class EnemyFSM1 : MonoBehaviour
 
     IEnumerator Attack()
     {
-        yield return new WaitForEndOfFrame();
         while (currentState == "Attack")
         {
-            yield return new WaitForSeconds(1.313f);
+            animator.SetBool("Attack", true);
+            yield return new WaitForEndOfFrame();
         }
+        animator.SetBool("Attack", false);
         SwitchState();
     }
 
     public void Damage()
     {
         GameManager.instance.health -= damage;
+        Debug.Log(GameManager.instance.health);
     }
 
 }
