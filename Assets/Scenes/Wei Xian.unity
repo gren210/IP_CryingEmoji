@@ -13757,6 +13757,7 @@ MonoBehaviour:
   secondaryBackpack: 0000
   meleeBackpack: 000000
   grenadeBackpack: 000000000000000000000000
+  health: 100
 --- !u!43 &850900549
 Mesh:
   m_ObjectHideFlags: 0
