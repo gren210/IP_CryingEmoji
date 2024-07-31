@@ -4,10 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyFSM1 : MonoBehaviour
+public class EnemyFSM1 : Enemy
 {
     Transform playerTarget;
 
+    [HideInInspector]
     public Animator animator;
 
     NavMeshAgent myAgent;
@@ -20,7 +21,11 @@ public class EnemyFSM1 : MonoBehaviour
 
     public float attackRange;
 
+    public float health;
+
     public int damage;
+
+    bool stunned;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +35,7 @@ public class EnemyFSM1 : MonoBehaviour
         myAgent = gameObject.GetComponent<NavMeshAgent>();
         currentState = "Idle";
         nextState = currentState;
-        SwitchState();
+        SwitchState(currentState);
     }
 
     // Update is called once per frame
@@ -40,20 +45,22 @@ public class EnemyFSM1 : MonoBehaviour
         {
             currentState = nextState;
         }
-        if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
         {
-            nextState = "Attack";
-            
+            if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
+            {
+                nextState = "Attack";
+
+            }
+            else if (detected)
+            {
+                nextState = "Chasing";
+            }
+            else if (stunned)
+            {
+                nextState = "Stunned";
+            }
         }
-        else if (detected)
-        {
-            nextState = "Chasing";
-            animator.SetBool("Attack", false);
-        }
-    }
-    void SwitchState()
-    {
-        StartCoroutine(currentState);
     }
 
     public void UpdateTarget(Transform newTarget)
@@ -72,15 +79,24 @@ public class EnemyFSM1 : MonoBehaviour
         {
             yield return new WaitForEndOfFrame();
         }
-        SwitchState();
+        SwitchState(currentState);
+    }
+
+    IEnumerator Stunned()
+    {
+        while (currentState == "Stunned")
+        {
+            yield return new WaitForEndOfFrame();
+        }
+        SwitchState(currentState);
     }
 
     IEnumerator Chasing()
     {
-        while(currentState == "Chasing")
+        while (currentState == "Chasing")
         {
             yield return new WaitForEndOfFrame();
-            if (playerTarget != null && !animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
+            if (playerTarget != null)
             {
                 if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Attack"))
                 {
@@ -88,24 +104,23 @@ public class EnemyFSM1 : MonoBehaviour
                 }
             }
         }
-        SwitchState();
+        SwitchState(currentState);
     }
 
     IEnumerator Attack()
     {
+        animator.SetBool("Attack", true);
         while (currentState == "Attack")
         {
-            animator.SetBool("Attack", true);
             yield return new WaitForEndOfFrame();
         }
         animator.SetBool("Attack", false);
-        SwitchState();
+        SwitchState(currentState);
     }
 
-    public void Damage()
+    protected override void Damage(int damage)
     {
-        GameManager.instance.health -= damage;
-        Debug.Log(GameManager.instance.health);
+        base.Damage(damage);
     }
 
 }

@@ -4,22 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int damage;
 
-    public float attackRange;
-
-    public int health;
-
-
-    // Start is called before the first frame update
-    void Start()
+    protected virtual void Damage(int damage)
     {
-        
+        GameManager.instance.health -= damage;
+        Debug.Log(GameManager.instance.health);
     }
 
-    // Update is called once per frame
-    void Update()
+    protected virtual void SwitchState(string currentState)
     {
-        
+        StartCoroutine(currentState);
     }
+
 }
