@@ -21,6 +21,10 @@ public class Melee : Interactable
 
     public bool interactable;
 
+    public int damage;
+
+    public float attackRange;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -83,4 +87,7 @@ public class Melee : Interactable
         thePlayer.OnMelee();
         Destroy(gameObject);
     }
+
+
+
 }

@@ -18,6 +18,7 @@ public class PlayerInteraction : MonoBehaviour
 
     Melee currentMeleePickup;
 
+    Enemy enemy;
 
 
     // Start is called before the first frame update

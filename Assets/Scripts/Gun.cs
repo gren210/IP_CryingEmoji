@@ -25,7 +25,9 @@ public class Gun : Interactable
 
     float currentCooldown;
 
-    float bulletRange;
+    public float bulletRange;
+
+    public int damage;
 
     Transform virtualCamera;
 
@@ -44,6 +46,8 @@ public class Gun : Interactable
 
     [SerializeField]
     GameObject gunAudio;
+
+    Enemy currentEnemy;
    
 
     private void Awake()
@@ -93,7 +97,6 @@ public class Gun : Interactable
     }
     public IEnumerator Reload()
     {
-        //GameManager.instance.animator.SetLayerWeight(7, 1);
         reloading = true;
         reloadSmooth = true;
         GameManager.instance.readySwap = false;
@@ -101,7 +104,6 @@ public class Gun : Interactable
         yield return new WaitForSeconds(reloadTime);
         reloading = false;
         reloadSmooth = true;
-        //GameManager.instance.animator.SetLayerWeight(7, 0);
     }
 
     public void Shoot(Player thePlayer)
@@ -111,11 +113,18 @@ public class Gun : Interactable
         if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
         {
             GameObject gunshot = Instantiate(gunAudio);
-            Destroy(gunshot, 1f);
-            bool hit = Physics.Raycast(thePlayer.playerCamera.position, thePlayer.playerCamera.forward, out hitInfo, bulletRange);
-            //StartCoroutine(ShakeCameraOverTime(.7f, .7f, .1f));
+            Destroy(gunshot, 1f); 
             shakeSource.GenerateImpulseWithForce(.04f);
             GameManager.instance.isShooting = true;
+            bool hit = Physics.Raycast(thePlayer.playerCamera.position, thePlayer.playerCamera.forward, out hitInfo, bulletRange);
+            if (hit)
+            {
+                if(hitInfo.collider.TryGetComponent<Enemy>(out currentEnemy))
+                {
+                    Debug.Log("hell");
+                    currentEnemy.TakeDamage(damage);
+                }
+            }
         }
     }
 
@@ -123,11 +132,10 @@ public class Gun : Interactable
     {
         while (true)
         {
-            if (fullAuto && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
+            if (fullAuto && !reloading && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
             {
                 Shoot(thePlayer);
                 float shotDelay = 60f / RPM;
-                Debug.Log(shotDelay);
                 yield return new WaitForSeconds(shotDelay);
             }
             yield return new WaitForEndOfFrame();

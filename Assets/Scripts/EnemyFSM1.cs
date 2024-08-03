@@ -19,12 +19,6 @@ public class EnemyFSM1 : Enemy
 
     public bool detected;
 
-    public float attackRange;
-
-    public float health;
-
-    public int damage;
-
     bool stunned;
 
     // Start is called before the first frame update
@@ -41,6 +35,7 @@ public class EnemyFSM1 : Enemy
     // Update is called once per frame
     void Update()
     {
+        animator.SetInteger("Health", health);
         if(currentState != nextState)
         {
             currentState = nextState;
@@ -60,6 +55,10 @@ public class EnemyFSM1 : Enemy
             {
                 nextState = "Stunned";
             }
+        }
+        if (health <= 0)
+        {
+            nextState = "Death";
         }
     }
 
@@ -98,7 +97,7 @@ public class EnemyFSM1 : Enemy
             yield return new WaitForEndOfFrame();
             if (playerTarget != null)
             {
-                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Attack"))
+                if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Attack") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
                 {
                     myAgent.SetDestination(playerTarget.position);
                 }
@@ -118,9 +117,17 @@ public class EnemyFSM1 : Enemy
         SwitchState(currentState);
     }
 
-    protected override void Damage(int damage)
+    IEnumerator Death()
     {
-        base.Damage(damage);
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        myAgent.enabled = false;
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
+    }
+
+    protected override void Damage()
+    {
+        base.Damage();
     }
 
 }

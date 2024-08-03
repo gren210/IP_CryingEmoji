@@ -201,7 +201,7 @@ GameObject:
   - component: {fileID: 2525589732236686389}
   - component: {fileID: 7690497793554275154}
   - component: {fileID: 248594733967851518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyVision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054fb6bc02a4741488257fca2653977c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attachedEnemy: {fileID: 6497267262499686611}
+  attachedEnemy: {fileID: 3348914166115893976}
 --- !u!65 &248594733967851518
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1002,7 +1002,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8169170163245786439}
   - component: {fileID: 2037264714626667944}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Bottoms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1224,7 +1224,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8748378048619261977}
   - component: {fileID: 3590547030058114547}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Tops
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1322,12 +1322,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1738915662813669782}
   - component: {fileID: 2609195187703737209}
-  - component: {fileID: 6497267262499686611}
+  - component: {fileID: 3348914166115893976}
   - component: {fileID: 1010592676236270681}
   - component: {fileID: 5315477882836960305}
   m_Layer: 0
   m_Name: zombie woman
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1374,7 +1374,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &6497267262499686611
+--- !u!114 &3348914166115893976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1386,10 +1386,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a2857af4193a07429e5de6c3a9b50a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
+  damage: 30
+  attackRange: 2
   animator: {fileID: 0}
   detected: 0
-  attackRange: 1.5
-  damage: 30
 --- !u!195 &1010592676236270681
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1479,7 +1480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2498665359710270671}
   - component: {fileID: 5322115709875549244}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2299,7 +2300,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1651016376055021986}
   - component: {fileID: 2145591609153358318}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
