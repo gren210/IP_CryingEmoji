@@ -23,7 +23,7 @@ public class Grenade : Interactable
     /// <summary>
     /// The particle system for the grenade explosion effect.
     /// </summary>
-    public ParticleSystem effect;
+    public GameObject effect;
 
     /// <summary>
     /// The radius where the grenade will affect entities.
@@ -33,7 +33,7 @@ public class Grenade : Interactable
     /// <summary>
     /// The damage dealt by the grenade explosion.
     /// </summary>
-    public float explodeDamage = 70f;
+    public int explodeDamage = 70;
 
     /// <summary>
     /// Indicates whether the grenade has been thrown.
@@ -136,7 +136,9 @@ public class Grenade : Interactable
     {
         //effect.GetComponent<ParticleSystem>().Play();
 
-        //AudioSource.PlayClipAtPoint(grenadeSound, transform.position);
+        GameObject explosion = Instantiate(effect, transform.position,transform.rotation);
+
+        AudioSource.PlayClipAtPoint(grenadeSound, transform.position);
 
         Collider[] entities = Physics.OverlapSphere(transform.position, explodeRadius);
 
@@ -144,7 +146,7 @@ public class Grenade : Interactable
         {
             if (collider.gameObject.tag == "Enemy")
             {
-                //UpdateEnemyHealth(collider.gameObject, explodeDamage);
+                collider.gameObject.GetComponent<Enemy>().health -= explodeDamage;
             }
             else if (collider.gameObject.tag == "Boss")
             {
@@ -152,7 +154,7 @@ public class Grenade : Interactable
             }
             else if (collider.gameObject.tag == "Player") //&& !GameManager.instance.isImmune)
             {
-                //GameManager.instance.playerHealth -= explodeDamage;
+                GameManager.instance.health -= explodeDamage;
             }
         }
         Destroy(gameObject);

@@ -7,6 +7,8 @@ using StarterAssets;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
+using System.Linq;
+using Unity.VisualScripting;
 
 public class PlayerInteraction : MonoBehaviour
 {
@@ -19,6 +21,8 @@ public class PlayerInteraction : MonoBehaviour
     Melee currentMeleePickup;
 
     Enemy enemy;
+
+    GameObject[] entities = { };
 
 
     // Start is called before the first frame update
@@ -50,6 +54,7 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+
     void OnInteract()
     {
         if (currentGunPickup != null)
@@ -64,5 +69,21 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentMeleePickup.Interact(x);
         }
+    }
+
+    public void Damage()
+    {
+        Melee melee = GameManager.instance.currentMelee;
+        Vector3 colliderPosition = GameManager.instance.thePlayer.transform.forward * (melee.attackRange / 2);
+        //Collider[] entities = gameObject.GetComponent<BoxCollider>();
+        //foreach (Collider entity in entities)
+        //{
+            //Debug.Log(entity);
+            //if (entity.transform.tag == "Enemy")
+            //{
+                //Debug.Log("Hello");
+                //entity.GetComponent<Enemy>().health -= melee.damage;
+            //}
+        //}
     }
 }

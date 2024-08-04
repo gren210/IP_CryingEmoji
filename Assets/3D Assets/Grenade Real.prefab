@@ -100,16 +100,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grenadeDistance: 200
   delay: 3
-  effect: {fileID: 0}
+  effect: {fileID: 4079710493560053110, guid: 32fd8393e4f28a64fa804fa1ac17f6be, type: 3}
   explodeRadius: 50
   explodeDamage: 70
   thrown: 0
-  grenadeSound: {fileID: 0}
+  grenadeSound: {fileID: 8300000, guid: 15e253825dd639e459f109695ee81f06, type: 3}
   shakeTimer: 0
   shakeIntensity: 0
   shakeFrequency: 0
   realGrenade: 1
   realGrenadeObject: {fileID: 0}
+  grenadeIndex: 0
+  impactGrenade: 0
 --- !u!135 &2237284380913461942
 SphereCollider:
   m_ObjectHideFlags: 0

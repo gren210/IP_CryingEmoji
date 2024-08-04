@@ -87,7 +87,4 @@ public class Melee : Interactable
         thePlayer.OnMelee();
         Destroy(gameObject);
     }
-
-
-
 }
