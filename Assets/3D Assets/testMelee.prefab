@@ -101,6 +101,10 @@ MonoBehaviour:
   comboDelay: 0.5
   readySwing: 0
   meleeIndex: 0
+  interactable: 0
+  damage: 100
+  attackRange: 2
+  damageCollider: {fileID: 1918774613944059008}
 --- !u!65 &1918774613944059008
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -116,9 +120,9 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 1.000001, y: 2.0000002, z: 1.0000002}
+  m_Size: {x: 3, y: 3, z: 3}
   m_Center: {x: 0.00000005960466, y: -2.6020852e-17, z: -0.00000020861626}

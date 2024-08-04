@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyFSM1 : Enemy
 {
@@ -17,13 +18,12 @@ public class EnemyFSM1 : Enemy
 
     string nextState;
 
-    public bool detected;
-
     bool stunned;
 
     // Start is called before the first frame update
     void Start()
     {
+        currentHealth = health;
         playerTarget = GameManager.instance.thePlayer.transform;
         animator = gameObject.GetComponent<Animator>();
         myAgent = gameObject.GetComponent<NavMeshAgent>();
@@ -35,17 +35,33 @@ public class EnemyFSM1 : Enemy
     // Update is called once per frame
     void Update()
     {
-        animator.SetInteger("Health", health);
+        animator.SetInteger("Health", currentHealth);
+
+        if (currentHealth < health)
+        {
+            detected = true;
+        }
+
+        if (detected)
+        {
+            animator.SetTrigger("Detected");
+        }
+
         if(currentState != nextState)
         {
             currentState = nextState;
         }
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
+
+        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
+        {
+            transform.forward = Vector3.Lerp(transform.forward, playerTarget.position, Time.deltaTime * 3f);
+        }
+
+        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Idle"))
         {
             if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
             {
                 nextState = "Attack";
-
             }
             else if (detected)
             {
@@ -56,7 +72,7 @@ public class EnemyFSM1 : Enemy
                 nextState = "Stunned";
             }
         }
-        if (health <= 0)
+        if (currentHealth <= 0)
         {
             nextState = "Death";
         }

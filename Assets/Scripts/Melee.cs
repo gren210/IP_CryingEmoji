@@ -25,6 +25,8 @@ public class Melee : Interactable
 
     public float attackRange;
 
+    public BoxCollider damageCollider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,5 +88,15 @@ public class Melee : Interactable
         thePlayer.currentMelee = thePlayer.meleeWeapons[meleeIndex];
         thePlayer.OnMelee();
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.transform.tag);
+        if (other.transform.tag == "Enemy")
+        {
+            Debug.Log("ok");
+            other.gameObject.GetComponent<Enemy>().currentHealth -= damage;
+        }
     }
 }

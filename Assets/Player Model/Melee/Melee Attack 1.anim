@@ -87249,9 +87249,17 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0.65
+  - time: 0.5833333
     functionName: Damage
-    data: 
+    data: true
+    objectReferenceParameter: {fileID: 11500000, guid: 4752a2dded8247e40820435c5b61b557,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.7
+    functionName: Damage
+    data: false
     objectReferenceParameter: {fileID: 11500000, guid: 4752a2dded8247e40820435c5b61b557,
       type: 3}
     floatParameter: 0

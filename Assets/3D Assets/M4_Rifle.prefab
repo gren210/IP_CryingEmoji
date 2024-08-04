@@ -35,6 +35,37 @@ Transform:
   - {fileID: 6450486893555400882}
   m_Father: {fileID: 1280529083787757870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2307537111003553865
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207017381775546105}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: -5487077368411116049, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1207017381775546105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2307537111003553865}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 7.48, z: 28.29}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1280529083787757870}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3357153006831368596
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,6 +605,7 @@ Transform:
   - {fileID: 2107134052987952020}
   - {fileID: 638136868130072515}
   - {fileID: 4465291680875461364}
+  - {fileID: 1207017381775546105}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1037740807869021532
@@ -594,11 +626,19 @@ MonoBehaviour:
   fullAuto: 1
   ammoCount: 0
   RPM: 650
+  bulletRange: 0
+  damage: 0
   sphereLookAt: {fileID: 0}
   gunIndex: 0
   isShooting: 0
   gunAudio: {fileID: 3585659912033475696, guid: 154c5d2b03622354bb26a155dede0c5e,
     type: 3}
+  bloodVFX: {fileID: 2459360466587414961, guid: 0408d5cb5353dfa499912501f202a558,
+    type: 3}
+  smokeVFX: {fileID: 6934042324524074853, guid: 7eb758657b3bca04db8f61508832af07,
+    type: 3}
+  muzzleVFX: {fileID: 0}
+  muzzle: {fileID: 1207017381775546105}
 --- !u!1 &5734065753958973532
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,7 +739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2107134052987952020
 Transform:
   m_ObjectHideFlags: 0

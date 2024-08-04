@@ -74,16 +74,7 @@ public class PlayerInteraction : MonoBehaviour
     public void Damage()
     {
         Melee melee = GameManager.instance.currentMelee;
-        Vector3 colliderPosition = GameManager.instance.thePlayer.transform.forward * (melee.attackRange / 2);
-        //Collider[] entities = gameObject.GetComponent<BoxCollider>();
-        //foreach (Collider entity in entities)
-        //{
-            //Debug.Log(entity);
-            //if (entity.transform.tag == "Enemy")
-            //{
-                //Debug.Log("Hello");
-                //entity.GetComponent<Enemy>().health -= melee.damage;
-            //}
-        //}
+        melee.damageCollider.enabled = !melee.damageCollider.enabled;
+        Debug.Log(melee.damageCollider.enabled);
     }
 }

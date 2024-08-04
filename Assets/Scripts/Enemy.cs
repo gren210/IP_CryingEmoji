@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health;
+    [HideInInspector]
+    public int currentHealth;
+
+    public int health = 0;
 
     public int damage;
 
     public float attackRange;
+
+    public bool detected;
 
     protected virtual void Damage()
     {
@@ -18,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        health -= damage;
+        currentHealth -= damage;
     }
 
     protected virtual void SwitchState(string currentState)

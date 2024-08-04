@@ -12,7 +12,6 @@ public class EnemyVision : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             attachedEnemy.UpdateTarget(other.transform);
-            attachedEnemy.animator.SetTrigger("Detected");
             attachedEnemy.detected = true;
         }
     }

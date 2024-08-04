@@ -48,6 +48,18 @@ public class Gun : Interactable
     GameObject gunAudio;
 
     Enemy currentEnemy;
+
+    [SerializeField]
+    GameObject bloodVFX;
+
+    [SerializeField]
+    GameObject smokeVFX;
+
+    [SerializeField]
+    GameObject muzzleVFX;
+
+    [SerializeField]
+    Transform muzzle;
    
 
     private void Awake()
@@ -110,6 +122,9 @@ public class Gun : Interactable
     {
         
         RaycastHit hitInfo;
+        GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
+        smoke.transform.SetParent(muzzle);
+        Destroy(smoke, .5f);
         if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
         {
             GameObject gunshot = Instantiate(gunAudio);
@@ -123,6 +138,7 @@ public class Gun : Interactable
                 {
                     Debug.Log("hell");
                     currentEnemy.TakeDamage(damage);
+                    Destroy(Instantiate(bloodVFX, hitInfo.point,hitInfo.transform.rotation), 1f);
                 }
             }
         }

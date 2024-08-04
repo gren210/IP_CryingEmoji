@@ -146,7 +146,7 @@ public class Grenade : Interactable
         {
             if (collider.gameObject.tag == "Enemy")
             {
-                collider.gameObject.GetComponent<Enemy>().health -= explodeDamage;
+                collider.gameObject.GetComponent<Enemy>().currentHealth -= explodeDamage;
             }
             else if (collider.gameObject.tag == "Boss")
             {
