@@ -9,6 +9,7 @@ using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -36,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public Melee currentMelee;
 
+    public TextMeshProUGUI ammoText; 
+
     public bool isShooting;
 
     public bool readySwap = true;
@@ -50,7 +53,11 @@ public class GameManager : MonoBehaviour
 
     public bool[] primaryBackpack = { false, false, false };
 
+    public int[] primaryAmmo = { 0, 0, 0 } ;
+
     public bool[] secondaryBackpack = { false, false };
+
+    public int[] secondaryAmmo = { 0, 0 };
 
     public bool[] meleeBackpack = { false, false, false };
 
@@ -82,6 +89,13 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        animator.SetInteger("Health", health);
+
+        if(currentGun != null)
+        {
+            ammoText.text = "" + currentGun.currentAmmoCount;
+        }
     }
+
+
 }

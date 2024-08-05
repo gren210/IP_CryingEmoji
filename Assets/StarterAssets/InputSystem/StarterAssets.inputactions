@@ -157,6 +157,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "b355532a-f217-43b5-b8f0-068ab4ee6692",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -478,6 +487,17 @@
                     "action": "Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e8676681-428d-4295-8c39-34c0182519e2",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -486,9 +506,18 @@
             "id": "79369b91-d988-4a4f-8139-719d3cc0513b",
             "actions": [
                 {
-                    "name": "New action",
+                    "name": "Backpack",
                     "type": "Button",
                     "id": "b104ef62-129f-4ecb-866e-6306c4ed6689",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Menu",
+                    "type": "Button",
+                    "id": "4fa73253-4ddb-4bd0-af16-aa1b29f51323",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -499,11 +528,22 @@
                 {
                     "name": "",
                     "id": "b60ad6ef-9d28-4a4a-b5ff-702c4c814ab2",
-                    "path": "",
+                    "path": "<Keyboard>/tab",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Backpack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1824e6a3-5f43-43b2-b968-1dcd5bdefac9",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Menu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

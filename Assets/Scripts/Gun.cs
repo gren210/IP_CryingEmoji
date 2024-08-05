@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Gun : Interactable
 {
+    Player player;
+
     [HideInInspector]
     public bool reloading = false;
 
@@ -15,13 +17,14 @@ public class Gun : Interactable
 
     public bool fullAuto;
 
-    [SerializeField]
-    int ammoCount;
+    [HideInInspector]
+    public int ammoCount;
 
     [SerializeField]
     int RPM;
 
-    int currentAmmoCount;
+    [HideInInspector]
+    public int currentAmmoCount;
 
     float currentCooldown;
 
@@ -44,6 +47,8 @@ public class Gun : Interactable
     [HideInInspector]
     public bool isShooting = false;
 
+    public bool interactable;
+
     [SerializeField]
     GameObject gunAudio;
 
@@ -60,7 +65,10 @@ public class Gun : Interactable
 
     [SerializeField]
     Transform muzzle;
-   
+
+    public float swayAmplitude;
+
+    public float swaySpeed;
 
     private void Awake()
     {
@@ -70,35 +78,40 @@ public class Gun : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        //GameManager.instance.currentGun = this;
+        player = GameManager.instance.thePlayer;
+        currentAmmoCount = ammoCount;
+        if (!interactable)
+        {
+            ShakeCamera(swayAmplitude, swaySpeed, player.aimVirtualCamera);
+            ShakeCamera(swayAmplitude, swaySpeed, player.crouchAimVirtualCamera);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         virtualCamera = GameManager.instance.currentVirtualCamera.transform;
-        
 
         if (reloadSmooth)
         {
             currentTimer += Time.deltaTime;
             if (reloading == true)
             {
-                GameManager.instance.animator.SetLayerWeight(7, Mathf.Lerp(0, 1, currentTimer/.2f));
+                player.animator.SetLayerWeight(7, Mathf.Lerp(0, 1, currentTimer/.2f));
             }
             else
             {
-                GameManager.instance.animator.SetLayerWeight(7, Mathf.Lerp(1, 0, currentTimer/.2f));
+                player.animator.SetLayerWeight(7, Mathf.Lerp(1, 0, currentTimer/.2f));
             }
             if (currentTimer > .2f)
             {
                 if (reloading == true)
                 {
-                    GameManager.instance.animator.SetLayerWeight(7, 1);
+                    player.animator.SetLayerWeight(7, 1);
                 }
                 else
                 {
-                    GameManager.instance.animator.SetLayerWeight(7, 0);
+                    player.animator.SetLayerWeight(7, 0);
                     GameManager.instance.readySwap = true;
                 }
                 currentTimer = 0;
@@ -106,21 +119,56 @@ public class Gun : Interactable
             }
         }
 
+        if (!interactable)
+        {
+            ShakeCamera(swayAmplitude, swaySpeed, player.aimVirtualCamera);
+            ShakeCamera(swayAmplitude, swaySpeed, player.crouchAimVirtualCamera);
+        }
+
+
+
     }
     public IEnumerator Reload()
     {
-        reloading = true;
-        reloadSmooth = true;
-        GameManager.instance.readySwap = false;
-        GameManager.instance.animator.SetTrigger("isReloading");
-        yield return new WaitForSeconds(reloadTime);
-        reloading = false;
-        reloadSmooth = true;
+        if (currentAmmoCount != ammoCount && ((secondary && GameManager.instance.secondaryAmmo[gunIndex] != 0) || (!secondary && GameManager.instance.primaryAmmo[gunIndex] != 0)))
+        {
+            reloading = true;
+            reloadSmooth = true;
+            GameManager.instance.readySwap = false;
+            player.animator.SetTrigger("isReloading");
+            yield return new WaitForSeconds(reloadTime);
+            if (secondary)
+            {
+                GameManager.instance.secondaryAmmo[gunIndex] = RefillAmmo(GameManager.instance.secondaryAmmo[gunIndex]);
+            }
+            else
+            {
+                GameManager.instance.primaryAmmo[gunIndex] = RefillAmmo(GameManager.instance.primaryAmmo[gunIndex]);
+            }
+            reloading = false;
+            reloadSmooth = true;
+        }
+    }
+
+    int RefillAmmo(int ammoReserve) 
+    {
+        if (ammoReserve < (ammoCount - currentAmmoCount))
+        {
+            currentAmmoCount += ammoReserve;
+            ammoReserve = 0;
+        }
+        else
+        {
+            ammoReserve -= (ammoCount - currentAmmoCount);
+            currentAmmoCount = ammoCount;
+        }
+        Debug.Log(ammoCount - currentAmmoCount);
+        return ammoReserve;
     }
 
     public void Shoot(Player thePlayer)
     {
-        
+        currentAmmoCount -= 1;
         RaycastHit hitInfo;
         GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
         smoke.transform.SetParent(muzzle);
@@ -136,7 +184,6 @@ public class Gun : Interactable
             {
                 if(hitInfo.collider.TryGetComponent<Enemy>(out currentEnemy))
                 {
-                    Debug.Log("hell");
                     currentEnemy.TakeDamage(damage);
                     Destroy(Instantiate(bloodVFX, hitInfo.point,hitInfo.transform.rotation), 1f);
                 }
@@ -148,7 +195,7 @@ public class Gun : Interactable
     {
         while (true)
         {
-            if (fullAuto && !reloading && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
+            if (fullAuto && currentAmmoCount > 0 && !reloading && thePlayer.starterAssetsInputs.shoot && thePlayer.starterAssetsInputs.aim && thePlayer.thirdPersonController.Grounded)
             {
                 Shoot(thePlayer);
                 float shotDelay = 60f / RPM;

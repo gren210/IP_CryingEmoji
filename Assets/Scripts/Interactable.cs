@@ -10,18 +10,18 @@ public class Interactable : MonoBehaviour
 
     }
 
-    protected void ShakeCamera(float shakeIntensity, float shakeFrequency)
+    protected void ShakeCamera(float shakeIntensity, float shakeFrequency, CinemachineVirtualCamera currentVirtualCamera)
     {
-        CinemachineBasicMultiChannelPerlin cinemachineComponent = GameManager.instance.currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        CinemachineBasicMultiChannelPerlin cinemachineComponent = currentVirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
         cinemachineComponent.m_AmplitudeGain = shakeIntensity;
         cinemachineComponent.m_FrequencyGain = shakeFrequency;
     }
 
-    protected IEnumerator ShakeCameraOverTime(float shakeIntensity, float shakeFrequency, float shakeTime)
+    protected IEnumerator ShakeCameraOverTime(float shakeIntensity, float shakeFrequency, float shakeTime, CinemachineVirtualCamera currentVirtualCamera)
     {
-        ShakeCamera(shakeIntensity, shakeFrequency);
+        ShakeCamera(shakeIntensity, shakeFrequency, currentVirtualCamera);
         yield return new WaitForSeconds(shakeTime);
-        ShakeCamera(0, 0);
+        ShakeCamera(0, 0, currentVirtualCamera);
     }
 
 }

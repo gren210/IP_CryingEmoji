@@ -22,6 +22,8 @@ public class PlayerInteraction : MonoBehaviour
 
     Enemy enemy;
 
+    Ammo currentAmmoPickup;
+
     GameObject[] entities = { };
 
 
@@ -41,15 +43,19 @@ public class PlayerInteraction : MonoBehaviour
         {
             if(hitInfo.transform.TryGetComponent<Gun>(out currentGunPickup))
             {
-                Debug.Log(currentGunPickup);
+                //Debug.Log(currentGunPickup);
             }
             else if (hitInfo.transform.TryGetComponent<Grenade>(out currentGrenadePickup))
             {
-                Debug.Log(currentGrenadePickup);
+                //Debug.Log(currentGrenadePickup);
             }
             else if(hitInfo.transform.TryGetComponent<Melee>(out currentMeleePickup))
             {
-                Debug.Log(currentMeleePickup);
+                //Debug.Log(currentMeleePickup);
+            }
+            else if(hitInfo.transform.TryGetComponent<Ammo>(out currentAmmoPickup))
+            {
+
             }
         }
     }
@@ -68,6 +74,10 @@ public class PlayerInteraction : MonoBehaviour
         if(currentMeleePickup != null)
         {
             currentMeleePickup.Interact(x);
+        }
+        if (currentAmmoPickup != null)
+        {
+            currentAmmoPickup.Interact(x);
         }
     }
 

@@ -102,11 +102,10 @@ public class Grenade : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        if (realGrenade && !impactGrenade)
+        if (realGrenade)
         {
             StartCoroutine(GrenadeTick());
         }
-        
     }
 
     // Update is called once per frame
@@ -188,6 +187,7 @@ public class Grenade : Interactable
     IEnumerator GrenadeTick()
     {
         gameObject.GetComponent<Rigidbody>().AddForce(grenadeDistance * GameManager.instance.playerCamera.transform.forward);
+        Debug.Log(grenadeDistance);
         yield return new WaitForSeconds(delay);
         if (!impactGrenade)
         {

@@ -47,17 +47,18 @@ public class EnemyFSM1 : Enemy
             animator.SetTrigger("Detected");
         }
 
-        if(currentState != nextState)
+        if (currentState != nextState)
         {
             currentState = nextState;
         }
 
-        if(animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream"))
         {
-            transform.forward = Vector3.Lerp(transform.forward, playerTarget.position, Time.deltaTime * 3f);
+            //transform.forward = Vector3.Lerp(transform.forward, playerTarget.position, Time.deltaTime * 3f);
+            transform.LookAt(playerTarget.position);
         }
 
-        if(!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Idle"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Scream") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Zombie Idle"))
         {
             if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
             {
@@ -76,16 +77,6 @@ public class EnemyFSM1 : Enemy
         {
             nextState = "Death";
         }
-    }
-
-    public void UpdateTarget(Transform newTarget)
-    {
-        if(newTarget == null)
-        {
-            nextState = "Idle";
-
-        }
-        playerTarget = newTarget;
     }
 
     IEnumerator Idle()

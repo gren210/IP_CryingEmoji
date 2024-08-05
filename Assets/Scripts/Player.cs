@@ -13,38 +13,32 @@ public class Player : ScriptManager
     /// <summary>
     /// The virtual camera for aiming.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera aimVirtualCamera;
+    public CinemachineVirtualCamera aimVirtualCamera;
 
     /// <summary>
     /// The standard virtual camera.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera virtualCamera;
+    public CinemachineVirtualCamera virtualCamera;
 
     /// <summary>
     /// The crouching virtual camera.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera crouchVirtualCamera;
+    public CinemachineVirtualCamera crouchVirtualCamera;
 
     /// <summary>
     /// The crouch aiming virtual camera.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera crouchAimVirtualCamera;
+    public CinemachineVirtualCamera crouchAimVirtualCamera;
 
     /// <summary>
     /// The current aiming virtual camera.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera currentAimVirtualCamera;
+    public CinemachineVirtualCamera currentAimVirtualCamera;
 
     /// <summary>
     /// The current virtual camera.
     /// </summary>
-    [SerializeField]
-    CinemachineVirtualCamera currentVirtualCamera;
+    public CinemachineVirtualCamera currentVirtualCamera;
 
     /// <summary>
     /// The transform of the invisible dot the player will always face.
@@ -90,7 +84,12 @@ public class Player : ScriptManager
     [HideInInspector]
     public Animator animator;
 
+    [SerializeField]
+    GameObject deathCam;
+
     CinemachineBrain cinemachineBrain;
+
+    PlayerInput playerInput;
 
     public float interactionDistance = 1000f;
 
@@ -143,6 +142,7 @@ public class Player : ScriptManager
         starterAssetsInputs = GetComponent<StarterAssetsInputs>();
         cinemachineBrain = playerCamera.gameObject.GetComponent<CinemachineBrain>();
         animator = GetComponent<Animator>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     private void Start()
@@ -202,7 +202,6 @@ public class Player : ScriptManager
         }
         else
         {
-            ShakeCamera(0f, 0f);
             if (currentWeaponLayer == 4)
             {
                 SetLayer(2, currentAimVirtualCamera, false, aimSensitivity);
@@ -418,7 +417,11 @@ public class Player : ScriptManager
         }
         else if (GameManager.instance.currentGun != null)
         {
-            if (!GameManager.instance.currentGun.fullAuto)
+            if (GameManager.instance.currentGun.currentAmmoCount <= 0)
+            {
+
+            }
+            else if (!GameManager.instance.currentGun.fullAuto)
             {
                 GameManager.instance.currentGun.Shoot(this);
             }
@@ -466,5 +469,12 @@ public class Player : ScriptManager
         {
             StartCoroutine(GameManager.instance.currentGun.Reload());
         }
+    }
+
+    void Death()
+    {
+        playerInput.SwitchCurrentActionMap("UI");
+        OnHolster();
+        deathCam.SetActive(true);
     }
 }
