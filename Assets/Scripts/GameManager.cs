@@ -59,11 +59,11 @@ public class GameManager : MonoBehaviour
 
     public int[] secondaryAmmo = { 0, 0 };
 
-    public bool[] meleeBackpack = { false, false, false };
+    public bool[] meleeBackpack = { false, false };
 
-    public int[] grenadeBackpack = { 0, 0, 0 };
+    public int[] grenadeBackpack = { 0, 0, 0, 0 };
 
-    public int[] itemBackpack = { 0, 0, 0, 0, 0, 0, 0 };
+    public int[] itemBackpack = { 0, 0, 0, 0, 0, 0, 0, 0 };
 
     public int health = 100;
 
