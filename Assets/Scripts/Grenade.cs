@@ -166,6 +166,7 @@ public class Grenade : Interactable
         thePlayer.animator.SetLayerWeight(7, 1);
         thePlayer.animator.SetTrigger("Throw");
         yield return new WaitForSeconds(.35f / .6f);
+        GameManager.instance.grenadeBackpack[grenadeIndex] -= 1;
         throwing = false;
         grenadeObject = Instantiate(realGrenadeObject, gameObject.transform.position, gameObject.transform.rotation);
         grenadeObject.GetComponent<Grenade>().thrown = true;

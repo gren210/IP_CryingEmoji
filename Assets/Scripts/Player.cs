@@ -313,12 +313,8 @@ public class Player : ScriptManager
         currentWeaponLayer = currentLayer;
     }
 
-    IEnumerator EquipState(bool primary, bool secondary, bool grenade, bool melee, int setLayer, int weaponState)
+    public void ActiveWeapons(bool primary, bool secondary, bool grenade, bool melee)
     {
-        if (currentCoroutine != null)
-        {
-            StopCoroutine(currentCoroutine);
-        }
         if (currentPrimary != null)
         {
             currentPrimary.SetActive(primary);
@@ -335,6 +331,15 @@ public class Player : ScriptManager
         {
             currentMelee.SetActive(melee);
         }
+    }
+
+    IEnumerator EquipState(bool primary, bool secondary, bool grenade, bool melee, int setLayer, int weaponState)
+    {
+        if (currentCoroutine != null)
+        {
+            StopCoroutine(currentCoroutine);
+        }
+        ActiveWeapons(primary, secondary, grenade, melee);
         animator.SetBool("isSecondary", secondary);
         animator.SetLayerWeight(setLayer, 0f);
         WeaponState(weaponState);
@@ -355,7 +360,7 @@ public class Player : ScriptManager
         }
     }
 
-    void WeaponSwitch(Gun gun, Grenade grenade, Melee melee)
+    public void WeaponSwitch(Gun gun, Grenade grenade, Melee melee)
     {
         GameManager.instance.currentGun = gun;
         GameManager.instance.currentGrenade = grenade;
@@ -368,7 +373,6 @@ public class Player : ScriptManager
         {
             WeaponSwitch(currentPrimary.GetComponent<Gun>(), null,null);
             StartCoroutine(EquipState(true, false, false, false, 3, 2));
-            Debug.Log("this");
             if (GameManager.instance.currentGun.fullAuto)
             { 
                 currentCoroutine = StartCoroutine(GameManager.instance.currentGun.FullAutoShoot(this));
@@ -398,9 +402,12 @@ public class Player : ScriptManager
     {
         if (GameManager.instance.readySwap && !cinemachineBrain.IsBlending && currentGrenade != null)
         {
-            WeaponSwitch(null, currentGrenade.GetComponent<Grenade>(), null);
-            StartCoroutine(EquipState(false, false, true, false, 3, 0));
-            AimState(currentAimVirtualCamera, false, normalSensitivity);
+            if (GameManager.instance.grenadeBackpack[currentGrenade.GetComponent<Grenade>().grenadeIndex] > 0)
+            {
+                WeaponSwitch(null, currentGrenade.GetComponent<Grenade>(), null);
+                StartCoroutine(EquipState(false, false, true, false, 3, 0));
+                AimState(currentAimVirtualCamera, false, normalSensitivity);
+            }
         }
 
     }
@@ -435,7 +442,7 @@ public class Player : ScriptManager
         }
     }
 
-    void OnHolster()
+    public void OnHolster()
     {
         if (GameManager.instance.readySwap && (currentPrimary != null || currentSecondary != null || currentGrenade != null || currentMelee != null)) // check if currentprimary secondary melee grenade is false null &&
         {
@@ -477,4 +484,21 @@ public class Player : ScriptManager
         OnHolster();
         deathCam.SetActive(true);
     }
+
+    void OnBackpack()
+    {
+        if(GameManager.instance.inventoryUI.activeSelf == true)
+        {
+            playerInput.SwitchCurrentActionMap("Player");
+            GameManager.instance.inventoryUI.SetActive(false);
+            CursorLock(true);
+        }
+        else
+        {
+            playerInput.SwitchCurrentActionMap("UI");
+            GameManager.instance.inventoryUI.SetActive(true);
+            CursorLock(false);
+        }
+    }
+
 }

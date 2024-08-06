@@ -65,15 +65,29 @@ public class GameManager : MonoBehaviour
 
     public int health = 100;
 
+    public GameObject playerUI;
+
+    public GameObject menuUI;
+
+    public GameObject inventoryUI;
+
+
+
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(playerUI);
+            DontDestroyOnLoad(inventoryUI);
+            DontDestroyOnLoad(menuUI);
         }
         else if (instance != null && instance != this)
         {
+            Destroy(inventoryUI);
+            Destroy(playerUI);
+            Destroy(menuUI);
             Destroy(gameObject);
         }
     }
@@ -96,6 +110,4 @@ public class GameManager : MonoBehaviour
             ammoText.text = "" + currentGun.currentAmmoCount;
         }
     }
-
-
 }
