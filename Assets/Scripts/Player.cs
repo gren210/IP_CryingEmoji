@@ -481,23 +481,27 @@ public class Player : ScriptManager
     void Death()
     {
         playerInput.SwitchCurrentActionMap("UI");
+        gameObject.GetComponent<CharacterController>().enabled = false;
         OnHolster();
         deathCam.SetActive(true);
     }
 
     void OnBackpack()
     {
-        if(GameManager.instance.inventoryUI.activeSelf == true)
+        if (!starterAssetsInputs.aim)
         {
-            playerInput.SwitchCurrentActionMap("Player");
-            GameManager.instance.inventoryUI.SetActive(false);
-            CursorLock(true);
-        }
-        else
-        {
-            playerInput.SwitchCurrentActionMap("UI");
-            GameManager.instance.inventoryUI.SetActive(true);
-            CursorLock(false);
+            if (GameManager.instance.inventoryUI.activeSelf == true)
+            {
+                playerInput.SwitchCurrentActionMap("Player");
+                GameManager.instance.inventoryUI.SetActive(false);
+                CursorLock(true);
+            }
+            else
+            {
+                playerInput.SwitchCurrentActionMap("UI");
+                GameManager.instance.inventoryUI.SetActive(true);
+                CursorLock(false);
+            }
         }
     }
 

@@ -24,6 +24,8 @@ public class PlayerInteraction : MonoBehaviour
 
     Ammo currentAmmoPickup;
 
+    Collectible currentCollectiblePickup;
+
     GameObject[] entities = { };
 
 
@@ -57,6 +59,10 @@ public class PlayerInteraction : MonoBehaviour
             {
 
             }
+            else if(hitInfo.transform.TryGetComponent<Collectible>(out currentCollectiblePickup))
+            {
+
+            }
         }
     }
 
@@ -67,17 +73,21 @@ public class PlayerInteraction : MonoBehaviour
         {
             currentGunPickup.Interact(x);
         }
-        if(currentGrenadePickup != null)
+        if (currentGrenadePickup != null)
         {
             currentGrenadePickup.Interact(x);
         }
-        if(currentMeleePickup != null)
+        if (currentMeleePickup != null)
         {
             currentMeleePickup.Interact(x);
         }
         if (currentAmmoPickup != null)
         {
             currentAmmoPickup.Interact(x);
+        }
+        if (currentCollectiblePickup != null)
+        {
+            currentCollectiblePickup.Interact(x);
         }
     }
 

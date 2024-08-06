@@ -63,6 +63,8 @@ public class GameManager : MonoBehaviour
 
     public int[] grenadeBackpack = { 0, 0, 0 };
 
+    public int[] itemBackpack = { 0, 0, 0, 0, 0, 0, 0 };
+
     public int health = 100;
 
     public GameObject playerUI;
