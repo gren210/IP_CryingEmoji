@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManager : ScriptManager
 {
     /// <summary>
     /// An instance of the GameManager so that all scripts can access the GameManager.
@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
     public Grenade currentGrenade;
 
     public Melee currentMelee;
+
+    public Workbench currentWorkbench;
 
     public TextMeshProUGUI ammoText; 
 
@@ -72,6 +74,8 @@ public class GameManager : MonoBehaviour
     public GameObject menuUI;
 
     public GameObject inventoryUI;
+
+    public GameObject workbenchUI;
 
 
 
@@ -116,4 +120,13 @@ public class GameManager : MonoBehaviour
             ammoText.text = "";
         }
     }
+
+    public void WorkbenchClose()
+    {
+        workbenchUI.SetActive(false);
+        currentWorkbench.virtualCamera.SetActive(false);
+        currentWorkbench = null;
+        CursorLock(true);
+    }
+
 }
