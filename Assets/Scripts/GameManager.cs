@@ -111,5 +111,9 @@ public class GameManager : MonoBehaviour
         {
             ammoText.text = "" + currentGun.currentAmmoCount;
         }
+        else
+        {
+            ammoText.text = "";
+        }
     }
 }

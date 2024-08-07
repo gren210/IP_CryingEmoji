@@ -147,6 +147,8 @@ public class Player : ScriptManager
 
     private void Start()
     {
+        GameManager.instance.thePlayer = this;
+        GameManager.instance.animator = animator;
         currentVirtualCamera = virtualCamera;
         currentAimVirtualCamera = aimVirtualCamera;
     }
@@ -483,6 +485,7 @@ public class Player : ScriptManager
         playerInput.SwitchCurrentActionMap("UI");
         gameObject.GetComponent<CharacterController>().enabled = false;
         OnHolster();
+        playerCamera.gameObject.SetActive(false);
         deathCam.SetActive(true);
     }
 
