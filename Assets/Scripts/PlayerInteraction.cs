@@ -24,6 +24,8 @@ public class PlayerInteraction : MonoBehaviour
 
     Ammo currentAmmoPickup;
 
+    Workbench currentWorkbench;
+
     Collectible currentCollectiblePickup;
 
     GameObject[] entities = { };
@@ -63,6 +65,10 @@ public class PlayerInteraction : MonoBehaviour
             {
 
             }
+            else if (hitInfo.transform.TryGetComponent<Workbench>(out currentWorkbench))
+            {
+
+            }
         }
     }
 
@@ -88,6 +94,10 @@ public class PlayerInteraction : MonoBehaviour
         if (currentCollectiblePickup != null)
         {
             currentCollectiblePickup.Interact(x);
+        }
+        if (currentWorkbench != null)
+        {
+            currentWorkbench.Interact(x);
         }
     }
 
