@@ -20,13 +20,16 @@ public class EnemyFSM1 : Enemy
 
     bool stunned;
 
+    private void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        myAgent = gameObject.GetComponent<NavMeshAgent>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = health;
-        playerTarget = GameManager.instance.thePlayer.transform;
-        animator = gameObject.GetComponent<Animator>();
-        myAgent = gameObject.GetComponent<NavMeshAgent>();
         currentState = "Idle";
         nextState = currentState;
         SwitchState(currentState);
@@ -35,6 +38,11 @@ public class EnemyFSM1 : Enemy
     // Update is called once per frame
     void Update()
     {
+        if(playerTarget != GameManager.instance.thePlayer.transform)
+        {
+            playerTarget = GameManager.instance.thePlayer.transform;
+        }
+
         animator.SetInteger("Health", currentHealth);
 
         if (currentHealth < health)
