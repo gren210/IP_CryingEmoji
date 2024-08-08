@@ -266,10 +266,13 @@ public class Player : ScriptManager
         
     }
 
-    IEnumerator Stunned()
+    public IEnumerator Stunned()
     {
-
+        playerInput.SwitchCurrentActionMap("UI");
+        gameObject.GetComponent<CharacterController>().enabled = false;
         yield return new WaitForSeconds(stunDuration);
+        playerInput.SwitchCurrentActionMap("Player");
+        gameObject.GetComponent<CharacterController>().enabled = true;
 
     }
 
@@ -496,6 +499,10 @@ public class Player : ScriptManager
         OnHolster();
         playerCamera.gameObject.SetActive(false);
         deathCam.SetActive(true);
+        //for(int i = 0; i < animator.layerCount - 1; i++)
+        //{
+            //animator.SetLayerWeight(i, 0);
+        //}
     }
 
     void OnBackpack()

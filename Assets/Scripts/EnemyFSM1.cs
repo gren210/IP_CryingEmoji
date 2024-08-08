@@ -143,6 +143,7 @@ public class EnemyFSM1 : Enemy
     protected override void Damage()
     {
         base.Damage();
+        StartCoroutine(playerTarget.gameObject.GetComponent<Player>().  Stunned());
     }
 
 }
