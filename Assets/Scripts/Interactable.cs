@@ -24,4 +24,19 @@ public class Interactable : MonoBehaviour
         ShakeCamera(0, 0, currentVirtualCamera);
     }
 
+    protected void CursorLock(bool isLock)
+    {
+        if (isLock)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+    }
+
+
 }
