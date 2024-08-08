@@ -126,6 +126,8 @@ public class Player : ScriptManager
 
     public float weaponSwapDelay;
 
+    public float stunDuration;
+
     public GameObject[] primaryWeapons;
 
     public GameObject[] secondaryWeapons;
@@ -262,6 +264,13 @@ public class Player : ScriptManager
         GameManager.instance.thirdPersonController = thirdPersonController;
 
         
+    }
+
+    IEnumerator Stunned()
+    {
+
+        yield return new WaitForSeconds(stunDuration);
+
     }
 
     public void FaceForward()
