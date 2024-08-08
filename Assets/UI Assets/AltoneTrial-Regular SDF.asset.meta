@@ -1,6 +1,12 @@
 fileFormatVersion: 2
-guid: 3f9fda42281cf404ea9382f14f8bc649
+<<<<<<<< HEAD:Assets/UI Assets/AltoneTrial-Regular SDF.asset.meta
+guid: 3900388964dfd1649b65000e51707958
 NativeFormatImporter:
+========
+guid: b67a2a39cc946e14283fe1839b2fd3b4
+folderAsset: yes
+DefaultImporter:
+>>>>>>>> 81616891785d0760fec697936e352edcbdc2da70:Assets/Modular Assets/Props.meta
   externalObjects: {}
   mainObjectFileID: 11400000
   userData: 
