@@ -50,7 +50,6 @@ public class NPC : Enemy
 
     IEnumerator Idle()
     {
-        Debug.Log("Idle");
         yield return new WaitForSeconds(idleTime);
         nextState = "Walk";
         while(currentState != nextState)
@@ -71,7 +70,6 @@ public class NPC : Enemy
         myAgent.SetDestination(idleTargets[target].transform.position);
         while (Vector3.Distance(gameObject.transform.position, idleTargets[target].transform.position) > 1)
         {
-            Debug.Log("Walking");
             yield return new WaitForEndOfFrame();
         }
         nextState = "Idle";

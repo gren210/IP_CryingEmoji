@@ -1,6 +1,7 @@
 using Cinemachine;
 using StarterAssets;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Gun : Interactable
@@ -69,6 +70,10 @@ public class Gun : Interactable
     public float swayAmplitude;
 
     public float swaySpeed;
+
+    public GameObject[] attachmentObjects = { null, null, null, null };
+
+    bool[] attachments = { false, false, false, false };
 
     private void Awake()
     {

@@ -20,6 +20,12 @@ public class EnemyFSM2 : Enemy
 
     bool stunned;
 
+    [SerializeField]
+    float explodeRadius;
+
+    [SerializeField]
+    GameObject explodeEffect;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,15 +67,11 @@ public class EnemyFSM2 : Enemy
         {
             if (detected && Vector3.Distance(playerTarget.position, gameObject.transform.position) <= attackRange)
             {
-                nextState = "Attack";
+                nextState = "Death";
             }
             else if (detected)
             {
                 nextState = "Chasing";
-            }
-            else if (stunned)
-            {
-                nextState = "Stunned";
             }
         }
         if (currentHealth <= 0)
@@ -122,28 +124,35 @@ public class EnemyFSM2 : Enemy
         SwitchState(currentState);
     }
 
-    IEnumerator Attack()
-    {
-        animator.SetBool("Attack", true);
-        while (currentState == "Attack")
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        animator.SetBool("Attack", false);
-        SwitchState(currentState);
-    }
-
     IEnumerator Death()
     {
+        Collider[] entities = Physics.OverlapSphere(transform.position, explodeRadius);
+
+        foreach (Collider collider in entities)
+        {
+            if (collider.gameObject.tag == "Enemy")
+            {
+                collider.gameObject.GetComponent<Enemy>().currentHealth -= damage;
+            }
+            else if (collider.gameObject.tag == "Player") //&& !GameManager.instance.isImmune)
+            {
+                GameManager.instance.health -= damage;
+            }
+        }
+        Destroy(Instantiate(explodeEffect,transform.position,transform.rotation),1f);
+        gameObject.SetActive(false);
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        myAgent.enabled = false;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
         Destroy(gameObject);
     }
 
     protected override void Damage()
     {
         base.Damage();
+        if (GameManager.instance.health > damage)
+        {
+            StartCoroutine(playerTarget.gameObject.GetComponent<Player>().Stunned());
+        }
     }
 
 }

@@ -176,7 +176,7 @@ Transform:
   m_GameObject: {fileID: 3612516882005765387}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.00000047683716, y: 4.7017255, z: 10.706403}
+  m_LocalPosition: {x: -0, y: 4.7017255, z: 10.706403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -643,6 +643,11 @@ MonoBehaviour:
   muzzle: {fileID: 1207017381775546105}
   swayAmplitude: 1.5
   swaySpeed: 0.3
+  attachmentObjects:
+  - {fileID: 919898962530954402}
+  - {fileID: 3612516882005765387}
+  - {fileID: 3934199278487060512}
+  - {fileID: 5736355595211866616}
 --- !u!1 &5734065753958973532
 GameObject:
   m_ObjectHideFlags: 0
@@ -743,7 +748,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2107134052987952020
 Transform:
   m_ObjectHideFlags: 0

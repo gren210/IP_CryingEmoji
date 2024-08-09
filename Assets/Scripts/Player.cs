@@ -114,6 +114,8 @@ public class Player : ScriptManager
 
     float currentCrouchTimer;
 
+    float currentStunTimer;
+
     private bool isCrouch = false;
 
     private bool isCrouching = false;
@@ -259,6 +261,17 @@ public class Player : ScriptManager
             thirdPersonController.SprintSpeed = 5.335f;
         }
 
+        if (animator.GetLayerWeight(8) != 0)
+        {
+            currentStunTimer += Time.deltaTime;
+            animator.SetLayerWeight(8, Mathf.Lerp(1, 0, currentStunTimer / stunDuration));
+            if (currentStunTimer >= stunDuration)
+            {
+                animator.SetLayerWeight(8, 0);
+                currentStunTimer = 0;
+            }
+        }
+
         GameManager.instance.isCrouch = isCrouching;
         GameManager.instance.isAiming = starterAssetsInputs.aim;
         GameManager.instance.thirdPersonController = thirdPersonController;
@@ -268,11 +281,22 @@ public class Player : ScriptManager
 
     public IEnumerator Stunned()
     {
-        playerInput.SwitchCurrentActionMap("UI");
-        gameObject.GetComponent<CharacterController>().enabled = false;
+        animator.SetLayerWeight(8, 1);
+        //SetLayer(8, 1)
+        float moveSpeed = thirdPersonController.MoveSpeed;
+        float sprintSpeed = thirdPersonController.SprintSpeed;
+        animator.SetBool("stunned", true);
+        //gameObject.GetComponent<CharacterController>().enabled = false;
+        thirdPersonController.MoveSpeed = 0;
+        thirdPersonController.SprintSpeed = 0;
+        GameManager.instance.readySwap = false;
         yield return new WaitForSeconds(stunDuration);
-        playerInput.SwitchCurrentActionMap("Player");
-        gameObject.GetComponent<CharacterController>().enabled = true;
+        thirdPersonController.MoveSpeed = moveSpeed;
+        thirdPersonController.SprintSpeed = sprintSpeed;
+        animator.SetBool("stunned", false);
+
+        //gameObject.GetComponent<CharacterController>().enabled = true;
+        GameManager.instance.readySwap = true;
 
     }
 
@@ -494,15 +518,19 @@ public class Player : ScriptManager
 
     void Death()
     {
+        GameManager.instance.immune = true;
+        animator.SetLayerWeight(9, 1);
         playerInput.SwitchCurrentActionMap("UI");
         gameObject.GetComponent<CharacterController>().enabled = false;
-        OnHolster();
+        starterAssetsInputs.enabled = false;
+        WeaponSwitch(null, null, null);
+        StartCoroutine(EquipState(false, false, false, false, 1, 0));
         playerCamera.gameObject.SetActive(false);
         deathCam.SetActive(true);
-        //for(int i = 0; i < animator.layerCount - 1; i++)
-        //{
-            //animator.SetLayerWeight(i, 0);
-        //}
+        for(int i = 1; i < animator.layerCount - 2; i++)
+        {
+            animator.SetLayerWeight(i, 0);
+        }
     }
 
     void OnBackpack()

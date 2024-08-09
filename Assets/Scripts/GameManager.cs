@@ -53,9 +53,11 @@ public class GameManager : ScriptManager
 
     public bool isAiming = false;
 
-    public bool[] primaryBackpack = { false, false, false };
+    public bool immune = false;
 
-    public int[] primaryAmmo = { 0, 0, 0 } ;
+    public bool[] primaryBackpack = { false, false };
+
+    public int[] primaryAmmo = { 0, 0 } ;
 
     public bool[] secondaryBackpack = { false, false };
 
@@ -63,9 +65,9 @@ public class GameManager : ScriptManager
 
     public bool[] meleeBackpack = { false, false };
 
-    public int[] grenadeBackpack = { 0, 0, 0, 0 };
+    public int[] grenadeBackpack = { 0, 0, 0 };
 
-    public int[] itemBackpack = { 0, 0, 0, 0, 0, 0, 0, 0 };
+    public int[] itemBackpack = { 0, 0 };
 
     public int health = 100;
 

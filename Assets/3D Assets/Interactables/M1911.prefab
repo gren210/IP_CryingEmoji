@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &3660300376883806397
 Transform:
   m_ObjectHideFlags: 0
@@ -638,6 +638,11 @@ MonoBehaviour:
   muzzle: {fileID: 4645853371147185525}
   swayAmplitude: 0.3
   swaySpeed: 1.5
+  attachmentObjects:
+  - {fileID: 7591682258471645291}
+  - {fileID: 2093928155147854132}
+  - {fileID: 5086583148891607049}
+  - {fileID: 964027643982657854}
 --- !u!1 &6778653267243256758
 GameObject:
   m_ObjectHideFlags: 0
