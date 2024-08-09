@@ -1,11 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Net;
+using UnityEditor.Rendering.Universal;
 using UnityEngine;
+using TMPro;
 
-public class UI : MonoBehaviour
+public class UI : ScriptManager
 {
     Player thePlayer;
+
+    Workbench workbench;
+
+    [SerializeField]
+    TextMeshProUGUI upgradeText;
+
+    [SerializeField]
+    GameObject upgradeInfo;
+
+    [SerializeField]
+    int currentUpgrade;
+
+    [SerializeField]
+    bool[] upgraded = { false, false, false, false };
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +32,7 @@ public class UI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        workbench = GameManager.instance.currentWorkbench;
     }
 
     public void SwitchPrimary(int gunIndex)
@@ -63,6 +79,80 @@ public class UI : MonoBehaviour
         }
     }
 
+    public void UpgradeSelect(int upgradeIndex)
+    {
+        upgradeText.text = "" + workbench.currentUpgradeText[upgradeIndex];
+        currentUpgrade = upgradeIndex;
+        if (upgraded[upgradeIndex])
+        {
+            upgradeInfo.SetActive(false);
+        }
+        else
+        {
+            upgradeInfo.SetActive(true);
+        }
+    }
 
+    public void Upgrade()
+    {
+        if(currentUpgrade == 0)
+        {
+            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
+            {
+                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
+            }
+            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
+            }
+        }
+        else if(currentUpgrade == 1)
+        {
+            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
+            {
+                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
+                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
+            }
+            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
+                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
+            }
+        }
+        else if (currentUpgrade == 2)
+        {
+            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
+            {
+                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
+            }
+            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
+            }
+        }
+        else if (currentUpgrade == 3)
+        {
+            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
+            {
+                gun.GetComponent<Gun>().silenced = true;
+            }
+            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().silenced = true;
+            }
+        }
+        upgraded[currentUpgrade] = true;
+
+        if (upgraded[currentUpgrade])
+        {
+            upgradeInfo.SetActive(false);
+        }
+        else
+        {
+            upgradeInfo.SetActive(true);
+        }
+    }
+
+    
 
 }

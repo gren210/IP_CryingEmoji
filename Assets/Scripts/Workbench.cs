@@ -9,6 +9,13 @@ public class Workbench : Interactable
 
     GameObject workbenchUI;
 
+    public Transform gunTransform;
+
+    [HideInInspector]
+    public int[] currentUpgrade = {0, 0, 0, 0};
+
+    public string[] currentUpgradeText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -34,5 +41,9 @@ public class Workbench : Interactable
     {
         yield return new WaitForSeconds(.5f);
         workbenchUI.SetActive(true);
+        GameManager.instance.workbenchUIObject.UpgradeSelect(0);
     }
+
+    
+
 }

@@ -18,14 +18,12 @@ public class Gun : Interactable
 
     public bool fullAuto;
 
-    [HideInInspector]
-    public int ammoCount;
+    public float ammoCount;
 
-    [SerializeField]
-    int RPM;
+    public float RPM;
 
     [HideInInspector]
-    public int currentAmmoCount;
+    public float currentAmmoCount;
 
     float currentCooldown;
 
@@ -70,6 +68,8 @@ public class Gun : Interactable
     public float swayAmplitude;
 
     public float swaySpeed;
+
+    public bool silenced = false;
 
     public GameObject[] attachmentObjects = { null, null, null, null };
 
@@ -155,7 +155,7 @@ public class Gun : Interactable
         }
     }
 
-    int RefillAmmo(int ammoReserve) 
+    float RefillAmmo(float ammoReserve) 
     {
         if (ammoReserve < (ammoCount - currentAmmoCount))
         {

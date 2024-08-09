@@ -57,11 +57,11 @@ public class GameManager : ScriptManager
 
     public bool[] primaryBackpack = { false, false };
 
-    public int[] primaryAmmo = { 0, 0 } ;
+    public float[] primaryAmmo = { 0, 0 } ;
 
     public bool[] secondaryBackpack = { false, false };
 
-    public int[] secondaryAmmo = { 0, 0 };
+    public float[] secondaryAmmo = { 0, 0 };
 
     public bool[] meleeBackpack = { false, false };
 
@@ -79,7 +79,7 @@ public class GameManager : ScriptManager
 
     public GameObject workbenchUI;
 
-
+    public UI workbenchUIObject;
 
     private void Awake()
     {
