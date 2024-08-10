@@ -451,12 +451,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba59812da852425429f39d1ea8d15447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSound: {fileID: 0}
+  interactText: Pick up M1 Garand
   reloading: 0
   reloadTime: 1.6
   secondary: 0
   fullAuto: 0
-  ammoCount: 5
-  RPM: 30
+  ammoCount: 6
+  RPM: 90
   currentAmmoCount: 0
   bulletRange: 10000
   damage: 125

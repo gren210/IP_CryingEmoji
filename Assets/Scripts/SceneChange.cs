@@ -57,16 +57,11 @@ public class SceneChange : ScriptManager
     /// </summary>
     void Start()
     {
-        CursorLock(true);
         currentTimer = 0;
         changeScene = false;
 
         //transition = GameManager.instance.transition;
         //transitionAnimator = GameManager.instance.transitionAnimator;
-        //if (!firstScene || GameManager.instance.hasRestarted)
-        //{
-        //transitionAnimator.SetTrigger("Start");
-        //}
 
         // Runs when the first level (spaceship) is loaded.
         //if (SceneManager.GetActiveScene().buildIndex == 6)
@@ -75,9 +70,13 @@ public class SceneChange : ScriptManager
         //GameManager.instance.UI.SetActive(true);
         //ChangeMusic(5);
         //}
-
         GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", false);
-        GameManager.instance.playerUI.SetActive(true);
+        if(!firstScene)
+        {
+            ChangeMusic(sceneIndex);
+            CursorLock(true);
+            GameManager.instance.playerUI.SetActive(true);
+        }
 
     }
 
@@ -100,15 +99,8 @@ public class SceneChange : ScriptManager
     {
         if (other.transform.tag == "Player")
         {
-            StartCoroutine(SceneLoad());
+            StartCoroutine(SceneLoad(sceneIndex));
         }
-    }
-
-    IEnumerator SceneLoad()
-    {
-        GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", true);
-        yield return new WaitForSeconds(1);
-        SceneManager.LoadScene(sceneIndex);
     }
 
 }

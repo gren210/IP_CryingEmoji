@@ -8,6 +8,7 @@ using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScriptManager : MonoBehaviour
 {
@@ -46,5 +47,20 @@ public class ScriptManager : MonoBehaviour
         ShakeCamera(shakeIntensity, shakeFrequency);
         yield return new WaitForSeconds(shakeTime);
         ShakeCamera(0,0);
+    }
+
+    protected IEnumerator SceneLoad(int sceneIndex)
+    {
+        GameManager.instance.immune = true;
+        GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", true);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneIndex);
+    }
+
+    protected virtual void ChangeMusic(int musicIndex)
+    {
+        GameManager.instance.musicSource.Stop();
+        GameManager.instance.musicSource.clip = GameManager.instance.music[musicIndex];
+        GameManager.instance.musicSource.Play();
     }
 }

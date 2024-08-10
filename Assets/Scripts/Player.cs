@@ -89,7 +89,8 @@ public class Player : ScriptManager
 
     CinemachineBrain cinemachineBrain;
 
-    PlayerInput playerInput;
+    [HideInInspector]
+    public PlayerInput playerInput;
 
     public float interactionDistance = 1000f;
 
@@ -153,6 +154,7 @@ public class Player : ScriptManager
     {
         GameManager.instance.thePlayer = this;
         GameManager.instance.animator = animator;
+        GameManager.instance.immune = false;
         currentVirtualCamera = virtualCamera;
         currentAimVirtualCamera = aimVirtualCamera;
     }

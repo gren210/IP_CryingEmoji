@@ -75,6 +75,8 @@ public class Gun : Interactable
 
     bool[] attachments = { false, false, false, false };
 
+    float currentShotTimer;
+
     private void Awake()
     {
         shakeSource = gameObject.GetComponent<CinemachineImpulseSource>();
@@ -90,11 +92,13 @@ public class Gun : Interactable
             ShakeCamera(swayAmplitude, swaySpeed, player.aimVirtualCamera);
             ShakeCamera(swayAmplitude, swaySpeed, player.crouchAimVirtualCamera);
         }
+        currentShotTimer = 60 / RPM;
     }
 
     // Update is called once per frame
     void Update()
     {
+        currentShotTimer -= Time.deltaTime;
         if(GameManager.instance.currentVirtualCamera != null)
         {
             virtualCamera = GameManager.instance.currentVirtualCamera.transform;
@@ -176,24 +180,28 @@ public class Gun : Interactable
 
     public void Shoot(Player thePlayer)
     {
-        currentAmmoCount -= 1;
-        RaycastHit hitInfo;
-        GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
-        smoke.transform.SetParent(muzzle);
-        Destroy(smoke, .5f);
-        if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
+        if (currentShotTimer <= 0)
         {
-            GameObject gunshot = Instantiate(gunAudio);
-            Destroy(gunshot, 1f); 
-            shakeSource.GenerateImpulseWithForce(.04f);
-            GameManager.instance.isShooting = true;
-            bool hit = Physics.Raycast(thePlayer.playerCamera.position, thePlayer.playerCamera.forward, out hitInfo, bulletRange);
-            if (hit)
+            currentShotTimer = 60 / RPM;
+            currentAmmoCount -= 1;
+            RaycastHit hitInfo;
+            GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
+            smoke.transform.SetParent(muzzle);
+            Destroy(smoke, .5f);
+            if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
             {
-                if(hitInfo.collider.TryGetComponent<Enemy>(out currentEnemy))
+                GameObject gunshot = Instantiate(gunAudio);
+                Destroy(gunshot, 1f);
+                shakeSource.GenerateImpulseWithForce(.04f);
+                GameManager.instance.isShooting = true;
+                bool hit = Physics.Raycast(thePlayer.playerCamera.position, thePlayer.playerCamera.forward, out hitInfo, bulletRange);
+                if (hit)
                 {
-                    currentEnemy.TakeDamage(damage);
-                    Destroy(Instantiate(bloodVFX, hitInfo.point,hitInfo.transform.rotation), 1f);
+                    if (hitInfo.collider.TryGetComponent<Enemy>(out currentEnemy))
+                    {
+                        currentEnemy.TakeDamage(damage);
+                        Destroy(Instantiate(bloodVFX, hitInfo.point, hitInfo.transform.rotation), 1f);
+                    }
                 }
             }
         }

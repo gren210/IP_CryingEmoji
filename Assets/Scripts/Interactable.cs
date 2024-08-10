@@ -1,10 +1,15 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
+    public AudioClip interactSound;
+
+    public string interactText;
+
     public virtual void Interact(Player thePlayer)
     {
 

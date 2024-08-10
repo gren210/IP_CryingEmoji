@@ -9,8 +9,9 @@ using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
 using System.Linq;
 using Unity.VisualScripting;
+using TMPro;
 
-public class PlayerInteraction : MonoBehaviour
+public class PlayerInteraction : ScriptManager
 {
     Player x;
 
@@ -32,6 +33,8 @@ public class PlayerInteraction : MonoBehaviour
 
     Interactable currentInteractable;
 
+    Door currentDoor;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,13 +50,14 @@ public class PlayerInteraction : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
         if (Physics.Raycast(x.playerCamera.position, x.playerCamera.forward, out hitInfo, x.interactionDistance))
         {
-            if(hitInfo.transform.TryGetComponent<Interactable>(out currentInteractable))
+            hitInfo.transform.TryGetComponent<Door>(out currentDoor);
+            if (hitInfo.transform.TryGetComponent<Interactable>(out currentInteractable))
             {
-                GameManager.instance.interactText.SetActive(true);
+                GameManager.instance.interactText.text = "" + currentInteractable.interactText;
             }
             else
             {
-                GameManager.instance.interactText.SetActive(false);
+                GameManager.instance.interactText.text = "";
             }
             if(hitInfo.transform.TryGetComponent<Gun>(out currentGunPickup))
             {
@@ -79,6 +83,10 @@ public class PlayerInteraction : MonoBehaviour
             {
 
             }
+        }
+        else
+        {
+            GameManager.instance.interactText.text = "";
         }
     }
 
@@ -108,6 +116,31 @@ public class PlayerInteraction : MonoBehaviour
         if (currentWorkbench != null)
         {
             currentWorkbench.Interact(x);
+        }
+        if(currentDoor != null)
+        {
+            currentDoor.Interact(x);
+        }
+    }
+
+    void OnPause()
+    {
+        if (Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+            GameManager.instance.pauseUI.SetActive(false);
+            x.playerInput.SwitchCurrentActionMap("Player");
+            if(GameManager.instance.currentWorkbench == null && GameManager.instance.inventoryUI.activeSelf == false)
+            {
+                CursorLock(true);
+            }
+        }
+        else
+        {
+            Time.timeScale = 0;
+            GameManager.instance.pauseUI.SetActive(true);
+            x.playerInput.SwitchCurrentActionMap("UI");
+            CursorLock(false);
         }
     }
 

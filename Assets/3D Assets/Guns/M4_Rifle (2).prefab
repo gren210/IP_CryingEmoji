@@ -303,6 +303,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba59812da852425429f39d1ea8d15447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSound: {fileID: 0}
+  interactText: Pick up AR15
   reloading: 0
   reloadTime: 2.7
   secondary: 0

@@ -80,6 +80,8 @@ public class GameManager : ScriptManager
 
     public GameObject workbenchUI;
 
+    public GameObject pauseUI;
+
     public GameObject UIassets;
 
     public UI workbenchUIObject;
@@ -94,9 +96,11 @@ public class GameManager : ScriptManager
 
     public GameObject transition;
 
-    public GameObject interactText;
+    public TextMeshProUGUI interactText;
 
+    public AudioClip[] music;
 
+    public AudioSource musicSource;
 
     private void Awake()
     {
@@ -104,20 +108,15 @@ public class GameManager : ScriptManager
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-            DontDestroyOnLoad(playerUI);
-            DontDestroyOnLoad(inventoryUI);
-            DontDestroyOnLoad(menuUI);
             DontDestroyOnLoad(UIassets);
         }
         else if (instance != null && instance != this)
         {
-            Destroy(inventoryUI);
-            Destroy(playerUI);
-            Destroy(menuUI);
             Destroy(UIassets);
             Destroy(gameObject);
             
         }
+        musicSource = GetComponent<AudioSource>();
     }
 
     // Start is called before the first frame update
@@ -126,6 +125,8 @@ public class GameManager : ScriptManager
         readyShoot = true;
         readySwap = true;
         readyMove = true;
+        musicSource.clip = music[0];
+        musicSource.Play();
     }
 
     // Update is called once per frame

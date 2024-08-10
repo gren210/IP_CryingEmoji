@@ -714,11 +714,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  health: 600
+  health: 1500
   damage: 32
   attackRange: 2
   detected: 0
   animator: {fileID: 0}
+  gasEffect: {fileID: 0}
 --- !u!195 &6009310190502322999
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba59812da852425429f39d1ea8d15447, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSound: {fileID: 8300000, guid: 54b315d70c2ec354aa24ddcb07519281, type: 3}
+  interactText: Pick up Desert Eagle
   reloading: 0
   reloadTime: 1.6
   secondary: 1

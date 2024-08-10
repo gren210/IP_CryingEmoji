@@ -42,7 +42,7 @@ public class UI : ScriptManager
 
     IEnumerator Transition(int index)
     {
-        animator.SetBool("Transition",true);
+        GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", true);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(index);
     }
@@ -56,6 +56,27 @@ public class UI : ScriptManager
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.pauseUI.SetActive(false);
+        GameManager.instance.thePlayer.playerInput.SwitchCurrentActionMap("Player");
+        if (GameManager.instance.currentWorkbench == null && GameManager.instance.inventoryUI.activeSelf == false)
+        {
+            CursorLock(true);
+        }
+    }
+
+    public void MainMenu()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.pauseUI.SetActive(false);
+        GameManager.instance.playerUI.SetActive(false);
+        GameManager.instance.inventoryUI.SetActive(false);
+        GameManager.instance.workbenchUI.SetActive(false);
+        StartCoroutine(SceneLoad(0));
     }
 
     public void SwitchPrimary(int gunIndex)
