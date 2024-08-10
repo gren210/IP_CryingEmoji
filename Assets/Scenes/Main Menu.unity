@@ -6202,7 +6202,7 @@ MonoBehaviour:
   meleeBackpack: 000000
   grenadeBackpack: 000000000000000000000000
   itemBackpack: 00000000000000000000000000000000000000000000000000000000
-  health: 100
+  health: 400
   playerUI: {fileID: 669505059}
   menuUI: {fileID: 1955739285}
   inventoryUI: {fileID: 1955739285}
@@ -7445,7 +7445,7 @@ RectTransform:
   m_GameObject: {fileID: 1147678455}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1936958, y: 0.9858668, z: 0.9453129}
+  m_LocalScale: {x: 0.470219, y: 0.3037554, z: 0.29126036}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 669505063}
