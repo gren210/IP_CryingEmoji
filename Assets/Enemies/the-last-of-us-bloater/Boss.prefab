@@ -719,7 +719,8 @@ MonoBehaviour:
   attackRange: 2
   detected: 0
   animator: {fileID: 0}
-  gasEffect: {fileID: 0}
+  gasEffect: {fileID: 7372574987670286011, guid: 3adf2a4bb47f94145a4c3999d275d07d,
+    type: 3}
 --- !u!195 &6009310190502322999
 NavMeshAgent:
   m_ObjectHideFlags: 0

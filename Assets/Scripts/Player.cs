@@ -157,6 +157,8 @@ public class Player : ScriptManager
         GameManager.instance.immune = false;
         currentVirtualCamera = virtualCamera;
         currentAimVirtualCamera = aimVirtualCamera;
+        CursorLock(true);
+        GameManager.instance.playerUI.SetActive(true);
     }
 
     private void Update()

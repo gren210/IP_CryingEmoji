@@ -74,8 +74,7 @@ public class SceneChange : ScriptManager
         if(!firstScene)
         {
             ChangeMusic(sceneIndex);
-            CursorLock(true);
-            GameManager.instance.playerUI.SetActive(true);
+            
         }
 
     }
