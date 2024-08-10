@@ -10,6 +10,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : ScriptManager
 {
@@ -79,7 +80,21 @@ public class GameManager : ScriptManager
 
     public GameObject workbenchUI;
 
+    public GameObject UIassets;
+
     public UI workbenchUIObject;
+
+    public Image healthbar;
+
+    public TextMeshProUGUI ammoCount;
+
+    public TextMeshProUGUI ammoReserve;
+
+    public GameObject ammoSign;
+
+   
+
+
 
     private void Awake()
     {
@@ -90,13 +105,16 @@ public class GameManager : ScriptManager
             DontDestroyOnLoad(playerUI);
             DontDestroyOnLoad(inventoryUI);
             DontDestroyOnLoad(menuUI);
+            DontDestroyOnLoad(UIassets);
         }
         else if (instance != null && instance != this)
         {
             Destroy(inventoryUI);
             Destroy(playerUI);
             Destroy(menuUI);
+            Destroy(UIassets);
             Destroy(gameObject);
+            
         }
     }
 
@@ -111,15 +129,30 @@ public class GameManager : ScriptManager
     // Update is called once per frame
     void Update()
     {
-        animator.SetInteger("Health", health);
+        if (animator != null)
+        {
+            animator.SetInteger("Health", health);
+        }
+        healthbar.fillAmount = health / 100f;
 
-        if(currentGun != null)
+        if (currentGun != null)
         {
             ammoText.text = "" + currentGun.currentAmmoCount;
+            if (currentGun.secondary)
+            {
+                ammoReserve.text = "" + secondaryAmmo[currentGun.gunIndex];
+            }
+            else
+            {
+                ammoReserve.text = "" + primaryAmmo[currentGun.gunIndex];
+            }
+            ammoSign.SetActive(true);
         }
         else
         {
             ammoText.text = "";
+            ammoReserve.text = "";
+            ammoSign.SetActive(false);
         }
     }
 

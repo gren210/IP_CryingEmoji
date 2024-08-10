@@ -65,16 +65,18 @@ public class SceneChange : ScriptManager
         //transitionAnimator = GameManager.instance.transitionAnimator;
         //if (!firstScene || GameManager.instance.hasRestarted)
         //{
-            //transitionAnimator.SetTrigger("Start");
+        //transitionAnimator.SetTrigger("Start");
         //}
 
         // Runs when the first level (spaceship) is loaded.
         //if (SceneManager.GetActiveScene().buildIndex == 6)
         //{
-            //GameManager.instance.objectiveText.text = GameManager.instance.objectiveStrings[0];
-            //GameManager.instance.UI.SetActive(true);
-            //ChangeMusic(5);
+        //GameManager.instance.objectiveText.text = GameManager.instance.objectiveStrings[0];
+        //GameManager.instance.UI.SetActive(true);
+        //ChangeMusic(5);
         //}
+
+        GameManager.instance.playerUI.SetActive(true);
 
     }
 
