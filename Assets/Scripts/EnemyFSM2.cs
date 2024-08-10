@@ -26,13 +26,15 @@ public class EnemyFSM2 : Enemy
     [SerializeField]
     GameObject explodeEffect;
 
+    private void Awake()
+    {
+        animator = gameObject.GetComponent<Animator>();
+        myAgent = gameObject.GetComponent<NavMeshAgent>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = health;
-        playerTarget = GameManager.instance.thePlayer.transform;
-        animator = gameObject.GetComponent<Animator>();
-        myAgent = gameObject.GetComponent<NavMeshAgent>();
         currentState = "Idle";
         nextState = currentState;
         SwitchState(currentState);
@@ -41,6 +43,7 @@ public class EnemyFSM2 : Enemy
     // Update is called once per frame
     void Update()
     {
+        playerTarget = GameManager.instance.thePlayer.transform;
         animator.SetInteger("Health", currentHealth);
 
         if (currentHealth < health)

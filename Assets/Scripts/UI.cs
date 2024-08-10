@@ -4,12 +4,17 @@ using System.Net;
 using UnityEditor.Rendering.Universal;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UI : ScriptManager
 {
     Player thePlayer;
 
     Workbench workbench;
+
+    public Animator animator;
+
+    public Canvas transitionCanvas;
 
     [SerializeField]
     TextMeshProUGUI upgradeText;
@@ -33,6 +38,24 @@ public class UI : ScriptManager
     void Update()
     {
         workbench = GameManager.instance.currentWorkbench;
+    }
+
+    IEnumerator Transition(int index)
+    {
+        animator.SetTrigger("Transition");
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene(index);
+    }
+
+    public void StartGame()
+    {
+        StartCoroutine(Transition(1));
+        
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     public void SwitchPrimary(int gunIndex)

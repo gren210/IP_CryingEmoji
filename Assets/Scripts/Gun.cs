@@ -95,7 +95,10 @@ public class Gun : Interactable
     // Update is called once per frame
     void Update()
     {
-        virtualCamera = GameManager.instance.currentVirtualCamera.transform;
+        if(GameManager.instance.currentVirtualCamera != null)
+        {
+            virtualCamera = GameManager.instance.currentVirtualCamera.transform;
+        }
 
         if (reloadSmooth)
         {
