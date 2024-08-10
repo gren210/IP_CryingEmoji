@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 9061190074845675430}
   - component: {fileID: 9160880769358042168}
   - component: {fileID: 6063176530157749989}
+  - component: {fileID: 8776809100229285347}
   m_Layer: 0
   m_Name: Single_Doorway
   m_TagString: Untagged
@@ -139,6 +140,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8776809100229285347
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343015245038159594}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 2653813812607479768, guid: bc6871c6d47801f4c82f1a4cff5e5f22, type: 3}
 --- !u!1 &5696181062255480544
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +173,7 @@ GameObject:
   - component: {fileID: 1462951856393772318}
   - component: {fileID: 8421723784292376840}
   - component: {fileID: 7862120604469125842}
+  - component: {fileID: 6735230537635365932}
   m_Layer: 0
   m_Name: pCube1
   m_TagString: Untagged
@@ -222,3 +246,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &6735230537635365932
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5696181062255480544}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4068373912626513877, guid: bc6871c6d47801f4c82f1a4cff5e5f22, type: 3}

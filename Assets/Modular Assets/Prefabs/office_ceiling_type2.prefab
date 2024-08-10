@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 5542343332696783258}
   - component: {fileID: 2290252828470892358}
   - component: {fileID: 1785721714634071449}
+  - component: {fileID: 4985857729234616501}
   m_Layer: 0
   m_Name: Floor2
   m_TagString: Untagged
@@ -139,6 +140,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4985857729234616501
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 929064290420536183}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 9176310897612776759, guid: 9aba5224d97ef8f49b7ae22def2410fa, type: 3}
 --- !u!1 &5853364449819955439
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +173,7 @@ GameObject:
   - component: {fileID: 4490364193542635613}
   - component: {fileID: 763669806123194}
   - component: {fileID: 6065652629399877436}
+  - component: {fileID: 5566418478604179784}
   m_Layer: 0
   m_Name: pCube29
   m_TagString: Untagged
@@ -222,3 +246,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &5566418478604179784
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5853364449819955439}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -5451849839690123725, guid: 9aba5224d97ef8f49b7ae22def2410fa, type: 3}

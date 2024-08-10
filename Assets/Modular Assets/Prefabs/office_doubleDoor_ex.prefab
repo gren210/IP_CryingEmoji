@@ -67,6 +67,7 @@ GameObject:
   - component: {fileID: 6019976209675309007}
   - component: {fileID: 3660479302289956749}
   - component: {fileID: 1565813849474005209}
+  - component: {fileID: 2312356335546876192}
   m_Layer: 0
   m_Name: Single_Doorway1
   m_TagString: Untagged
@@ -139,6 +140,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2312356335546876192
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4431046186326509762}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 3499792330788212348, guid: 8e62e1b338380084489e361e82bb895c, type: 3}
 --- !u!1 &7249373932588828783
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,6 +173,7 @@ GameObject:
   - component: {fileID: 8504318650873176227}
   - component: {fileID: 3123054676549678555}
   - component: {fileID: 8318723002080879592}
+  - component: {fileID: 8693265297045068677}
   m_Layer: 0
   m_Name: pCube37
   m_TagString: Untagged
@@ -222,3 +246,25 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &8693265297045068677
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7249373932588828783}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4712477794023769951, guid: 8e62e1b338380084489e361e82bb895c, type: 3}
