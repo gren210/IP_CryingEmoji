@@ -7611,6 +7611,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 325745679}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &326637235
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 339.318
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.000005722046
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 568.138
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &329013590
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8785,6 +8853,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 76a81bdceb9706b43ae600252dbad735, type: 3}
+--- !u!1001 &370481570
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 348.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0068107843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 590.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70442116
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70978236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90.434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &370671225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10793,6 +10929,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 443362409}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &446192694
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 318.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 578.982
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &450079799
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11715,6 +11919,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 488285084}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &489346129
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 347.266
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0068107843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 591.632
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.46187788
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.8869435
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 124.983
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &489464797
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21771,6 +22043,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 890086336}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &891057489
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 344.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0068107843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 563.336
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.39986566
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9165738
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 227.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &895135726
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32179,6 +32519,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1314432595}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1320459962
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 348.406
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0068107843
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 591.395
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.70442116
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70978236
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90.434
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &1321784375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36079,6 +36487,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1470406676}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1472191585
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 308.768
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 578.994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &1474136479
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36153,6 +36629,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1474136479}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1482671038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 310.759
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 585.122
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &1484905043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42693,7 +43237,7 @@ PrefabInstance:
     - target: {fileID: 3070725689183680764, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4999938
+      value: 0.4999718
       objectReference: {fileID: 0}
     - target: {fileID: 3070725689183680764, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
@@ -42703,7 +43247,7 @@ PrefabInstance:
     - target: {fileID: 3070725689183680764, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.8000026
+      value: -1.5948881
       objectReference: {fileID: 0}
     - target: {fileID: 4257497510395513029, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
@@ -42758,7 +43302,7 @@ PrefabInstance:
     - target: {fileID: 8598393741731582007, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.4999938
+      value: 0.4999718
       objectReference: {fileID: 0}
     - target: {fileID: 8598393741731582007, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
@@ -42768,7 +43312,7 @@ PrefabInstance:
     - target: {fileID: 8598393741731582007, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.8000026
+      value: -1.5948881
       objectReference: {fileID: 0}
     - target: {fileID: 8598393741731582007, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}
@@ -47980,6 +48524,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98acd6c366c14814a86d1e880cbff30f, type: 3}
+--- !u!1001 &1906987008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 317.775
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 578.989
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &1907131229
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50145,6 +50757,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2003598189}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2005113688
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 309.795
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 578.994
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &2006115165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51791,6 +52471,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98acd6c366c14814a86d1e880cbff30f, type: 3}
+--- !u!1001 &2112786678
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 328.799
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.00399971
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 600.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7063173594619912454, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7588211719622458300, guid: 4671f8198e6b5be4798f44ad0a01e7a3,
+        type: 3}
+      propertyPath: m_Name
+      value: WoodenDoor (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4671f8198e6b5be4798f44ad0a01e7a3, type: 3}
 --- !u!1001 &2117891501
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54337,3 +55085,14 @@ SceneRoots:
   - {fileID: 831153677}
   - {fileID: 577803790}
   - {fileID: 1147347260}
+  - {fileID: 489346129}
+  - {fileID: 1320459962}
+  - {fileID: 370481570}
+  - {fileID: 891057489}
+  - {fileID: 326637235}
+  - {fileID: 446192694}
+  - {fileID: 1906987008}
+  - {fileID: 1482671038}
+  - {fileID: 2112786678}
+  - {fileID: 2005113688}
+  - {fileID: 1472191585}
