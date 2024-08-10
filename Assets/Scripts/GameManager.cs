@@ -92,7 +92,9 @@ public class GameManager : ScriptManager
 
     public GameObject ammoSign;
 
-   
+    public GameObject transition;
+
+    public GameObject interactText;
 
 
 

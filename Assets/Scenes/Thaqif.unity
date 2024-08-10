@@ -5238,6 +5238,8 @@ MonoBehaviour:
   ammoCount: {fileID: 707295910}
   ammoReserve: {fileID: 1777970644}
   ammoSign: {fileID: 1986295365}
+  transition: {fileID: 0}
+  interactText: {fileID: 0}
 --- !u!1 &859479395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6584,7 +6586,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 3cb2f5e40dd5b7a45a6c5c88195f97ea, type: 2}
   m_BuildHeightMesh: 1
@@ -6615,7 +6617,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: af7f5d30fc284234f964f0e6d3c657d0, type: 2}
   m_BuildHeightMesh: 0
@@ -6646,7 +6648,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.33333334
+  m_VoxelSize: 0.06666667
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 5843bac1ce572e248a788aec95cfd510, type: 2}
   m_BuildHeightMesh: 0
@@ -15131,11 +15133,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2523356002131084132, guid: 476e985466112544da7a702ddd12fe74,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4257497510395513029, guid: 476e985466112544da7a702ddd12fe74,
         type: 3}

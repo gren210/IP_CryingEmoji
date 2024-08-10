@@ -76,6 +76,7 @@ public class SceneChange : ScriptManager
         //ChangeMusic(5);
         //}
 
+        GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", false);
         GameManager.instance.playerUI.SetActive(true);
 
     }
@@ -99,7 +100,15 @@ public class SceneChange : ScriptManager
     {
         if (other.transform.tag == "Player")
         {
-            SceneManager.LoadScene(sceneIndex);
+            StartCoroutine(SceneLoad());
         }
     }
+
+    IEnumerator SceneLoad()
+    {
+        GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", true);
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(sceneIndex);
+    }
+
 }

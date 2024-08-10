@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2065524457960995387}
+  - component: {fileID: -3865950357791065927}
   m_Layer: 0
   m_Name: Katana
   m_TagString: Untagged
@@ -33,6 +34,26 @@ Transform:
   - {fileID: 4086334287825652201}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-3865950357791065927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741622702025845806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 185045671b6902548a50376d7a2ec28f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cooldown: 0.7
+  comboDelay: 0.3
+  readySwing: 0
+  meleeIndex: 1
+  interactable: 1
+  damage: 30
+  attackRange: 3
+  damageCollider: {fileID: 0}
 --- !u!1 &6038513545907106456
 GameObject:
   m_ObjectHideFlags: 0

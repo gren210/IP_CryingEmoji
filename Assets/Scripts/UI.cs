@@ -42,7 +42,7 @@ public class UI : ScriptManager
 
     IEnumerator Transition(int index)
     {
-        animator.SetTrigger("Transition");
+        animator.SetBool("Transition",true);
         yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(index);
     }

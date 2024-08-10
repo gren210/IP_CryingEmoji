@@ -30,6 +30,8 @@ public class PlayerInteraction : MonoBehaviour
 
     GameObject[] entities = { };
 
+    Interactable currentInteractable;
+
 
     // Start is called before the first frame update
     void Start()
@@ -45,9 +47,17 @@ public class PlayerInteraction : MonoBehaviour
         //Debug.DrawLine(transform.position, transform.position + (transform.forward * 999f), Color.red);
         if (Physics.Raycast(x.playerCamera.position, x.playerCamera.forward, out hitInfo, x.interactionDistance))
         {
+            if(hitInfo.transform.TryGetComponent<Interactable>(out currentInteractable))
+            {
+                GameManager.instance.interactText.SetActive(true);
+            }
+            else
+            {
+                GameManager.instance.interactText.SetActive(false);
+            }
             if(hitInfo.transform.TryGetComponent<Gun>(out currentGunPickup))
             {
-                //Debug.Log(currentGunPickup);
+                Debug.Log(currentGunPickup);
             }
             else if (hitInfo.transform.TryGetComponent<Grenade>(out currentGrenadePickup))
             {
