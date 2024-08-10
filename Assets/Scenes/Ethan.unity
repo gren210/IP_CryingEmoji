@@ -1371,10 +1371,11 @@ MonoBehaviour:
   readyMove: 1
   isCrouch: 0
   isAiming: 0
+  immune: 0
   primaryBackpack: 000000
-  primaryAmmo: 000000000000000000000000
+  primaryAmmo: []
   secondaryBackpack: 0000
-  secondaryAmmo: 0000000000000000
+  secondaryAmmo: []
   meleeBackpack: 000000
   grenadeBackpack: 000000000000000000000000
   itemBackpack: 0000000000000000000000000000000000000000000000000000000000000000
@@ -1383,6 +1384,17 @@ MonoBehaviour:
   menuUI: {fileID: 0}
   inventoryUI: {fileID: 0}
   workbenchUI: {fileID: 0}
+  pauseUI: {fileID: 0}
+  UIassets: {fileID: 0}
+  workbenchUIObject: {fileID: 0}
+  healthbar: {fileID: 0}
+  ammoCount: {fileID: 0}
+  ammoReserve: {fileID: 0}
+  ammoSign: {fileID: 0}
+  transition: {fileID: 0}
+  interactText: {fileID: 0}
+  music: []
+  musicSource: {fileID: 0}
 --- !u!1001 &911028589
 PrefabInstance:
   m_ObjectHideFlags: 0
