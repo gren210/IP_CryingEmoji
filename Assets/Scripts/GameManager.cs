@@ -70,6 +70,8 @@ public class GameManager : ScriptManager
 
     public int[] itemBackpack = { 0, 0 };
 
+    public bool[] upgrades = { false, false, false, false };   
+
     public int health = 100;
 
     public GameObject playerUI;
@@ -102,6 +104,95 @@ public class GameManager : ScriptManager
 
     public AudioSource musicSource;
 
+    public Transform currentCheckpoint;
+
+    public Transform[] checkpoints = {null, null, null, null, null, null, null, null};
+
+    public int currentCheckpointIndex = -1;
+
+    public bool[] upgradesSave = { false, false, false, false };
+
+    bool[] primaryBackpackSave = { false, false };
+
+    float[] primaryAmmoSave = { 0, 0 };
+
+    bool[] secondaryBackpackSave = { false, false };
+
+    float[] secondaryAmmoSave = { 0, 0 };
+
+    bool[] meleeBackpackSave = { false, false };
+
+    int[] grenadeBackpackSave = { 0, 0, 0 };
+
+    int[] itemBackpackSave = { 0, 0 };
+
+    int currentPrimarySave = 5;
+
+    int currentSecondarySave = 5;
+
+    int currentMeleeSave = 5;
+
+    int currentGrenadeSave = 5;
+
+
+    public void SaveItems()
+    {
+        primaryBackpackSave = primaryBackpack;
+        primaryAmmoSave = primaryAmmo;
+        secondaryBackpackSave = secondaryBackpack;
+        secondaryAmmoSave = secondaryAmmo;
+        meleeBackpackSave = meleeBackpack;
+        grenadeBackpackSave= grenadeBackpack;
+        itemBackpackSave = itemBackpack;
+        upgradesSave = upgrades;
+        if(thePlayer.currentPrimary != null)
+        {
+            currentPrimarySave = thePlayer.currentPrimary.GetComponent<Gun>().gunIndex;
+        }
+        if (thePlayer.currentSecondary != null)
+        {
+            currentSecondarySave = thePlayer.currentSecondary.GetComponent<Gun>().gunIndex;
+        }
+        if (thePlayer.currentMelee != null)
+        {
+            currentMeleeSave = thePlayer.currentMelee.GetComponent<Melee>().meleeIndex;
+        }
+        if (thePlayer.currentGrenade != null)
+        {
+            currentGrenadeSave = thePlayer.currentGrenade.GetComponent<Grenade>().grenadeIndex;
+        }
+
+    }
+
+    public void ReloadSave()
+    {
+        primaryBackpack = primaryBackpackSave;
+        primaryAmmo = primaryAmmoSave;
+        secondaryBackpack = secondaryBackpackSave;
+        secondaryAmmo = secondaryAmmoSave;
+        meleeBackpack = meleeBackpackSave;
+        grenadeBackpack = grenadeBackpackSave;
+        itemBackpack = itemBackpackSave;
+        upgrades = upgradesSave;
+        if (currentPrimarySave != 5)
+        {
+            thePlayer.currentPrimary = thePlayer.primaryWeapons[currentPrimarySave];
+        }
+        if (currentSecondarySave != 5)
+        {
+            thePlayer.currentSecondary = thePlayer.secondaryWeapons[currentSecondarySave];
+            thePlayer.OnSecondaryEquip();
+        }
+        if (currentMeleeSave != 5)
+        {
+            thePlayer.currentMelee = thePlayer.meleeWeapons[currentMeleeSave];
+        }
+        if (currentGrenadeSave != 5)
+        {
+            thePlayer.currentGrenade = thePlayer.grenadeWeapons[currentGrenadeSave];
+        }
+    }
+
     private void Awake()
     {
         if (instance == null)
@@ -127,7 +218,8 @@ public class GameManager : ScriptManager
         readyMove = true;
         musicSource.clip = music[0];
         musicSource.Play();
-    }
+        currentCheckpointIndex = -1;
+}
 
     // Update is called once per frame
     void Update()

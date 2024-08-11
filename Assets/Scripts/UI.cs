@@ -69,6 +69,16 @@ public class UI : ScriptManager
         }
     }
 
+    public void RestartLevel()
+    {
+        Time.timeScale = 1;
+        GameManager.instance.pauseUI.SetActive(false);
+        GameManager.instance.playerUI.SetActive(false);
+        GameManager.instance.inventoryUI.SetActive(false);
+        GameManager.instance.workbenchUI.SetActive(false);
+        StartCoroutine(SceneLoad(SceneManager.GetActiveScene().buildIndex));
+    }
+
     public void MainMenu()
     {
         Time.timeScale = 1;
@@ -139,7 +149,11 @@ public class UI : ScriptManager
 
     public void Upgrade()
     {
-        if(currentUpgrade == 0)
+        GameManager.instance.thePlayer.Upgrade1();
+        GameManager.instance.thePlayer.Upgrade2();
+        GameManager.instance.thePlayer.Upgrade3();
+        GameManager.instance.thePlayer.Upgrade4();
+        if (currentUpgrade == 0)
         {
             foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
             {
@@ -185,9 +199,9 @@ public class UI : ScriptManager
                 gun.GetComponent<Gun>().silenced = true;
             }
         }
-        upgraded[currentUpgrade] = true;
+        GameManager.instance.upgrades[currentUpgrade] = true;
 
-        if (upgraded[currentUpgrade])
+        if (GameManager.instance.upgrades[currentUpgrade])
         {
             upgradeInfo.SetActive(false);
         }

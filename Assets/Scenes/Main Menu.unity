@@ -6003,13 +6003,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2141341212}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2141341214}
+        m_TargetAssemblyTypeName: UI, Assembly-CSharp
+        m_MethodName: RestartLevel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -7802,6 +7802,7 @@ MonoBehaviour:
   meleeBackpack: 000000
   grenadeBackpack: 000000000000000000000000
   itemBackpack: 00000000000000000000000000000000000000000000000000000000
+  upgrades: 00000000
   health: 100
   playerUI: {fileID: 669505059}
   menuUI: {fileID: 1955739285}
@@ -7818,6 +7819,21 @@ MonoBehaviour:
   interactText: {fileID: 1213223372}
   music:
   - {fileID: 8300000, guid: a8793dcf968e95e4d9ac7df06785c0b2, type: 3}
+  - {fileID: 8300000, guid: a8793dcf968e95e4d9ac7df06785c0b2, type: 3}
+  - {fileID: 8300000, guid: a8793dcf968e95e4d9ac7df06785c0b2, type: 3}
+  musicSource: {fileID: 0}
+  currentCheckpoint: {fileID: 0}
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentCheckpointIndex: -1
+  upgradesSave: 00000000
 --- !u!4 &972893944
 Transform:
   m_ObjectHideFlags: 0

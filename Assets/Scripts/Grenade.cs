@@ -99,6 +99,12 @@ public class Grenade : Interactable
     [SerializeField]
     bool impactGrenade;
 
+    [SerializeField]
+    bool molotov;
+
+    [SerializeField]
+    GameObject molotovFire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -176,12 +182,20 @@ public class Grenade : Interactable
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (impactGrenade)
+        if (impactGrenade || molotov)
         {
             GameManager.instance.readySwap = true;
             GameManager.instance.readyShoot = true;
             GameManager.instance.animator.SetLayerWeight(7, 0);
-            GrenadeExplode();
+            if (impactGrenade)
+            {
+                GrenadeExplode();
+            }
+            else if (molotov)
+            {
+                Instantiate(molotovFire,transform.position, transform.rotation);
+                Destroy(gameObject);
+            }
         }
     }
 

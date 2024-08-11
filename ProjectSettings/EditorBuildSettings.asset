@@ -12,6 +12,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Thaqif.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
+    path: Assets/Scenes/Level 1 - Quarantine Zone.unity
+    guid: 0cc6258ee14f265418ef823d61cd457f
+  - enabled: 1
     path: Assets/Scenes/Level 2 - Infected Zone.unity
     guid: 2fd58beac293ec64f968c28f9a39a8f9
+  - enabled: 1
+    path: Assets/Scenes/Level 3 - MC House.unity
+    guid: 52feb4f283671904b8e147cbfa986fd6
+  - enabled: 1
+    path: Assets/Scenes/Level 4 - Basement.unity
+    guid: cfa6472260a464a4e9bb9dfdb256941a
   m_configObjects: {}

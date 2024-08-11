@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class NPC : Enemy
+public class NPC : Interactable
 {
     [HideInInspector]
     public Animator animator;
@@ -48,6 +48,11 @@ public class NPC : Enemy
         }
     }
 
+    void SwitchState(string currentState)
+    {
+        StartCoroutine(currentState);
+    }
+
     IEnumerator Idle()
     {
         yield return new WaitForSeconds(idleTime);
@@ -79,6 +84,12 @@ public class NPC : Enemy
         }
         animator.SetBool("isWalk", false);
         SwitchState(currentState);
+    }
+
+    public override void Interact(Player thePlayer)
+    {
+        base.Interact(thePlayer);
+        //thePlayer
     }
 
 }

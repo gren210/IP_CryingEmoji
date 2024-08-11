@@ -159,6 +159,29 @@ public class Player : ScriptManager
         currentAimVirtualCamera = aimVirtualCamera;
         CursorLock(true);
         GameManager.instance.playerUI.SetActive(true);
+        GameManager.instance.ReloadSave();
+        StartCoroutine(Teleport());
+        Upgrade1();
+        Upgrade2();
+        Upgrade3();
+        Upgrade4();
+    }
+
+    IEnumerator Teleport()
+    {
+        Debug.Log(GameManager.instance.currentCheckpointIndex);
+        if (GameManager.instance.currentCheckpointIndex != -1)
+        {
+            yield return new WaitForEndOfFrame();
+            GetComponent<CharacterController>().enabled = false;
+            thirdPersonController.enabled = false;
+            Physics.SyncTransforms();
+            transform.position = GameManager.instance.checkpoints[GameManager.instance.currentCheckpointIndex].position;
+            transform.rotation = GameManager.instance.checkpoints[GameManager.instance.currentCheckpointIndex].rotation;
+            yield return new WaitForEndOfFrame();
+            thirdPersonController.enabled = true;
+            GetComponent<CharacterController>().enabled = true;
+        }
     }
 
     private void Update()
@@ -554,6 +577,68 @@ public class Player : ScriptManager
                 CursorLock(false);
             }
         }
+    }
+
+    public void Upgrade1()
+    {
+        if (GameManager.instance.upgrades[0])
+        {
+            foreach (GameObject gun in primaryWeapons)
+            {
+                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
+            }
+            foreach (GameObject gun in secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
+            }
+        }
+    }
+
+    public void Upgrade2()
+    {
+        if (GameManager.instance.upgrades[1])
+        {
+            foreach (GameObject gun in primaryWeapons)
+            {
+                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
+                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
+            }
+            foreach (GameObject gun in secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
+                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
+            }
+        }
+            
+    }
+    public void Upgrade3()
+    {
+        if (GameManager.instance.upgrades[2])
+        {
+            foreach (GameObject gun in primaryWeapons)
+            {
+                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
+            }
+            foreach (GameObject gun in secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
+            }
+        }
+    }
+    public void Upgrade4()
+    {
+        if (GameManager.instance.upgrades[3])
+        {
+            foreach (GameObject gun in primaryWeapons)
+            {
+                gun.GetComponent<Gun>().silenced = true;
+            }
+            foreach (GameObject gun in secondaryWeapons)
+            {
+                gun.GetComponent<Gun>().silenced = true;
+            }
+        }
+        
     }
 
 }

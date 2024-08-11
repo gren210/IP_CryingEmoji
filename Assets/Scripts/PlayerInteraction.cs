@@ -35,6 +35,8 @@ public class PlayerInteraction : ScriptManager
 
     Door currentDoor;
 
+    NPC currentNPC;
+
 
     // Start is called before the first frame update
     void Start()
@@ -51,6 +53,7 @@ public class PlayerInteraction : ScriptManager
         if (Physics.Raycast(x.playerCamera.position, x.playerCamera.forward, out hitInfo, x.interactionDistance))
         {
             hitInfo.transform.TryGetComponent<Door>(out currentDoor);
+            hitInfo.transform.TryGetComponent<NPC>(out currentNPC);
             if (hitInfo.transform.TryGetComponent<Interactable>(out currentInteractable))
             {
                 GameManager.instance.interactText.text = "" + currentInteractable.interactText;
@@ -120,6 +123,10 @@ public class PlayerInteraction : ScriptManager
         if(currentDoor != null)
         {
             currentDoor.Interact(x);
+        }
+        if (currentNPC != null)
+        {
+            currentNPC.Interact(x);
         }
     }
 
