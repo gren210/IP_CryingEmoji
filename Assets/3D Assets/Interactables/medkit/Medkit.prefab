@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5048428663371815045}
   - component: {fileID: 3854397557410112625}
   - component: {fileID: 746948943371053733}
+  - component: {fileID: -4878072851464073191}
   m_Layer: 0
   m_Name: Medkit
   m_TagString: Untagged
@@ -134,3 +135,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4878072851464073191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3281935614642069887}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce8292c993dd56a45982c762d064ca0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactSound: {fileID: 8300000, guid: 54b315d70c2ec354aa24ddcb07519281, type: 3}
+  interactText: Pick up Medkit
+  itemIndex: 1

@@ -75,7 +75,7 @@ public class SceneChange : ScriptManager
         GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", false);
         if(!firstScene)
         {
-            //ChangeMusic(sceneIndex);
+            ChangeMusic(sceneIndex);
         }
 
     }
