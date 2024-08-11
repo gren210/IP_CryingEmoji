@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Cinemachine;
 using StarterAssets;
-using static UnityEditor.Experimental.GraphView.GraphView;
 using UnityEngine.Animations.Rigging;
 using UnityEngine.UIElements;
 
