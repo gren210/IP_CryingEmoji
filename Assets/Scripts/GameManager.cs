@@ -74,6 +74,12 @@ public class GameManager : ScriptManager
 
     public int health = 100;
 
+    public TextMeshProUGUI healCountText;
+
+    public TextMeshProUGUI gearCountText;
+
+    public int healAmount;
+
     public GameObject playerUI;
 
     public GameObject menuUI;
@@ -112,7 +118,7 @@ public class GameManager : ScriptManager
 
     public bool[] upgradesSave = { false, false, false, false };
 
-    bool[] primaryBackpackSave = { false, false };
+    public bool[] primaryBackpackSave = { false, false };
 
     float[] primaryAmmoSave = { 0, 0 };
 
@@ -229,6 +235,8 @@ public class GameManager : ScriptManager
             animator.SetInteger("Health", health);
         }
         healthbar.fillAmount = health / 100f;
+        gearCountText.text = "Gears:" + itemBackpack[0];
+        healCountText.text = "Medkits:" + itemBackpack[1];
 
         if (currentGun != null)
         {

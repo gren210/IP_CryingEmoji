@@ -92,8 +92,11 @@ public class UI : ScriptManager
     public void SwitchPrimary(int gunIndex)
     {
         bool backpack = GameManager.instance.primaryBackpack[gunIndex];
+        Debug.Log(backpack);
+        Debug.Log(GameManager.instance.readySwap);
         if (backpack && GameManager.instance.readySwap)
         {
+            Debug.Log("hello");
             thePlayer.ActiveWeapons(false, false, false, false);
             thePlayer.currentPrimary = thePlayer.primaryWeapons[gunIndex];
             thePlayer.OnPrimaryEquip();
@@ -153,52 +156,6 @@ public class UI : ScriptManager
         GameManager.instance.thePlayer.Upgrade2();
         GameManager.instance.thePlayer.Upgrade3();
         GameManager.instance.thePlayer.Upgrade4();
-        if (currentUpgrade == 0)
-        {
-            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
-            {
-                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
-            }
-            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
-            {
-                gun.GetComponent<Gun>().RPM = gun.GetComponent<Gun>().RPM * 1.2f;
-            }
-        }
-        else if(currentUpgrade == 1)
-        {
-            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
-            {
-                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
-                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
-            }
-            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
-            {
-                gun.GetComponent<Gun>().swayAmplitude = gun.GetComponent<Gun>().swayAmplitude / 2;
-                gun.GetComponent<Gun>().swaySpeed = gun.GetComponent<Gun>().swaySpeed / 2;
-            }
-        }
-        else if (currentUpgrade == 2)
-        {
-            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
-            {
-                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
-            }
-            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
-            {
-                gun.GetComponent<Gun>().ammoCount = gun.GetComponent<Gun>().ammoCount * 1.5f;
-            }
-        }
-        else if (currentUpgrade == 3)
-        {
-            foreach (GameObject gun in GameManager.instance.thePlayer.primaryWeapons)
-            {
-                gun.GetComponent<Gun>().silenced = true;
-            }
-            foreach (GameObject gun in GameManager.instance.thePlayer.secondaryWeapons)
-            {
-                gun.GetComponent<Gun>().silenced = true;
-            }
-        }
         GameManager.instance.upgrades[currentUpgrade] = true;
 
         if (GameManager.instance.upgrades[currentUpgrade])
@@ -211,6 +168,12 @@ public class UI : ScriptManager
         }
     }
 
-    
+    public void Heal()
+    {
+        if (GameManager.instance.itemBackpack[1] > 0)
+        {
+            GameManager.instance.health += GameManager.instance.healAmount;
+        }
+    }
 
 }

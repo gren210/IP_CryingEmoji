@@ -185,11 +185,14 @@ public class Gun : Interactable
             currentShotTimer = 60 / RPM;
             currentAmmoCount -= 1;
             RaycastHit hitInfo;
-            GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
-            smoke.transform.SetParent(muzzle);
-            Destroy(smoke, .5f);
             if (currentCooldown <= 0f && thePlayer.starterAssetsInputs.aim)
             {
+                GameObject smoke = Instantiate(smokeVFX, muzzle.position, muzzle.rotation);
+                GameObject flash = Instantiate(muzzleVFX, muzzle.position, muzzle.rotation);
+                smoke.transform.SetParent(muzzle);
+                flash.transform.SetParent(muzzle);
+                Destroy(smoke, .5f);
+                Destroy(flash, .1f);
                 GameObject gunshot = Instantiate(gunAudio);
                 Destroy(gunshot, 1f);
                 shakeSource.GenerateImpulseWithForce(.04f);

@@ -74,6 +74,7 @@ public class Melee : Interactable
             yield return new WaitForSeconds(cooldown - comboDelay);
             animator.SetInteger("hitCount", hitCount);
             readySwing = true;
+            //GetComponent<BoxCollider>().enabled = false;
         }
     }
 
