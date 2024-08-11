@@ -1379,6 +1379,7 @@ MonoBehaviour:
   meleeBackpack: 000000
   grenadeBackpack: 000000000000000000000000
   itemBackpack: 0000000000000000000000000000000000000000000000000000000000000000
+  upgrades: 00000000
   health: 100
   playerUI: {fileID: 0}
   menuUI: {fileID: 0}
@@ -1395,6 +1396,18 @@ MonoBehaviour:
   interactText: {fileID: 0}
   music: []
   musicSource: {fileID: 0}
+  currentCheckpoint: {fileID: 0}
+  checkpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentCheckpointIndex: -1
+  upgradesSave: 00000000
 --- !u!1001 &911028589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2715,11 +2728,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3995272465676935165, guid: c873f6ee4f109c04dac7702a4dc21f23,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1e1046e9f116de43886d3c288242eed, type: 2}
     - target: {fileID: 919132149155446097, guid: c873f6ee4f109c04dac7702a4dc21f23,
         type: 3}
       propertyPath: m_Name
       value: LootBox
       objectReference: {fileID: 0}
+    - target: {fileID: 2834455701579547633, guid: c873f6ee4f109c04dac7702a4dc21f23,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b1e1046e9f116de43886d3c288242eed, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
