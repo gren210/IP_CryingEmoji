@@ -8093,16 +8093,16 @@ MonoBehaviour:
   immune: 0
   primaryBackpack: 000000
   primaryAmmo:
-  - 0
-  - 0
-  - 0
+  - 90
+  - 90
+  - 90
   secondaryBackpack: 0000
   secondaryAmmo:
-  - 0
-  - 0
-  - 0
+  - 90
+  - 90
+  - 90
   meleeBackpack: 000000
-  grenadeBackpack: 000000000000000000000000
+  grenadeBackpack: 0a0000000a0000000a000000
   itemBackpack: 00000000000000000000000000000000000000000000000000000000
   upgrades: 00000000
   health: 100
@@ -8129,6 +8129,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: acb0dd343a95cd749af66bc4000cabb9, type: 3}
   - {fileID: 8300000, guid: 6e9a135b27ab3f741aa9a8cf35da1445, type: 3}
   - {fileID: 8300000, guid: acb0dd343a95cd749af66bc4000cabb9, type: 3}
+  - {fileID: 8300000, guid: a8793dcf968e95e4d9ac7df06785c0b2, type: 3}
   - {fileID: 8300000, guid: a8793dcf968e95e4d9ac7df06785c0b2, type: 3}
   musicSource: {fileID: 0}
   journalNotes:
@@ -16884,8 +16885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   transitionCanvas: {fileID: 0}
-  upgradeText: {fileID: 0}
-  upgradeInfo: {fileID: 0}
+  upgradeText: {fileID: 543342727}
+  upgradeInfo: {fileID: 1666712561}
   currentUpgrade: 0
   upgraded: 00000000
 --- !u!1660057539 &9223372036854775807

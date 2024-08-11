@@ -98,10 +98,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1655440141c5aed43b3176f719a396ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  interactSound: {fileID: 0}
+  interactText: 
   grenadeDistance: 200
   delay: 3
   effect: {fileID: 4079710493560053110, guid: fcd80d87b1dd79f49a24ac159df6aa9f, type: 3}
-  explodeRadius: 50
+  explodeRadius: 3
   explodeDamage: 70
   thrown: 0
   grenadeSound: {fileID: 8300000, guid: 15e253825dd639e459f109695ee81f06, type: 3}
@@ -112,6 +114,8 @@ MonoBehaviour:
   realGrenadeObject: {fileID: 0}
   grenadeIndex: 1
   impactGrenade: 1
+  molotov: 0
+  molotovFire: {fileID: 0}
 --- !u!135 &2237284380913461942
 SphereCollider:
   m_ObjectHideFlags: 0
