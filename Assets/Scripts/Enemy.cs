@@ -15,6 +15,10 @@ public class Enemy : MonoBehaviour
 
     public bool detected;
 
+    public AudioClip[] zombieSounds;
+
+    public AudioSource audioSource;
+
     protected virtual void Damage()
     {
         GameManager.instance.health -= damage;
@@ -29,6 +33,13 @@ public class Enemy : MonoBehaviour
     protected virtual void SwitchState(string currentState)
     {
         StartCoroutine(currentState);
+    }
+
+    protected virtual void ChangeSound(int soundIndex)
+    {
+        audioSource.Stop();
+        audioSource.clip = zombieSounds[soundIndex];
+        audioSource.Play();
     }
 
 }

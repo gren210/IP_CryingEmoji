@@ -52,6 +52,8 @@ public class SceneChange : ScriptManager
     [SerializeField]
     bool firstScene;
 
+    public bool newScene;
+
     /// <summary>
     /// This start function starts each scene with the correct settings
     /// </summary>
@@ -74,7 +76,7 @@ public class SceneChange : ScriptManager
         GameManager.instance.transition.GetComponent<Animator>().SetBool("Transition", false);
         if(!firstScene)
         {
-            ChangeMusic(sceneIndex);
+            //ChangeMusic(sceneIndex);
         }
 
     }
@@ -99,6 +101,10 @@ public class SceneChange : ScriptManager
         if (other.transform.tag == "Player")
         {
             GameManager.instance.currentCheckpoint = null;
+            if(newScene)
+            {
+                GameManager.instance.currentCheckpointIndex = -1;
+            }
             StartCoroutine(SceneLoad(sceneIndex));
         }
     }

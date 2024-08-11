@@ -12,7 +12,7 @@ public class Interactable : MonoBehaviour
 
     public virtual void Interact(Player thePlayer)
     {
-
+        AudioSource.PlayClipAtPoint(interactSound,transform.position);
     }
 
     protected void ShakeCamera(float shakeIntensity, float shakeFrequency, CinemachineVirtualCamera currentVirtualCamera)

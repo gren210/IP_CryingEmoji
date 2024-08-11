@@ -515,7 +515,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "BackPack",
+                    "name": "Backpack",
                     "type": "Button",
                     "id": "1dc11b3e-743d-4326-92e8-933ff909a6fe",
                     "expectedControlType": "Button",
@@ -543,7 +543,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BackPack",
+                    "action": "Backpack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
