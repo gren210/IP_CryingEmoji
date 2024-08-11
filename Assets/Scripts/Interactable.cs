@@ -43,5 +43,15 @@ public class Interactable : MonoBehaviour
         }
     }
 
+    protected void ChangeSound(AudioClip soundToChange, bool play)
+    {
+        GetComponent<AudioSource>().Stop();
+        GetComponent<AudioSource>().clip = soundToChange;
+        if (play)
+        {
+            GetComponent<AudioSource>().Play();
+        }
+    }
+
 
 }

@@ -72,10 +72,12 @@ public class UI : ScriptManager
     public void RestartLevel()
     {
         Time.timeScale = 1;
+        GameManager.instance.health = 100;
         GameManager.instance.pauseUI.SetActive(false);
         GameManager.instance.playerUI.SetActive(false);
         GameManager.instance.inventoryUI.SetActive(false);
         GameManager.instance.workbenchUI.SetActive(false);
+        GameManager.instance.deathUI.SetActive(false);
         StartCoroutine(SceneLoad(SceneManager.GetActiveScene().buildIndex));
     }
 

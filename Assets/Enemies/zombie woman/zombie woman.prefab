@@ -1394,9 +1394,9 @@ MonoBehaviour:
   attackRange: 2
   detected: 0
   zombieSounds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: c9d8362bea467e44b93994fa133239b8, type: 3}
+  - {fileID: 8300000, guid: 5799718d3db55b74bb837797e7970682, type: 3}
+  - {fileID: 8300000, guid: dc23587c460639c4697502c41b2f05f8, type: 3}
   audioSource: {fileID: 4478274510286334815}
   animator: {fileID: 0}
 --- !u!195 &1010592676236270681
@@ -1527,7 +1527,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

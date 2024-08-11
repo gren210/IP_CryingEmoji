@@ -37,6 +37,8 @@ public class PlayerInteraction : ScriptManager
 
     NPC currentNPC;
 
+    Journal currentJournal;
+
 
     // Start is called before the first frame update
     void Start()
@@ -54,6 +56,7 @@ public class PlayerInteraction : ScriptManager
         {
             hitInfo.transform.TryGetComponent<Door>(out currentDoor);
             hitInfo.transform.TryGetComponent<NPC>(out currentNPC);
+            hitInfo.transform.TryGetComponent<Journal>(out currentJournal);
             if (hitInfo.transform.TryGetComponent<Interactable>(out currentInteractable))
             {
                 GameManager.instance.interactText.text = "" + currentInteractable.interactText;
@@ -127,6 +130,10 @@ public class PlayerInteraction : ScriptManager
         if (currentNPC != null)
         {
             currentNPC.Interact(x);
+        }
+        if (currentJournal != null)
+        {
+            currentJournal.Interact(x);
         }
     }
 

@@ -29,6 +29,7 @@ public class EnemyFSM1 : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        ChangeSound(0);
         currentHealth = health;
         currentState = "Idle";
         nextState = currentState;
@@ -52,6 +53,7 @@ public class EnemyFSM1 : Enemy
 
         if (detected)
         {
+            ChangeSound(1);
             animator.SetTrigger("Detected");
         }
 
@@ -107,6 +109,7 @@ public class EnemyFSM1 : Enemy
 
     IEnumerator Chasing()
     {
+        
         while (currentState == "Chasing")
         {
             yield return new WaitForEndOfFrame();
@@ -134,6 +137,7 @@ public class EnemyFSM1 : Enemy
 
     IEnumerator Death()
     {
+        ChangeSound(2);
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         myAgent.enabled = false;
         yield return new WaitForSeconds(3f);

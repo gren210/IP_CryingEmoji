@@ -59,7 +59,6 @@ public class SceneChange : ScriptManager
     /// </summary>
     void Start()
     {
-        GameManager.instance.currentCheckpointIndex = -1;
         currentTimer = 0;
         changeScene = false;
 
@@ -101,10 +100,7 @@ public class SceneChange : ScriptManager
         if (other.transform.tag == "Player")
         {
             GameManager.instance.currentCheckpoint = null;
-            if(newScene)
-            {
-                GameManager.instance.currentCheckpointIndex = -1;
-            }
+            GameManager.instance.SaveItems();
             StartCoroutine(SceneLoad(sceneIndex));
         }
     }

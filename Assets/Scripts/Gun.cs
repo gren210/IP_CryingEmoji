@@ -51,6 +51,8 @@ public class Gun : Interactable
     [SerializeField]
     GameObject gunAudio;
 
+    public AudioClip reloadSound;
+
     Enemy currentEnemy;
 
     [SerializeField]
@@ -142,6 +144,7 @@ public class Gun : Interactable
     }
     public IEnumerator Reload()
     {
+        ChangeSound(reloadSound,true);
         if (currentAmmoCount != ammoCount && ((secondary && GameManager.instance.secondaryAmmo[gunIndex] != 0) || (!secondary && GameManager.instance.primaryAmmo[gunIndex] != 0)))
         {
             reloading = true;
@@ -159,6 +162,7 @@ public class Gun : Interactable
             }
             reloading = false;
             reloadSmooth = true;
+            ChangeSound(null, false);
         }
     }
 

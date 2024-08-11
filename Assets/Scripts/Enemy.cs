@@ -37,9 +37,12 @@ public class Enemy : MonoBehaviour
 
     protected virtual void ChangeSound(int soundIndex)
     {
-        audioSource.Stop();
-        audioSource.clip = zombieSounds[soundIndex];
-        audioSource.Play();
+        if(zombieSounds[soundIndex] != audioSource.clip)
+        {
+            audioSource.Stop();
+            audioSource.clip = zombieSounds[soundIndex];
+            audioSource.Play();
+        }
     }
 
 }

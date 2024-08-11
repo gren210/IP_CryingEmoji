@@ -155,12 +155,13 @@ public class Player : ScriptManager
         GameManager.instance.thePlayer = this;
         GameManager.instance.animator = animator;
         GameManager.instance.immune = false;
+        GameManager.instance.playerCamera = playerCamera.gameObject;
         currentVirtualCamera = virtualCamera;
         currentAimVirtualCamera = aimVirtualCamera;
         CursorLock(true);
         GameManager.instance.playerUI.SetActive(true);
         GameManager.instance.ReloadSave();
-        StartCoroutine(Teleport());
+        //StartCoroutine(Teleport());
         Upgrade1();
         Upgrade2();
         Upgrade3();
@@ -170,12 +171,14 @@ public class Player : ScriptManager
     IEnumerator Teleport()
     {
         Debug.Log(GameManager.instance.currentCheckpointIndex);
+        Debug.Log(GameManager.instance.checkpoints[GameManager.instance.currentCheckpointIndex]);
         if (GameManager.instance.currentCheckpointIndex != -1)
         {
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForSeconds(0.1f);
             GetComponent<CharacterController>().enabled = false;
             thirdPersonController.enabled = false;
             Physics.SyncTransforms();
+            Debug.Log(GameManager.instance.currentCheckpointIndex);
             transform.position = GameManager.instance.checkpoints[GameManager.instance.currentCheckpointIndex].position;
             transform.rotation = GameManager.instance.checkpoints[GameManager.instance.currentCheckpointIndex].rotation;
             yield return new WaitForEndOfFrame();
@@ -546,6 +549,11 @@ public class Player : ScriptManager
     void Death()
     {
         GameManager.instance.immune = true;
+        CursorLock(false);
+        GameManager.instance.playerUI.SetActive(false);
+        GameManager.instance.inventoryUI.SetActive(false);
+        GameManager.instance.workbenchUI.SetActive(false);
+        GameManager.instance.deathUI.SetActive(true);
         animator.SetLayerWeight(9, 1);
         playerInput.SwitchCurrentActionMap("UI");
         gameObject.GetComponent<CharacterController>().enabled = false;

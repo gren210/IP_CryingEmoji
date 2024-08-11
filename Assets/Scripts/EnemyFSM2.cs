@@ -34,6 +34,7 @@ public class EnemyFSM2 : Enemy
     // Start is called before the first frame update
     void Start()
     {
+        ChangeSound(0);
         currentHealth = health;
         currentState = "Idle";
         nextState = currentState;
@@ -53,6 +54,7 @@ public class EnemyFSM2 : Enemy
 
         if (detected)
         {
+            ChangeSound(1);
             animator.SetTrigger("Detected");
         }
 
@@ -96,15 +98,6 @@ public class EnemyFSM2 : Enemy
     IEnumerator Idle()
     {
         while(currentState == "Idle")
-        {
-            yield return new WaitForEndOfFrame();
-        }
-        SwitchState(currentState);
-    }
-
-    IEnumerator Stunned()
-    {
-        while (currentState == "Stunned")
         {
             yield return new WaitForEndOfFrame();
         }

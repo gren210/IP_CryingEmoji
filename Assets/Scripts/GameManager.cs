@@ -90,6 +90,8 @@ public class GameManager : ScriptManager
 
     public GameObject pauseUI;
 
+    public GameObject deathUI;
+
     public GameObject UIassets;
 
     public UI workbenchUIObject;
@@ -109,6 +111,8 @@ public class GameManager : ScriptManager
     public AudioClip[] music;
 
     public AudioSource musicSource;
+
+    public TextMeshProUGUI[] journalNotes;
 
     public Transform currentCheckpoint;
 
