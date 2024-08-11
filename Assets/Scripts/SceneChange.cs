@@ -75,7 +75,6 @@ public class SceneChange : ScriptManager
         if(!firstScene)
         {
             ChangeMusic(sceneIndex);
-            
         }
 
     }

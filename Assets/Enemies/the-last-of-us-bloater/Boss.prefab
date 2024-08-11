@@ -672,7 +672,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.9990241, z: -0, w: -0.04416847}
   m_LocalPosition: {x: 9.171, y: 0.2200017, z: -5.807}
-  m_LocalScale: {x: 0.19181924, y: 0.16561, z: 0.18980563}
+  m_LocalScale: {x: 0.24742763, y: 0.21362033, z: 0.24483027}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6254278507700036747}
@@ -714,10 +714,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 0
-  health: 1500
+  health: 2500
   damage: 32
   attackRange: 2
-  detected: 0
+  detected: 1
   animator: {fileID: 0}
   gasEffect: {fileID: 7372574987670286011, guid: 3adf2a4bb47f94145a4c3999d275d07d,
     type: 3}
